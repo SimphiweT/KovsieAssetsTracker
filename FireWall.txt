@@ -1,0 +1,5 @@
+New-NetFirewallRule -DisplayName "KovsieAssetsTracker API" -Direction Inbound -Protocol TCP -LocalPort 5250 -Action Allow
+
+cd "C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Api"
+dotnet run --urls "http://0.0.0.0:5250"
+

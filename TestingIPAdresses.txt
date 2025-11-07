@@ -1,0 +1,10 @@
+Android
+http://10.0.2.2:5250		// Emulator
+http://192.168.18.56:5250	// Home Wi-Fi
+http://1192.168.18.4:5250	// Mobile Hotspot
+
+API
+http://localhost:5250
+
+WEB
+http://localhost:5055

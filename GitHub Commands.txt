@@ -1,0 +1,38 @@
+https://github.com/SimphiweT/KovsieAssetTrackerUFS
+
+*************** First Time ************************
+
+cd "C:\KovsieAssetTrackerUFS"
+
+# Initialize git if not already done
+git init
+
+# Add remote repository
+git remote add origin https://github.com/SimphiweT/KovsieAssetTrackerUFS.git
+
+# Make sure you are on your branch (replace with your branch name)
+git checkout -b KovsieAssetTrackerUFS
+
+***************************************************************************
+
+
+*************** PushChanges *********************************************************
+cd "C:\KovsieAssetTrackerUFS"
+
+# 1. Check current branch
+git branch
+
+# 2. Pull latest changes from GitHub (avoid conflicts)
+git pull origin KovsieAssetTrackerUFS
+
+# 3. Stage all changes
+git add .
+
+# 4. Commit with a message
+git commit -m "Updated Android + API code (example)"
+
+# 5. Push to GitHub
+git push origin KovsieAssetTrackerUFS
+
+*********************************************************************************************
+

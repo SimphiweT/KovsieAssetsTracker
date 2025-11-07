@@ -1,0 +1,7 @@
+If antivirus-protected add project path and %TEMP% to exclusions
+
+C:\Users\SIMPHI~1\AppData\Local\Temp
+C:\KovsieAssetTrackerUFS
+
+disable “Just My Code”
+Tools → Options → Debugging → General → uncheck "Enable Just My Code".

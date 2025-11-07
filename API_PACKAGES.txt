@@ -1,0 +1,12 @@
+Microsoft.AspNetCore.Authentication.JwtBearer Version:8.0.19
+Microsoft.AspNetCore.Http 2.3.0
+Microsoft.AspNetCore.Identity 2.3.1
+Microsoft.EntityFrameworkCore 8.0.19
+Microsoft.EntityFrameworkCore.Design 8.0.19
+Microsoft.EntityFrameworkCore.SqlServer 8.0.19
+Microsoft.EntityFrameworkCore.Tools 8.0.19
+Microsoft.IdentityModel.Tokens 8.14.0
+Swashbuckle.AspNetCore 6.6.2
+System.IdentityModel.Tokens.Jwt 8.14.0
+System.Security.Claims 4.3.0
+QRCoder Latest stable 1.7.0

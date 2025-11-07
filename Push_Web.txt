@@ -1,0 +1,11 @@
+cd "C:\KovsieAssetTrackerUFS\KovsieAssetsTracker"
+git init
+git remote remove origin  # only if it already exists
+git remote add origin https://github.com/SimphiweT/KovsieAssetsTracker.git
+git checkout -b KovsieAssetsTracker_Web
+
+git fetch origin
+git checkout KovsieAssetsTracker_Web
+git add .
+git commit -m "Initial push of KovsieAssetsTracker project files"
+git push -u origin KovsieAssetsTracker_Web

@@ -1,0 +1,24 @@
+# Navigate to your Android project folder
+cd "C:\KovsieAssetTrackerUFS\KovsieAssetsTrackerAndroid"
+
+# Initialize Git only if not already a repository
+git init
+
+# Connect to your GitHub repository (reset origin if needed)
+git remote remove origin 2>$null
+git remote add origin https://github.com/SimphiweT/KovsieAssetsTracker.git
+
+# Fetch latest branches from GitHub
+git fetch origin
+
+# Checkout the Android branch that already exists remotely
+git checkout KovsieAssetsTracker_Android
+
+# Stage all files
+git add .
+
+# Commit your changes
+git commit -m "Update Android project files"
+
+# Push to the Android branch on GitHub
+git push -u origin KovsieAssetsTracker_Android

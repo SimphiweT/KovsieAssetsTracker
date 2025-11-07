@@ -1,0 +1,105 @@
+{
+    "info": {
+        "name": "Kovsie Assets Tracker v1 \u2013 Local API",
+        "_postman_id": "d8e8fca2-0eeb-4d1b-84d2-8e64dfaa43a2",
+        "description": "Local API collection for Kovsie Assets Tracker. Base URL: http://localhost:5250",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Auth/login",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Auth",
+                                "login"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\": \"admin@kovsie.com\", \"password\": \"Admin@123\"}"
+                        },
+                        "description": "Authenticate and get JWT token."
+                    }
+                },
+                {
+                    "name": "Change Password",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Auth/change-password",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Auth",
+                                "change-password"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"currentPassword\": \"OldPass123!\", \"newPassword\": \"NewPass123!\"}"
+                        },
+                        "description": "Change password for logged-in user."
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Get All Users",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Users",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Users"
+                            ]
+                        },
+                        "description": "Retrieve all users (Admin only)."
+                    }
+                }
+            ]
+        }
+    ]
+}

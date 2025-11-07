@@ -1,0 +1,5 @@
+ClosedXML Latest stable 0.105.0
+itext7 Latest stable 9.3.0    (Deprecated)
+Microsoft.VisualStudio.Web.CodeGeneration.Design 8.0.7
+BouncyCastle.Cryptography Latest stable 2.6.2
+itext.bouncy-castle-adapter Latest stable 9.3.0

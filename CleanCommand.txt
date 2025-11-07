@@ -1,0 +1,27 @@
+Powershell
+Remove-Item -Recurse -Force .\bin
+Remove-Item -Recurse -Force .\obj
+
+Get-ChildItem -Path . -Include bin,obj -Recurse | Remove-Item -Recurse -Force
+
+
+
+
+
+
+
+dotnet clean
+rmdir /s /q .\bin
+rmdir /s /q .\obj
+
+****************** vs powershell **************
+
+dotnet clean
+Get-ChildItem -Path . -Include bin,obj -Recurse | Remove-Item -Recurse -Force
+Get-ChildItem -Path $env:TEMP -Recurse -Force -ErrorAction SilentlyContinue | Where-Object { $_.Name -like "*staticwebassets*" } | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+
+dotnet nuget locals all --clear
+
+dotnet build
+
+

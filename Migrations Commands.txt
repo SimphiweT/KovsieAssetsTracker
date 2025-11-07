@@ -1,0 +1,9 @@
+Add-Migration initial_migration -StartupProject KovsieAssetsTracker.Api -Project KovsieAssetsTracker.Infrastructure
+
+Update-Database -StartupProject KovsieAssetsTracker.Api -Project KovsieAssetsTracker.Infrastructure
+
+
+Drop-Database -StartupProject KovsieAssetsTracker.Api -Project KovsieAssetsTracker.Infrastructure 
+
+Remove-Migration -Project KovsieAssetsTracker.Infrastructure
+

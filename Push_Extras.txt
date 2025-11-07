@@ -1,0 +1,24 @@
+# Go to your Extras folder
+cd "C:\KovsieAssetTrackerUFS\Extras"
+
+# Initialize Git if not already initialized
+git init
+
+# Connect to your GitHub repository (reset origin if necessary)
+git remote remove origin 2>$null
+git remote add origin https://github.com/SimphiweT/KovsieAssetsTracker.git
+
+# Fetch all branches from GitHub
+git fetch origin
+
+# Switch to the existing Extras branch
+git checkout KovsieAssetsTracker_Extras
+
+# Stage all files for commit
+git add .
+
+# Commit your updates
+git commit -m "Add Extras project files and resources"
+
+# Push changes to the Extras branch
+git push -u origin KovsieAssetsTracker_Extras

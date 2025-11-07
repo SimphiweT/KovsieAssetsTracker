@@ -1,0 +1,570 @@
+{
+    "info": {
+        "name": "Kovsie Assets Tracker v1 \u2013 Local API",
+        "_postman_id": "9d02d1b3-f7d1-4a83-b4a0-8d6bdfd430c8",
+        "description": "Complete local API test suite for Kovsie Assets Tracker at http://localhost:5250",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Campuses",
+            "item": [
+                {
+                    "name": "Get All Campuses",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Campuses",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Campuses"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Campuse",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Campuses",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Campuses"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Buildings",
+            "item": [
+                {
+                    "name": "Get All Buildings",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Buildings",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Buildings"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Building",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Buildings",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Buildings"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Floors",
+            "item": [
+                {
+                    "name": "Get All Floors",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Floors",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Floors"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Floor",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Floors",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Floors"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Rooms",
+            "item": [
+                {
+                    "name": "Get All Rooms",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Rooms",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Rooms"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Room",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Rooms",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Rooms"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Assets",
+            "item": [
+                {
+                    "name": "Get All Assets",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Assets",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Assets"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Asset",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Assets",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Assets"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "AssetCategories",
+            "item": [
+                {
+                    "name": "Get All AssetCategories",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/AssetCategories",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "AssetCategories"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create AssetCategorie",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/AssetCategories",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "AssetCategories"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\": \"admin@kovsie.com\", \"password\": \"Admin@123\"}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Auth/login",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Auth",
+                                "login"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Register (Admin only)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Auth/register",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Auth",
+                                "register"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Change Password",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"currentPassword\": \"OldPass123!\", \"newPassword\": \"NewPass123!\"}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Auth/change-password",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Auth",
+                                "change-password"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Forgot Password",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\": \"user@kovsie.com\"}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Auth/forgot-password",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Auth",
+                                "forgot-password"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Get All Users",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Users",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Users"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Update User",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{jwtToken}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Users/{id}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Users",
+                                "{id}"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Contact",
+            "item": [
+                {
+                    "name": "Send Message",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\": \"Simphiwe\", \"email\": \"simphiwe@kovsie.com\", \"message\": \"Testing contact form.\"}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Contact/Send",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Contact",
+                                "Send"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Download",
+            "item": [
+                {
+                    "name": "Get APK Info",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Download/apk-info",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Download",
+                                "apk-info"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Download APK",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/Download/download-apk",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "Download",
+                                "download-apk"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
