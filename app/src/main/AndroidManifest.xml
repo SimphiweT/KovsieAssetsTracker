@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--
+uses-permission
+        android:name="android.permission.READ_MEDIA_IMAGES"
+        tools:ignore="PhotoAndVideoPolicy,SelectedPhotoAccess" /
+    -->
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
+
+    <application
+        android:name=".MyApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/logo_192x192"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/app_logo_48x48"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.KovsieAssetsTracker"
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config">
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+        <receiver
+            android:name=".remote.network.NetworkChangeReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+
+        <activity
+            android:name=".ui.activities.others.CustomScannerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomScannerTheme"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.authentications.ResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.authentications.RequestAccessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.startups.AboutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.authentications.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.dashboards.staffDashboard.StaffDashboardActivity"
+            android:theme="@style/Theme.KovsieAssetsTracker"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.startups.StartupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.startups.SplashScreenActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

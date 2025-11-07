@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_dialog">
+<ImageView
+    android:layout_width="70dp"
+    android:layout_height="wrap_content"
+    android:src="@drawable/remove_24px"
+    android:layout_gravity="center|top"
+    android:scaleType="centerCrop"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textAlignment="viewStart"
+            android:text="Create or Update"
+            android:textColor="@color/red"
+            android:padding="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="5dp" />
+
+        <ImageView
+            android:id="@+id/cancelButton_dashboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_clear_24"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutCreateAsset_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_marginTop="10dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/devices_24px"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Create asset"
+            android:textColor="@color/red"
+            android:layout_marginStart="30dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutCreateRoom_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add_business_24px"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Create room"
+            android:textColor="@color/red"
+            android:layout_marginStart="30dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutUpdateAsset_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/update_24px"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Update asset"
+            android:textColor="@color/red"
+            android:layout_marginStart="30dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutUpdateRoom_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/apartment_24px"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Update a room"
+            android:textColor="@color/red"
+            android:layout_marginStart="30dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

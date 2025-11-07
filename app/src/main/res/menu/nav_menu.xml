@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navProfile_dashboard"
+            android:icon="@drawable/home_24px"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/navChangePassword_dashboard"
+            android:icon="@drawable/key_vertical_24px"
+            android:title="Change Password" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navCreateCategory_dashboard"
+            android:icon="@drawable/ic_category"
+            android:title="Create Asset Category" />
+        <item
+            android:id="@+id/navUpdateCategory_dashboard"
+            android:icon="@drawable/ic_update"
+            android:title="Create update Category" />
+    </group>
+    <item
+        android:title="">
+        <menu>
+            <item
+                android:id="@+id/navLogout_dashboard"
+                android:icon="@drawable/logout_24px"
+                android:title="Logout"/>
+        </menu>
+    </item>
+</menu>

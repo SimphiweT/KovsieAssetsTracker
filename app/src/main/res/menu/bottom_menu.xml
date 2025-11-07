@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottomNavHome_dashboard"
+        android:title="Home"
+        android:icon="@drawable/home_24px"/>
+
+    <item
+        android:id="@+id/bottomNavDevices_dashboard"
+        android:title="Devices"
+        android:icon="@drawable/devices_24px"/>
+
+    <item
+        android:title="" />
+
+    <item
+        android:id="@+id/bottomNavCategories_dashboard"
+        android:title="Categories"
+        android:icon="@drawable/ic_category"/>
+    <item
+        android:id="@+id/bottomNavRoom_dashboard"
+        android:title="Rooms"
+        android:icon="@drawable/apartment_24px"/>
+</menu>

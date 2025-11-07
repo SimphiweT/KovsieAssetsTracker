@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">KovsieAssetsTracker</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="startup_description">Get Things done with Kovsie assets tracker manager, track assets, and store assets data securely.</string>
+    <string name="asset_image">asset picture\n</string>
+    <string name="asset_qr_code">asset qrcode</string>
+    <string name="android_backup">asset description\n</string>
+    <string name="server_backup">"is it backed up on server? "</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="delete_asset">Delete Asset\n</string>
+    <string name="confirm_delete_asset">Are you sure you want to delete this?</string>
+    <string name="cancel">Cancel</string>
+    <string name="select_status_prompt">Select Asset Status</string>
+    <string name="status_selected">Selected Status: %1$s</string>
+    <string name="room_picture">Room Picture</string>
+    <string name="asset_category_picture">Asset Category Picture</string>
+    <string name="scan_qr_code">Scan QRCode</string>
+    <string name="asset_name_placeholder">Asset Name\n</string>
+    <string name="asset_description_placeholder">Asset Description\n</string>
+    <string name="asset_status_placeholder">Asset Status</string>
+    <string name="asset_category_placeholder">Asset Category\n</string>
+    <string name="asset_room_placeholder">Asset Room Location</string>
+    <string name="profile_picture">User Profile Picture\n</string>
+</resources>

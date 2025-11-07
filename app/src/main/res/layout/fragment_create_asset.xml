@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="35dp"
+    tools:context=".ui.activities.dashboards.staffDashboard.fragments.asset.CreateAssetFragment">
+
+        <!-- Enable scrolling for smaller screens -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="32dp">
+
+                <!-- Animation -->
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottieAnimationView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/login" />
+
+                <!-- Title -->
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bungee_regular"
+                    android:text="Create Asset"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@id/lottieAnimationView"
+                    app:layout_constraintStart_toEndOf="@id/lottieAnimationView"
+                    app:layout_constraintTop_toTopOf="@id/lottieAnimationView"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <!-- Subtitle -->
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="32dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Create Asset by providing related information, scan and take a photo. Choose to save locally or on a server. N.B: can’t save on server if offline."
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@id/lottieAnimationView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <!-- Server Id Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/serverIdLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toBottomOf="@id/textView2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:hintTextColor="@color/navy"
+                    app:startIconDrawable="@drawable/server_backup_24px"
+                    app:startIconTint="@color/navy">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtAssetServerId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Asset Server Id (Optional)"
+                        android:inputType="text|number"
+                        android:textColor="@color/charcoal"
+                        android:textColorHint="@color/charcoal"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Asset Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nameLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/serverIdLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:hintTextColor="@color/navy"
+                    app:startIconDrawable="@drawable/devices_24px"
+                    app:startIconTint="@color/navy">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtAssetName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Asset Name"
+                        android:inputType="textCapWords"
+                        android:textColor="@color/charcoal"
+                        android:textColorHint="@color/charcoal"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Asset Description -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/descriptionLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/nameLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:hintTextColor="@color/navy"
+                    app:startIconDrawable="@drawable/devices_24px"
+                    app:startIconTint="@color/navy">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtAssetDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Asset Description"
+                        android:inputType="textMultiLine"
+                        android:lines="3"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/charcoal"
+                        android:textColorHint="@color/charcoal"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Asset Image -->
+                <TextView
+                    android:id="@+id/lblImageTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Pick or Capture Asset Photo"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/descriptionLayout" />
+
+                <LinearLayout
+                    android:id="@+id/assetImageLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/lblImageTitle">
+
+                    <ImageView
+                        android:id="@+id/assetImageView"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/outline_broken_image_24"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <ImageView
+                        android:id="@+id/assetCaptureImageView"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="24dp"
+                        android:src="@drawable/camera_24px" />
+                </LinearLayout>
+
+                <!-- QR Code -->
+                <TextView
+                    android:id="@+id/lblQrCodeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Pick or Scan Asset QR Code"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/assetImageLayout" />
+
+                <LinearLayout
+                    android:id="@+id/assetQrCodeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/lblQrCodeLabel">
+
+                    <ImageView
+                        android:id="@+id/assetImageViewQrCode"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/qrcode_scan"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <ImageView
+                        android:id="@+id/assetScanImageView"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="24dp"
+                        android:src="@drawable/qr_code_scanner_24px" />
+
+                </LinearLayout>
+                <!-- Secret Description -->
+                <LinearLayout
+                    android:id="@+id/generateQrCodeLayout"
+                    app:layout_constraintTop_toBottomOf="@id/assetQrCodeLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnGenerateQrCode"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Generate"
+                        android:layout_marginEnd="10dp"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/red"
+                        app:cornerRadius="20dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/assetQrCodeSecretLayoutLayout"
+                    android:layout_weight="0.6"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:hintTextColor="@color/navy"
+                    app:startIconDrawable="@drawable/devices_24px"
+                    app:startIconTint="@color/navy">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/assetQrCodeSecretText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Qr Code"
+                        android:inputType="textMultiLine"
+                        android:lines="3"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/charcoal"
+                        android:textColorHint="@color/charcoal"
+                        android:textSize="16sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+                <!-- Spinners & Checkboxes -->
+                <LinearLayout
+                    android:id="@+id/statusLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/generateQrCodeLayout">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:text="Asset Status"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                    <Spinner
+                        android:id="@+id/statusSpinner"
+                        android:layout_weight="0.5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:prompt="@string/select_status_prompt"/>
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/isAndroidBackedUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Android Backed up?"
+                    app:layout_constraintTop_toBottomOf="@id/statusLayout" />
+
+                <CheckBox
+                    android:id="@+id/isServerBackedUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Server Backed up?"
+                    app:layout_constraintTop_toBottomOf="@id/isAndroidBackedUp" />
+                <LinearLayout
+                    android:id="@+id/categoryLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/isServerBackedUp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:text="Asset Category"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                    <Spinner
+                        android:id="@+id/assetCategorySpinner"
+                        android:layout_weight="0.5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/roomLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/categoryLayout">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:text="Storage Room"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                    <Spinner
+                        android:id="@+id/roomSpinner"
+                        android:layout_weight="0.5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <!-- Save Buttons -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCreateAssetLocally"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="64dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Create Asset Locally"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/red"
+                    app:cornerRadius="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/roomLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCreateAssetServer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="64dp"
+                    android:layout_marginTop="24dp"
+                    android:text="Create Asset On Server"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/navy"
+                    app:cornerRadius="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/btnCreateAssetLocally"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+</FrameLayout>

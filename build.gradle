@@ -1,0 +1,24 @@
+// === Top-level Gradle configuration ===
+plugins {
+    id 'com.android.application' version '8.13.0' apply false
+    id 'com.android.library' version '8.13.0' apply false
+}
+
+// === Modern and safe clean task ===
+tasks.register('clean', Delete) {
+    // official replacement for buildDir (Gradle 8+)
+    def buildDirPath = layout.buildDirectory.get().asFile
+
+    doLast {
+        if (buildDirPath.exists()) {
+            println("Cleaning: ${buildDirPath}")
+            try {
+                delete buildDirPath
+            } catch (Exception e) {
+                println("Could not delete ${buildDirPath.name}: ${e.message}")
+            }
+        } else {
+            println("Nothing to clean, ${buildDirPath} does not exist.")
+        }
+    }
+}

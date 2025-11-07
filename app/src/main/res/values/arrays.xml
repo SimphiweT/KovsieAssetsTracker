@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Asset status display texts -->
+    <string-array name="asset_statuses">
+        <item>Available / Ready to Deploy</item>
+        <item>Deployed / In Use</item>
+        <item>In Repair / Maintenance</item>
+        <item>Out of Service</item>
+        <item>Retired / Disposed</item>
+        <item>Lost / Stolen</item>
+        <item>In Transit</item>
+        <item>On Order / Ordered</item>
+        <item>Received / In Inventory</item>
+        <item>Under Evaluation / Testing</item>
+    </string-array>
+
+    <!-- Corresponding backend values -->
+    <string-array name="asset_status_values">
+        <item>available</item>
+        <item>deployed</item>
+        <item>in_repair</item>
+        <item>out_of_service</item>
+        <item>retired</item>
+        <item>lost_stolen</item>
+        <item>in_transit</item>
+        <item>on_order</item>
+        <item>received</item>
+        <item>under_evaluation</item>
+    </string-array>
+
+    <string-array name="roles_array">
+        <item>Administrator</item>
+        <item>StaffMember</item>
+        <item>VerificationAgent</item>
+
+    </string-array>
+</resources>

@@ -1,0 +1,325 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 7,
+    "identityHash": "3c250cee8423f5e8d4923b49101ba161",
+    "entities": [
+      {
+        "tableName": "assets_categories",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`asset_category_local_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `asset_category_server_id` INTEGER, `asset_category_name` TEXT, `asset_category_description` TEXT, `asset_category_image` TEXT, `is_android_backed_up` INTEGER NOT NULL, `is_server_backed_up` INTEGER NOT NULL, `created_date` INTEGER, `updated_date` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "assetCategoryLocalId",
+            "columnName": "asset_category_local_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "assetCategoryServerId",
+            "columnName": "asset_category_server_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "assetCategoryName",
+            "columnName": "asset_category_name",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "assetCategoryDescription",
+            "columnName": "asset_category_description",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "assetCategoryImage",
+            "columnName": "asset_category_image",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "isAndroidBackedUp",
+            "columnName": "is_android_backed_up",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isServerBackedUp",
+            "columnName": "is_server_backed_up",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdDate",
+            "columnName": "created_date",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "updatedDate",
+            "columnName": "updated_date",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "asset_category_local_id"
+          ]
+        }
+      },
+      {
+        "tableName": "rooms",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`room_local_id` INTEGER PRIMARY KEY AUTOINCREMENT, `room_server_id` INTEGER, `room_name` TEXT, `room_description` TEXT, `room_image` TEXT, `is_android_backed_up` INTEGER NOT NULL, `is_server_backed_up` INTEGER NOT NULL, `created_date` INTEGER, `updated_date` INTEGER, `floor_server_id` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "roomLocalId",
+            "columnName": "room_local_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "roomServerId",
+            "columnName": "room_server_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "roomName",
+            "columnName": "room_name",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "roomDescription",
+            "columnName": "room_description",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "roomImage",
+            "columnName": "room_image",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "isAndroidBackedUp",
+            "columnName": "is_android_backed_up",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isServerBackedUp",
+            "columnName": "is_server_backed_up",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdDate",
+            "columnName": "created_date",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "updatedDate",
+            "columnName": "updated_date",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "floorServerId",
+            "columnName": "floor_server_id",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "room_local_id"
+          ]
+        }
+      },
+      {
+        "tableName": "assets",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`assetLocal_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `assetServer_id` INTEGER, `asset_name` TEXT, `asset_description` TEXT, `asset_image` TEXT, `asset_qrcode_image` TEXT, `asset_qrcode_text` TEXT, `asset_status` TEXT, `is_android_backed_up` INTEGER NOT NULL, `is_server_backed_up` INTEGER NOT NULL, `created_date` INTEGER, `updated_date` INTEGER, `assetCategoryLocalId` INTEGER, `roomLocalId` INTEGER, FOREIGN KEY(`assetCategoryLocalId`) REFERENCES `assets_categories`(`asset_category_local_id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`roomLocalId`) REFERENCES `rooms`(`room_local_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "assetLocalID",
+            "columnName": "assetLocal_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "assetServerId",
+            "columnName": "assetServer_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "assetName",
+            "columnName": "asset_name",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "assetDescription",
+            "columnName": "asset_description",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "assetImage",
+            "columnName": "asset_image",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "assetQrCodeImage",
+            "columnName": "asset_qrcode_image",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "assetQrCodeSecretText",
+            "columnName": "asset_qrcode_text",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "assetStatus",
+            "columnName": "asset_status",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "isAndroidBackedUp",
+            "columnName": "is_android_backed_up",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isServerBackedUp",
+            "columnName": "is_server_backed_up",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdDate",
+            "columnName": "created_date",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "updatedDate",
+            "columnName": "updated_date",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "assetCategoryLocalId",
+            "columnName": "assetCategoryLocalId",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "roomLocalId",
+            "columnName": "roomLocalId",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "assetLocal_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_assets_assetCategoryLocalId",
+            "unique": false,
+            "columnNames": [
+              "assetCategoryLocalId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_assets_assetCategoryLocalId` ON `${TABLE_NAME}` (`assetCategoryLocalId`)"
+          },
+          {
+            "name": "index_assets_roomLocalId",
+            "unique": false,
+            "columnNames": [
+              "roomLocalId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_assets_roomLocalId` ON `${TABLE_NAME}` (`roomLocalId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "assets_categories",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "assetCategoryLocalId"
+            ],
+            "referencedColumns": [
+              "asset_category_local_id"
+            ]
+          },
+          {
+            "table": "rooms",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "roomLocalId"
+            ],
+            "referencedColumns": [
+              "room_local_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "floors",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`floor_local_id` INTEGER PRIMARY KEY AUTOINCREMENT, `floor_server_id` INTEGER, `floor_name` TEXT, `floor_description` TEXT, `is_android_backed_up` INTEGER NOT NULL, `is_server_backed_up` INTEGER NOT NULL, `created_date` INTEGER, `updated_date` INTEGER, `building_server_id` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "floorLocalId",
+            "columnName": "floor_local_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "floorServerId",
+            "columnName": "floor_server_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "floorName",
+            "columnName": "floor_name",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "floorDescription",
+            "columnName": "floor_description",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "isAndroidBackedUp",
+            "columnName": "is_android_backed_up",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isServerBackedUp",
+            "columnName": "is_server_backed_up",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdDate",
+            "columnName": "created_date",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "updatedDate",
+            "columnName": "updated_date",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "buildingServerId",
+            "columnName": "building_server_id",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "floor_local_id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3c250cee8423f5e8d4923b49101ba161')"
+    ]
+  }
+}

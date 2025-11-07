@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardRoomItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="7dp"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- Collapsed Layout -->
+        <LinearLayout
+            android:id="@+id/collapsedRelLayoutRoomItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivRoomImageItem"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:background="@drawable/image_border"
+                android:src="@mipmap/ic_launcher" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_gravity="center"
+                android:layout_marginBottom="4dp">
+
+                <ImageView
+                    android:id="@+id/dashlineAssetItem"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/remove_24px" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvRoomNameItem"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:minWidth="80dp"
+                    android:text="Room Name"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical|start"/>
+
+
+                <ImageView
+                    android:id="@+id/btnDownArrowRoomItem"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/top_panel_open_24px"
+                    android:gravity="center_vertical|end"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Expanded Layout -->
+        <LinearLayout
+            android:id="@+id/expandedRelLayoutRoomItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:paddingTop="8dp">
+
+            <!-- Created Date -->
+            <LinearLayout
+                android:id="@+id/dateLayoutAssetItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="CREATED DATE"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins_bold"/>
+
+                <TextView
+                    android:id="@+id/tvDatetimeRoomItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Created Date"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins_regular"/>
+            </LinearLayout>
+
+            <!-- Android Backup -->
+            <LinearLayout
+                android:id="@+id/androidBackupLayoutAssetItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="ANDROID BACKED UP"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins_bold"/>
+
+                <ImageView
+                    android:id="@+id/ivIsAndroidBackedUp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/android_backup_24px"/>
+            </LinearLayout>
+
+            <!-- Server Backup -->
+            <LinearLayout
+                android:id="@+id/serverBackupLayoutAssetItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="SERVER BACKED UP"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins_bold"/>
+
+                <ImageView
+                    android:id="@+id/ivIsServerBackedUp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/server_no_backup_24px"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/dashlineExpAssetItem"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/remove_24px"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Buttons -->
+            <LinearLayout
+                android:id="@+id/buttonsBackupLayoutAssetItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:weightSum="2">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDeleteRoomItem"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="DELETE"
+                    android:textSize="12sp"
+                    android:backgroundTint="#F44336"
+                    app:cornerRadius="24dp"
+                    android:fontFamily="@font/poppins_bold"/>
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPushToServerRoomItem"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="PUSH"
+                    android:textSize="12sp"
+                    android:backgroundTint="#3F51B5"
+                    app:cornerRadius="24dp"
+                    android:fontFamily="@font/poppins_bold"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:id="@+id/btnUpArrowRoomItem"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/bottom_panel_open_24px"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

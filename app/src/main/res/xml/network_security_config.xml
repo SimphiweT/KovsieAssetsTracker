@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Allow cleartext (HTTP) traffic for local dev -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Explicitly trust these development IPs -->
+    <domain-config cleartextTrafficPermitted="true">
+        <!-- Emulator bridge -->
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <!-- Alt emulator virtual NICs -->
+        <domain includeSubdomains="true"> 10.0.2.15</domain>
+        <domain includeSubdomains="true">10.0.2.16</domain>
+
+        <!-- Localhost for physical tests -->
+        <domain includeSubdomains="true">localhost</domain>
+
+        <!-- Common LAN IP blocks -->
+        <domain includeSubdomains="true">196.255.132.200</domain><!-- UFS_Wireless1 -->
+        <domain includeSubdomains="true">196.255.135.226</domain><!--  //UFS_Wireless1 My Android -->
+        <domain includeSubdomains="true">192.168.0.1</domain>
+        <domain includeSubdomains="true">192.168.1.100</domain>
+        <domain includeSubdomains="true">192.168.18.4</domain>
+        <domain includeSubdomains="true">192.168.18.56</domain>
+        <domain includeSubdomains="true">10.246.7.120</domain><!-- hotspot -->
+
+        <domain includeSubdomains="true">192.168.21.93</domain><!--  //UFS_Guest -->
+        <domain includeSubdomains="true">192.168.18.27</domain><!--  //UFS_Guest My Android -->
+    </domain-config>
+</network-security-config>
