@@ -1,0 +1,157 @@
+﻿@using KovsieAssetsTracker.WebAppMVC
+@using KovsieAssetsTracker.WebAppMVC.Helpers
+@using KovsieAssetsTracker.WebAppMVC.Models
+@inject SessionManager sessionManager
+
+@{
+    string role = sessionManager.GetRole() as string ?? "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="~/images/icon_logo_transparent.png" />
+    <title>KOVSIE STAFF | @ViewBag.Title</title>
+
+    @*<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />*@
+    <link rel="stylesheet" href="~/lib/remixicon/remixicon.min.css" />
+    <link rel="stylesheet" href="~/lib/sweetalert2/sweetalert2.min.css" />
+
+    <link rel="stylesheet" href="~/css/style_staff.css" asp-append-version="true" />
+
+    @*<script src="~/lib/bootstrap/js/bootstrap.min.js" defer></script>*@
+    <script src="~/lib/sweetalert2/sweetalert2.all.min.js" defer></script>
+    <script src="~/lib/lottie-web/lottie.min.js" defer></script>
+    <script src="https://unpkg.com/scrollreveal" defer></script>
+    <script src="~/lib/apexcharts/apexcharts.min.js" defer></script>
+    <script src="~/js/ui-helper.js" defer></script>
+    <script src="~/js/script_staff.js" defer></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="@Url.Action("StaffDashboard", "Staff")">
+                        <span class="icon"><img src="~/images/icon_logo_transparent.png" alt="Kovsie Logo" class="logo" /></span>
+                        <span class="title">Kovsie Assets Tracker</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("StaffDashboard", "Staff")">
+                        <span class="icon"> <i class="ri-dashboard-line"></i></span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ManageAssets", "Staff")">
+                        <span class="icon">  <i class="ri-folder-2-line"></i></span>
+                        <span class="title">Assets</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ManageCategories", "Staff")">
+                        <span class="icon"><i class="ri-list-check"></i></span>
+                        <span class="title">Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ManageRooms", "Staff")">
+                        <span class="icon"><i class="ri-database-line remixicon-outlined"></i></span>
+                        <span class="title">Rooms</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ManageProfile", "Staff")">
+                        <span class="icon"><i class="ri-account-circle-line"></i></span>
+                        <span class="title">Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ChangePassword", "Staff")">
+                        <span class="icon"><i class="ri-key-fill"></i></span>
+                        <span class="title">Change Password</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("LogOut", "Staff")">
+                        <span class="icon"><i class="ri-logout-circle-line"></i></span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- main -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <i class="ri-menu-line"></i>
+                </div>
+                @* <!-- search -->
+                 <div class="search">
+                     <label>
+                         <input type="text" placeholder="Search here" />
+                         <i class="ri-search-line"></i>
+                     </label>
+                 </div>*@
+                <!-- GLOBAL SEARCH BAR -->
+                <form asp-action="SearchManager" asp-controller="Staff" method="get" class="top-search d-flex align-items-center">
+                    @{
+                        var searchQuery = ViewData.Eval("Model.Query")?.ToString() ?? "";
+                        var searchFilter = ViewData.Eval("Model.TypeFilter")?.ToString() ?? "All";
+                    }
+
+                    <div class="search-wrapper d-flex align-items-center">
+                        <i class="ri-search-line search-icon"></i>
+                        <input type="text"
+                               name="query"
+                               value="@searchQuery"
+                               placeholder="Search assets, rooms, or categories..."
+                               class="search-input" />
+
+                        <select name="typeFilter" class="search-select">
+                            <option value="All" selected="@("All".Equals(searchFilter, StringComparison.OrdinalIgnoreCase))">All</option>
+                            <option value="Asset" selected="@("Asset".Equals(searchFilter, StringComparison.OrdinalIgnoreCase))">Assets</option>
+                            <option value="Room" selected="@("Room".Equals(searchFilter, StringComparison.OrdinalIgnoreCase))">Rooms</option>
+                            <option value="Category" selected="@("Category".Equals(searchFilter, StringComparison.OrdinalIgnoreCase))">Categories</option>
+                        </select>
+
+                        <button type="submit" class="search-btn">
+                            <i class="ri-arrow-right-line"></i>
+                        </button>
+                    </div>
+                </form>
+
+
+
+
+                <!-- user image -->
+                <div class="user">
+                    <img src="@(string.IsNullOrEmpty(sessionManager.GetProfilePictureUrl()) ? Url.Content("~/images/default-avatar.png") : Url.Content(sessionManager.GetProfilePictureUrl()))" alt="Profile" style="width:40px; height:40px; border-radius:50%; object-fit:cover;" />
+                 </div>
+            </div>
+            <div class="main-body">
+                @RenderBody()
+            </div>
+        
+
+        </div>
+    </div>
+
+
+    <!-- Section scripts -->
+    @RenderSection("Scripts", required: false)
+
+    <!-- SweetAlert / Lottie Partial -->
+    @await Html.PartialAsync("_SweetAlertPartial")
+
+</body>
+</html>

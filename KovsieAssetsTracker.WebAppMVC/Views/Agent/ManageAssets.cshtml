@@ -1,0 +1,195 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Asset.UpdateAndListAssetViewModel
+@{
+    ViewBag.Title = "Manage Assets";
+}
+
+<div class="main-title">
+    <h2><i class="ri-database-2-line"></i> MANAGE ASSETS</h2>
+    <div class="export-btns">
+        <a asp-action="ExportAssetsExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportAssetsPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<section class="manage-assets-wrapper">
+    <!-- ===== LEFT: ASSET LIST ===== -->
+    <section class="asset-list">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="fw-semibold mb-0">Assets</h5>
+                <input id="search-bar" class="form-control form-control-sm" placeholder="Search assets..." />
+            </div>
+
+            <div class="card-body">
+                <table id="assets-table" class="table align-middle mb-0">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Room</th>
+                            <th>Status</th>
+                            <th>QR</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Assets?.Any() == true)
+                        {
+                            foreach (var a in Model.Assets)
+                            {
+                                var img = !string.IsNullOrEmpty(a.AssetImage) ? a.AssetImage : Url.Content("~/images/default_broken.jpg");
+                                var qr = !string.IsNullOrEmpty(a.AssetQRCodeImage) ? a.AssetQRCodeImage : Url.Content("~/images/default_broken.jpg");
+
+                                <tr class="asset-row"
+                                    data-id="@a.AssetServerId"
+                                    data-name="@a.AssetName"
+                                    data-desc="@a.AssetDescription"
+                                    data-category="@a.AssetCategoryServerId"
+                                    data-room="@a.RoomServerId"
+                                    data-status="@a.Status"
+                                    data-andr="@a.IsAndroidBackedUp"
+                                    data-srv="@a.IsServerBackedUp">
+                                    <td><img src="@img" class="preview-image" /></td>
+                                    <td>@a.AssetName</td>
+                                    <td>@a.AssetCategoryName</td>
+                                    <td>@a.RoomName</td>
+                                    <td><span class="badge bg-primary">@a.Status</span></td>
+                                    <td>
+                                        <button class="btn btn-outline-secondary btn-sm" onclick="showQR('@qr','@a.AssetName')">
+                                            <i class="bi bi-qr-code"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <a asp-action="AssetsDetailsAndUpdate" asp-route-id="@a.AssetServerId" asp-controller="Agent"
+                                               class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <form asp-action="DeleteAsset" method="post" class="delete-asset-form" asp-controller="Agent">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="assetId" value="@a.AssetServerId" />
+                                                <button class="btn btn-outline-danger btn-sm delete-asset-btn"
+                                                        data-name="@a.AssetName">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="6" class="text-center text-muted">No assets found.</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RIGHT: UPDATE FORM ===== -->
+    <aside class="asset-form-wrapper">
+        <form asp-action="ManageAssets" method="post" enctype="multipart/form-data" class="asset-form card h-100">
+            @Html.AntiForgeryToken()
+            <div class="card-header">
+                <h5 class="fw-bold mb-0 text-white">Update Asset</h5>
+            </div>
+            <div class="card-body">
+                <input asp-for="UpdateAsset.AssetServerId" type="hidden" />
+
+                <label asp-for="UpdateAsset.AssetName" class="form-label">Asset Name</label>
+                <input asp-for="UpdateAsset.AssetName" class="form-control mb-3" placeholder="Asset Name" />
+
+                <label asp-for="UpdateAsset.AssetDescription" class="form-label">Description</label>
+                <textarea asp-for="UpdateAsset.AssetDescription" rows="3" class="form-control mb-3"
+                          placeholder="Description"></textarea>
+
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <label asp-for="UpdateAsset.AssetCategoryServerId" class="form-label">Category</label>
+                        <select asp-for="UpdateAsset.AssetCategoryServerId" class="form-select">
+                            <option value="">Select Category</option>
+                            @foreach (var c in Model.Categories)
+                            {
+                                <option value="@c.AssetCategoryServerId">@c.AssetCategoryName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label asp-for="UpdateAsset.RoomServerId" class="form-label">Room</label>
+                        <select asp-for="UpdateAsset.RoomServerId" class="form-select">
+                            <option value="">Select Room</option>
+                            @foreach (var r in Model.Rooms)
+                            {
+                                <option value="@r.RoomServerId">@r.RoomName</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <label asp-for="UpdateAsset.Status" class="form-label">Status</label>
+                <select asp-for="UpdateAsset.Status" class="form-select mb-3">
+                    <option>Available</option>
+                    <option>Deployed</option>
+                    <option>In_Repair</option>
+                    <option>Out_Of_Service</option>
+                    <option>Lost_Stolen</option>
+                    <option>In_Transit</option>
+                </select>
+
+                <div class="form-check mb-2">
+                    <input asp-for="UpdateAsset.IsAndroidBackedUp" class="form-check-input" type="checkbox" />
+                    <label asp-for="UpdateAsset.IsAndroidBackedUp" class="form-check-label">Android BackedUp?</label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input asp-for="UpdateAsset.IsServerBackedUp" class="form-check-input" type="checkbox" />
+                    <label asp-for="UpdateAsset.IsServerBackedUp" class="form-check-label">Server BackedUp?</label>
+                </div>
+
+                <button class="btn btn-gradient w-100 fw-bold mt-2">
+                    <i class="bi bi-pencil me-1"></i> Update Asset
+                </button>
+            </div>
+        </form>
+    </aside>
+</section>
+
+@section Scripts {
+    <script>
+        // Search filter
+        document.getElementById('search-bar').addEventListener('input', e => {
+            const q = e.target.value.toLowerCase();
+            document.querySelectorAll('#assets-table tbody tr').forEach(r => {
+                r.style.display = r.innerText.toLowerCase().includes(q) ? '' : 'none';
+            });
+        });
+
+        // Click asset row to populate form
+        document.querySelectorAll('.asset-row').forEach(row => {
+            row.addEventListener('click', () => {
+                const form = document.querySelector('.asset-form');
+                form.querySelector('[name="UpdateAsset.AssetServerId"]').value = row.dataset.id;
+                form.querySelector('[name="UpdateAsset.AssetName"]').value = row.dataset.name;
+                form.querySelector('[name="UpdateAsset.AssetDescription"]').value = row.dataset.desc;
+                form.querySelector('[name="UpdateAsset.AssetCategoryServerId"]').value = row.dataset.category;
+                form.querySelector('[name="UpdateAsset.RoomServerId"]').value = row.dataset.room;
+                form.querySelector('[name="UpdateAsset.Status"]').value = row.dataset.status;
+                form.querySelector('[name="UpdateAsset.IsAndroidBackedUp"]').checked = row.dataset.andr === "True";
+                form.querySelector('[name="UpdateAsset.IsServerBackedUp"]').checked = row.dataset.srv === "True";
+                form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+
+        // QR modal helper
+        window.showQR = function (src, name) {
+            Swal.fire({
+                title: name,
+                html: `<img src="${src}" style="width:200px;height:200px;border-radius:8px;margin-top:10px;">`,
+                showConfirmButton: false
+            });
+        };
+    </script>
+}

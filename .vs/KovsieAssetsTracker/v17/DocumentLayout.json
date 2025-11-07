@@ -1,0 +1,258 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|c:\\kovsieassettrackerufs\\kovsieassetstracker\\kovsieassetstracker.webappmvc\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|solutionrelative:kovsieassetstracker.webappmvc\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|c:\\kovsieassettrackerufs\\kovsieassetstracker\\kovsieassetstracker.webappmvc\\wwwroot\\js\\script_staff.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|solutionrelative:kovsieassetstracker.webappmvc\\wwwroot\\js\\script_staff.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|c:\\kovsieassettrackerufs\\kovsieassetstracker\\kovsieassetstracker.webappmvc\\views\\shared\\_layoutstaff.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|solutionrelative:kovsieassetstracker.webappmvc\\views\\shared\\_layoutstaff.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|c:\\kovsieassettrackerufs\\kovsieassetstracker\\kovsieassetstracker.webappmvc\\models\\staff\\staffdashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|solutionrelative:kovsieassetstracker.webappmvc\\models\\staff\\staffdashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|c:\\kovsieassettrackerufs\\kovsieassetstracker\\kovsieassetstracker.webappmvc\\views\\shared\\_sweetalertpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|solutionrelative:kovsieassetstracker.webappmvc\\views\\shared\\_sweetalertpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|c:\\kovsieassettrackerufs\\kovsieassetstracker\\kovsieassetstracker.webappmvc\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|solutionrelative:kovsieassetstracker.webappmvc\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|c:\\kovsieassettrackerufs\\kovsieassetstracker\\kovsieassetstracker.webappmvc\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|solutionrelative:kovsieassetstracker.webappmvc\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|c:\\kovsieassettrackerufs\\kovsieassetstracker\\kovsieassetstracker.webappmvc\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|solutionrelative:kovsieassetstracker.webappmvc\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|c:\\kovsieassettrackerufs\\kovsieassetstracker\\kovsieassetstracker.webappmvc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|solutionrelative:kovsieassetstracker.webappmvc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|c:\\kovsieassettrackerufs\\kovsieassetstracker\\kovsieassetstracker.webappmvc\\helpers\\authheaderhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|solutionrelative:kovsieassetstracker.webappmvc\\helpers\\authheaderhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|c:\\kovsieassettrackerufs\\kovsieassetstracker\\kovsieassetstracker.webappmvc\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|solutionrelative:kovsieassetstracker.webappmvc\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|c:\\kovsieassettrackerufs\\kovsieassetstracker\\kovsieassetstracker.webappmvc\\models\\admin\\dashboardstatsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|solutionrelative:kovsieassetstracker.webappmvc\\models\\admin\\dashboardstatsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|c:\\kovsieassettrackerufs\\kovsieassetstracker\\kovsieassetstracker.webappmvc\\views\\shared\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|solutionrelative:kovsieassetstracker.webappmvc\\views\\shared\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|c:\\kovsieassettrackerufs\\kovsieassetstracker\\kovsieassetstracker.webappmvc\\services\\repositories\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}|KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj|solutionrelative:kovsieassetstracker.webappmvc\\services\\repositories\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "script_staff.js",
+              "DocumentMoniker": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\wwwroot\\js\\script_staff.js",
+              "RelativeDocumentMoniker": "KovsieAssetsTracker.WebAppMVC\\wwwroot\\js\\script_staff.js",
+              "ToolTip": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\wwwroot\\js\\script_staff.js",
+              "RelativeToolTip": "KovsieAssetsTracker.WebAppMVC\\wwwroot\\js\\script_staff.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-05T21:25:51.512Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_LayoutStaff.cshtml",
+              "DocumentMoniker": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_LayoutStaff.cshtml",
+              "RelativeDocumentMoniker": "KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_LayoutStaff.cshtml",
+              "ToolTip": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_LayoutStaff.cshtml",
+              "RelativeToolTip": "KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_LayoutStaff.cshtml",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAYwJ0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-05T21:23:23.839Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StaffDashboardViewModel.cs",
+              "DocumentMoniker": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Models\\Staff\\StaffDashboardViewModel.cs",
+              "RelativeDocumentMoniker": "KovsieAssetsTracker.WebAppMVC\\Models\\Staff\\StaffDashboardViewModel.cs",
+              "ToolTip": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Models\\Staff\\StaffDashboardViewModel.cs",
+              "RelativeToolTip": "KovsieAssetsTracker.WebAppMVC\\Models\\Staff\\StaffDashboardViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T21:07:49.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "StaffController.cs",
+              "DocumentMoniker": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Controllers\\StaffController.cs",
+              "RelativeDocumentMoniker": "KovsieAssetsTracker.WebAppMVC\\Controllers\\StaffController.cs",
+              "ToolTip": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Controllers\\StaffController.cs",
+              "RelativeToolTip": "KovsieAssetsTracker.WebAppMVC\\Controllers\\StaffController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T21:05:36.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_SweetAlertPartial.cshtml",
+              "DocumentMoniker": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_SweetAlertPartial.cshtml",
+              "RelativeDocumentMoniker": "KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_SweetAlertPartial.cshtml",
+              "ToolTip": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_SweetAlertPartial.cshtml",
+              "RelativeToolTip": "KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_SweetAlertPartial.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-05T20:20:52.549Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-05T20:20:46.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "KovsieAssetsTracker.WebAppMVC\\Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "KovsieAssetsTracker.WebAppMVC\\Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-05T20:20:02.49Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "KovsieAssetsTracker.WebAppMVC\\Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "KovsieAssetsTracker.WebAppMVC\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-05T20:19:42.62Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-05T20:19:32.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AuthHeaderHandler.cs",
+              "DocumentMoniker": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Helpers\\AuthHeaderHandler.cs",
+              "RelativeDocumentMoniker": "KovsieAssetsTracker.WebAppMVC\\Helpers\\AuthHeaderHandler.cs",
+              "ToolTip": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Helpers\\AuthHeaderHandler.cs",
+              "RelativeToolTip": "KovsieAssetsTracker.WebAppMVC\\Helpers\\AuthHeaderHandler.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwA8AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T19:16:12.008Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "KovsieAssetsTracker.WebAppMVC\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "KovsieAssetsTracker.WebAppMVC\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAHgKAAAAAAAAAAAYwI8KAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T18:30:56.918Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "DashboardStatsViewModel.cs",
+              "DocumentMoniker": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Models\\Admin\\DashboardStatsViewModel.cs",
+              "RelativeDocumentMoniker": "KovsieAssetsTracker.WebAppMVC\\Models\\Admin\\DashboardStatsViewModel.cs",
+              "ToolTip": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Models\\Admin\\DashboardStatsViewModel.cs",
+              "RelativeToolTip": "KovsieAssetsTracker.WebAppMVC\\Models\\Admin\\DashboardStatsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T18:19:02.482Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "_LayoutAdmin.cshtml",
+              "DocumentMoniker": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "RelativeDocumentMoniker": "KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "ToolTip": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "RelativeToolTip": "KovsieAssetsTracker.WebAppMVC\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAuwJ4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-05T18:10:47.139Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Services\\Repositories\\UserService.cs",
+              "RelativeDocumentMoniker": "KovsieAssetsTracker.WebAppMVC\\Services\\Repositories\\UserService.cs",
+              "ToolTip": "C:\\KovsieAssetTrackerUFS\\KovsieAssetsTracker\\KovsieAssetsTracker.WebAppMVC\\Services\\Repositories\\UserService.cs",
+              "RelativeToolTip": "KovsieAssetsTracker.WebAppMVC\\Services\\Repositories\\UserService.cs",
+              "ViewState": "AgIAAPcAAAAAAAAAAAAwwBMBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T17:24:35.231Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

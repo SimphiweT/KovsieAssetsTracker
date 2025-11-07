@@ -1,0 +1,129 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.User.DetailsAndUpdateUserViewModel
+@{
+    ViewBag.Title = "My Profile";
+
+    var img = !string.IsNullOrEmpty(Model?.UserDetails?.ProfileImageFileName)
+        ? Model.UserDetails.ProfileImageFileName
+        : Url.Content("~/images/default-avatar.png");
+}
+
+<!-- ===== PAGE HEADER ===== -->
+<div class="main-title">
+    <h2><i class="ri-user-line"></i> MY PROFILE</h2>
+    <div class="export-btns">
+        <a asp-action="AdminDashboard" class="btn btn-outline-light">
+            <i class="ri-arrow-left-line me-1"></i> Back
+        </a>
+    </div>
+</div>
+
+<!-- ===== MAIN WRAPPER ===== -->
+<section class="manage-assets-wrapper">
+    <!-- ===== LEFT: PROFILE DETAILS CARD ===== -->
+    <section class="asset-list">
+        <div class="card h-100 text-center text-white bg-gradient">
+            <div class="card-body">
+                <img id="profilePreview"
+                     src="@img"
+                     alt="Profile Picture"
+                     class="rounded-circle border border-3 border-light shadow-soft mb-3"
+                     style="width:140px;height:140px;object-fit:cover;" />
+
+                <h4 class="fw-bold text-white mb-0">@Model?.UserDetails?.UsernameDisplay</h4>
+                <p class="text-light small mb-2">@Model?.UserDetails?.UserRole</p>
+                <hr class="divider-light my-3" />
+
+                <div class="text-start small px-3">
+                    <p class="mb-2"><i class="ri-mail-line me-1"></i> <strong>Email:</strong> @Model?.UserDetails?.UserEmail</p>
+                    <p class="mb-2"><i class="ri-phone-line me-1"></i> <strong>Contact:</strong> @Model?.UserDetails?.ContactNumber</p>
+                    <p class="mb-2"><i class="ri-calendar-line me-1"></i> <strong>Joined:</strong> @Model?.UserDetails?.CreatedDate?.ToString("yyyy-MM-dd")</p>
+                    <p class="mb-0"><strong>About:</strong> @Model?.UserDetails?.Description</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RIGHT: UPDATE PROFILE FORM ===== -->
+    <aside class="asset-form-wrapper">
+        <form asp-action="ManageProfile" method="post" enctype="multipart/form-data" class="asset-form card h-100">
+            @Html.AntiForgeryToken()
+            <div class="card-header">
+                <h5 class="fw-bold mb-0 text-white"><i class="bi bi-pencil-square me-1"></i> Update Profile</h5>
+            </div>
+
+            <div class="card-body">
+                <input type="hidden" name="_method" value="PUT" />
+                <input type="hidden" asp-for="UpdateUser.UserId" name="UserId" />
+
+                <!-- Profile Picture -->
+                <label class="form-label">Profile Picture</label>
+                <div class="text-center mb-3">
+                    <img id="UploadPreview"
+                         src="@img"
+                         alt="Profile"
+                         class="rounded-circle shadow-soft mb-2 preview-image"
+                         style="width:120px; height:120px;" />
+                    <input asp-for="UpdateUser.ImageFile"
+                           type="file"
+                           accept="image/*"
+                           class="form-control"
+                           id="ImageFile" name="ImageFile" />
+                </div>
+
+                <!-- Full Name -->
+                <label asp-for="UpdateUser.UsernameDisplay" class="form-label">Full Name</label>
+                <input asp-for="UpdateUser.UsernameDisplay" class="form-control mb-3" placeholder="Full Name" name="UsernameDisplay" />
+
+                <!-- Email -->
+                <label asp-for="UpdateUser.UserEmail" class="form-label">Email</label>
+                <input asp-for="UpdateUser.UserEmail" class="form-control mb-3" readonly name="UserEmail" />
+
+                <!-- Staff / Student Number -->
+                <label asp-for="UpdateUser.StudentStaffNumber" class="form-label">Staff / Student No.</label>
+                <input asp-for="UpdateUser.StudentStaffNumber" class="form-control mb-3" readonly name="StudentStaffNumber" />
+
+                <!-- Contact Number -->
+                <label asp-for="UpdateUser.ContactNumber" class="form-label">Contact Number</label>
+                <input asp-for="UpdateUser.ContactNumber" class="form-control mb-3" placeholder="Phone Number" name="ContactNumber" />
+
+                <!-- Description -->
+                <label asp-for="UpdateUser.Description" class="form-label">About You</label>
+                <textarea asp-for="UpdateUser.Description"
+                          class="form-control mb-3"
+                          rows="3"
+                          maxlength="500"
+                          placeholder="Write a short description about yourself..." name="Description"></textarea>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between">
+                    <a asp-action="AdminDashboard" class="btn btn-secondary fw-bold">
+                        <i class="ri-close-line me-1"></i> Cancel
+                    </a>
+                    <button class="btn btn-gradient fw-bold">
+                        <i class="ri-save-3-line me-1"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+        </form>
+    </aside>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // ===== Profile Picture Preview (Both Main + Form) =====
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', e => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = ev => {
+                    document.getElementById('UploadPreview').src = ev.target.result;
+                    document.getElementById('profilePreview').src = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+    </script>
+}

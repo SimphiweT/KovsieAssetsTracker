@@ -1,0 +1,228 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Campus.CreateAndListCampusViewModel
+@{
+    ViewBag.Title = "Manage Campuses";
+}
+
+<div class="main-title">
+    <h2><i class="ri-school-line"></i> MANAGE CAMPUSES</h2>
+    <div class="export-btns">
+        <a asp-action="ExportCampusesExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportCampusesPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<section class="manage-assets-wrapper">
+    <!-- ===== LEFT: CAMPUS LIST ===== -->
+    <section class="asset-list">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fw-semibold">All Campuses</h5>
+                <input id="search-bar" class="form-control form-control-sm" placeholder="Search campus..." />
+            </div>
+
+            <div class="card-body">
+                <!-- ===== TABLE VIEW ===== -->
+                <table id="campuses-table" class="table align-middle mb-0">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Buildings</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Campuses != null && Model.Campuses.Any())
+                        {
+                            foreach (var c in Model.Campuses)
+                            {
+                                var img = !string.IsNullOrEmpty(c.CampusImage)
+                                ? c.CampusImage
+                                : Url.Content("~/images/default_broken.jpg");
+
+                                <tr>
+                                    <td><img src="@img" alt="@c.CampusName" style="width:60px;height:60px;object-fit:cover;border-radius:8px;" /></td>
+                                    <td>@c.CampusName</td>
+                                    <td>@c.CampusDescription</td>
+                                    <td>@(c.Buildings?.Count ?? 0)</td>
+                                    <td>@c.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <a asp-action="CampusDetailsAndUpdate"
+                                               asp-controller="Admin"
+                                               asp-route-id="@c.CampusServerId"
+                                               class="btn btn-outline-primary btn-sm"
+                                               title="Edit Campus">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <form asp-action="DeleteCampus" method="post" class="delete-campus-form d-inline">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="campusId" value="@c.CampusServerId" />
+                                                <button class="btn btn-outline-danger btn-sm delete-campus-btn" data-name="@c.CampusName">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="6" class="text-muted-ux">No campuses found.</td></tr>
+                        }
+                    </tbody>
+                </table>
+
+                <!-- ===== GRID VIEW ===== -->
+                <div id="campuses-grid" class="mt-2">
+                    @if (Model.Campuses != null && Model.Campuses.Any())
+                    {
+                        foreach (var c in Model.Campuses)
+                        {
+                            var img = !string.IsNullOrEmpty(c.CampusImage)
+                            ? c.CampusImage
+                            : Url.Content("~/images/default_broken.jpg");
+
+                            <div class="asset-card">
+                                <img src="@img" alt="@c.CampusName" />
+                                <h6 class="fw-semibold">@c.CampusName</h6>
+                                <div class="text-muted-ux">@c.CampusDescription</div>
+                                <div class="mt-1"><span class="badge bg-primary">@(c.Buildings?.Count ?? 0) Buildings</span></div>
+                                <div class="action-btns mt-2">
+                                    <a asp-action="DetailsAndUpdateCampusViewModel"
+                                       asp-controller="Admin"
+                                       asp-route-id="@c.CampusServerId"
+                                       class="btn btn-outline-primary btn-sm"
+                                       title="View & Update Campus">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+
+                                    <form asp-action="DeleteCampus" method="post" class="delete-campus-form">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="campusId" value="@c.CampusServerId" />
+                                        <button class="btn btn-outline-danger btn-sm delete-campus-btn" data-name="@c.CampusName">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <!-- Floating Toggle -->
+                <button id="toggle-view" class="fab-toggle" title="Switch View"><i class="bi bi-grid"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RIGHT: REGISTER NEW CAMPUS ===== -->
+    <aside class="asset-form-wrapper">
+        <form asp-action="ManageCampuses" method="post" enctype="multipart/form-data" class="asset-form card h-100">
+            @Html.AntiForgeryToken()
+            <div class="card-header">
+                <h5 class="fw-bold mb-0 text-white">Register New Campus</h5>
+            </div>
+            <div class="card-body">
+                <label class="form-label">Campus Image</label>
+                <div class="text-center mb-3">
+                    <img id="campusPreview" src="~/images/default_broken.jpg" class="rounded shadow-soft mb-2 preview-img" />
+                    <input asp-for="CreateCampus.ImageFile" type="file" accept="image/*" class="form-control" />
+                </div>
+
+                <label asp-for="CreateCampus.CampusLocalId" class="form-label">Campus Name</label>
+                <input asp-for="CreateCampus.CampusLocalId" class="form-control mb-3" placeholder="RoomDB KEY" />
+                <span asp-validation-for="CreateCampus.CampusLocalId" class="text-danger small"></span>
+
+                <label asp-for="CreateCampus.CampusName" class="form-label">Campus Name</label>
+                <input asp-for="CreateCampus.CampusName" class="form-control mb-3" placeholder="Enter campus name" />
+                <span asp-validation-for="CreateCampus.CampusName" class="text-danger small"></span>
+
+                <label asp-for="CreateCampus.CampusDescription" class="form-label">Description</label>
+                <textarea asp-for="CreateCampus.CampusDescription" rows="3" class="form-control mb-3"
+                          placeholder="Enter campus description"></textarea>
+                <span asp-validation-for="CreateCampus.CampusDescription" class="text-danger small"></span>
+
+                <input asp-for="CreateCampus.IsAndroidBackedUp" class="form-check-input" type="checkbox" />
+                <label asp-for="CreateCampus.IsAndroidBackedUp" class="form-check-label">Android BackedUp?</label>
+                <span asp-validation-for="CreateCampus.IsAndroidBackedUp" class="text-danger small"></span>
+
+                <input asp-for="CreateCampus.IsServerBackedUp" class="form-check-input" type="checkbox" />
+                <label asp-for="CreateCampus.IsServerBackedUp" class="form-check-label">Server BackedUp?</label>
+                <span asp-validation-for="CreateCampus.IsServerBackedUp" class="text-danger small"></span>
+
+                <button type="submit" class="btn btn-gradient w-100 fw-bold">
+                    <i class="bi bi-plus-circle me-1"></i> Add Campus
+                </button>
+            </div>
+        </form>
+    </aside>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script>
+        // === Toggle grid/table ===
+        const btnToggle = document.getElementById('toggle-view');
+        const tableEl = document.getElementById('campuses-table');
+        const gridEl = document.getElementById('campuses-grid');
+        let showingGrid = false;
+
+        btnToggle.addEventListener('click', () => {
+            showingGrid = !showingGrid;
+            btnToggle.classList.toggle('active');
+            if (showingGrid) {
+                tableEl.style.display = 'none';
+                gridEl.style.display = 'grid';
+                btnToggle.innerHTML = '<i class="bi bi-table"></i>';
+            } else {
+                gridEl.style.display = 'none';
+                tableEl.style.display = 'table';
+                btnToggle.innerHTML = '<i class="bi bi-grid"></i>';
+            }
+        });
+
+        // === Search filter ===
+        document.getElementById('search-bar').addEventListener('input', e => {
+            const q = e.target.value.toLowerCase();
+            document.querySelectorAll('#campuses-table tbody tr').forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(q) ? '' : 'none';
+            });
+        });
+
+        // image preview for create form
+        // ===== Image Preview =====
+        const imgInput = document.querySelector('input[name="CreateCampus.ImageFile"]');
+        if (imgInput) {
+            imgInput.addEventListener("change", e => {
+                const f = e.target.files?.[0];
+                const img = document.getElementById("campusPreview");
+                if (!f) return img.src = "~/images/default_broken.jpg";
+                const r = new FileReader();
+                r.onload = ev => img.src = ev.target.result;
+                r.readAsDataURL(f);
+            });
+        }
+
+        // === Delete confirmation ===
+        document.querySelectorAll('.delete-campus-form').forEach(form => {
+            form.addEventListener('submit', function (ev) {
+                ev.preventDefault();
+                const name = this.querySelector('.delete-campus-btn').dataset.name;
+                Swal.fire({
+                    title: 'Confirm Deletion',
+                    html: `Delete campus <strong>${name}</strong>?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, delete'
+                }).then(r => { if (r.isConfirmed) this.submit(); });
+            });
+        });
+    </script>
+}

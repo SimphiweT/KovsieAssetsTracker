@@ -1,0 +1,319 @@
+﻿      @model KovsieAssetsTracker.WebAppMVC.Models.Asset.CreateAndListAssetViewModel
+@{
+    ViewBag.Title = "Manage Assets";
+}
+
+<div class="main-title">
+    <h2><i class="ri-folder-2-line"></i> MANAGE ASSETS</h2>
+    <div class="export-btns">
+        <a asp-action="ExportAssetsExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportAssetsPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<section class="manage-assets-wrapper">
+    <!-- ===== LEFT: ASSET LIST ===== -->
+    <section class="asset-list">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fw-semibold">All Assets</h5>
+                <input id="search-bar" class="form-control form-control-sm" placeholder="Search assets..." />
+            </div>
+
+            <div class="card-body">
+                <!-- ===== TABLE VIEW ===== -->
+                <table id="assets-table" class="table align-middle mb-0">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Room</th>
+                            <th>Status</th>
+                            <th>QR</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Assets != null && Model.Assets.Any())
+                        {
+                            foreach (var a in Model.Assets)
+                            {
+                                var img = !string.IsNullOrEmpty(a.AssetImage) ? a.AssetImage : Url.Content("~/images/default_broken.jpg");
+                                var qr = !string.IsNullOrEmpty(a.AssetQRCodeImage) ? a.AssetQRCodeImage : Url.Content("~/images/default_broken.jpg");
+                                <tr>
+                                    <td><img src="@img" alt="@a.AssetName" class="preview-image" /></td>
+                                    <td>@a.AssetName</td>
+                                    <td>@a.AssetCategoryName</td>
+                                    <td>@a.RoomName</td>
+                                    <td><span class="badge bg-primary">@a.Status</span></td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-secondary btn-sm"
+                                                onclick="showQR('@qr','@a.AssetName')">
+                                            <i class="bi bi-qr-code"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <a asp-action="AssetsDetailsAndUpdate" asp-route-id="@a.AssetServerId"
+                                               class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <form asp-action="DeleteAsset" method="post" class="delete-asset-form">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="assetId" value="@a.AssetServerId" />
+                                                <button class="btn btn-outline-danger btn-sm delete-asset-btn"
+                                                        data-name="@a.AssetName">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="7" class="text-muted-ux">No assets found.</td></tr>
+                        }
+                    </tbody>
+                </table>
+
+                <!-- ===== GRID VIEW ===== -->
+                <div id="assets-grid" class="mt-2">
+                    @if (Model.Assets != null && Model.Assets.Any())
+                    {
+                        foreach (var a in Model.Assets)
+                        {
+                            var img = !string.IsNullOrEmpty(a.AssetImage) ? a.AssetImage : Url.Content("~/images/default_broken.jpg");
+                            var qr = !string.IsNullOrEmpty(a.AssetQRCodeImage) ? a.AssetQRCodeImage : Url.Content("~/images/default_broken.jpg");
+                            <div class="asset-card">
+                                <img src="@img" alt="@a.AssetName" />
+                                <h6 class="fw-semibold">@a.AssetName</h6>
+                                <div class="text-muted-ux">@a.AssetCategoryName</div>
+                                <div class="mt-1"><span class="badge bg-primary">@a.Status</span></div>
+                                <div class="action-btns mt-2">
+                                    <a asp-action="AssetsDetailsAndUpdate" asp-route-id="@a.AssetServerId" asp-controller="Staff"
+                                       class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil"></i></a>
+                                    <form asp-action="DeleteAsset" method="post" class="delete-asset-form">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="assetId" value="@a.AssetServerId" />
+                                        <button class="btn btn-outline-danger btn-sm delete-asset-btn"
+                                                data-name="@a.AssetName">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                                            onclick="showQR('@qr','@a.AssetName')">
+                                        <i class="bi bi-qr-code"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <!-- Floating Toggle -->
+                <button id="toggle-view" class="fab-toggle" title="Switch View"><i class="bi bi-grid"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RIGHT: STICKY ASSET FORM ===== -->
+    <aside class="asset-form-wrapper">
+        <form asp-action="ManageAssets" method="post" enctype="multipart/form-data" class="asset-form card h-100">
+            @Html.AntiForgeryToken()
+            <div class="card-header">
+                <h5 class="fw-bold mb-0 text-white">Register New Asset</h5>
+            </div>
+            <div class="card-body">
+                <label class="form-label">Asset Image</label>
+                <div class="text-center mb-3">
+                    <img id="assetPreview" src="~/images/default-asset.png" class="rounded shadow-soft mb-2 preview-img" />
+                    <input asp-for="CreateAsset.ImageFileAsset" type="file" accept="image/*" class="form-control" />
+                </div>
+                <label asp-for="CreateAsset.AssetLocalId" class="form-label">RoomDB Primary Key</label>
+                <input asp-for="CreateAsset.AssetLocalId" class="form-control mb-3" placeholder="RoomDB Primary Key" />
+
+                <label asp-for="CreateAsset.AssetName" class="form-label">Asset Name</label>
+                <input asp-for="CreateAsset.AssetName" class="form-control mb-3" placeholder="Asset Name" />
+
+                <label asp-for="CreateAsset.AssetDescription" class="form-label">Description</label>
+                <textarea asp-for="CreateAsset.AssetDescription" rows="3" class="form-control mb-3"
+                          placeholder="Description"></textarea>
+
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <label asp-for="CreateAsset.AssetCategoryServerId" class="form-label">Category</label>
+                        <select asp-for="CreateAsset.AssetCategoryServerId" class="form-select">
+                            <option value="">Select Category</option>
+                            @foreach (var c in Model.Categories ?? new List<KovsieAssetsTracker.WebAppMVC.Models.Category.CategoryViewModel>())
+                            {
+                                <option value="@c.AssetCategoryServerId">@c.AssetCategoryName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label asp-for="CreateAsset.RoomServerId" class="form-label">Room</label>
+                        <select asp-for="CreateAsset.RoomServerId" class="form-select">
+                            <option value="">Select Room</option>
+                            @foreach (var r in Model.Rooms ?? new List<KovsieAssetsTracker.WebAppMVC.Models.Room.RoomViewModel>())
+                            {
+                                <option value="@r.RoomServerId">@r.RoomName</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <label asp-for="CreateAsset.Status" class="form-label">Status</label>
+                <select asp-for="CreateAsset.Status" class="form-select mb-3">
+                    <option>Available</option>
+                    <option>Deployed</option>
+                    <option>In_Repair</option>
+                    <option>Out_Of_Service</option>
+                    <option>Device</option>
+                    <option>Lost_Stolen</option>
+                    <option>Lost_Stolen</option>
+                    <option>In_Transit</option>
+                    <option>On_Order</option>
+                    <option>Received</option>
+                    <option>Under_Evaluation</option>
+                </select>
+
+                <div class="form-check mb-3">
+                    <input asp-for="CreateAsset.IsAndroidBackedUp" class="form-check-input" type="checkbox" />
+                    <label asp-for="CreateAsset.IsAndroidBackedUp" class="form-check-label">
+                        Android BackedUp?
+                    </label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input asp-for="CreateAsset.IsServerBackedUp" class="form-check-input" type="checkbox" />
+                    <label asp-for="CreateAsset.IsServerBackedUp" class="form-check-label">
+                        Server BackedUp?
+                    </label>
+                </div>
+
+                <button class="btn btn-gradient w-100 fw-bold">
+                    <i class="bi bi-plus-circle me-1"></i> Add Asset
+                </button>
+            </div>
+        </form>
+    </aside>
+</section>
+
+
+
+
+<!-- QR Viewer -->
+<div id="qrModal">
+    <span class="btn-close">&times;</span>
+    <div class="qr-content">
+        <img id="qrPreview" src="" alt="QR Code" />
+        <div id="qrAssetName"></div>
+        <button class="btn btn-gradient mt-2" onclick="printQR()">
+            <i class="bi bi-printer"></i> Print
+        </button>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        const btnToggle = document.getElementById('toggle-view');
+           const tableEl = document.getElementById('assets-table');
+           const gridEl = document.getElementById('assets-grid');
+           const qrModal = document.getElementById('qrModal');
+           const qrPreview = document.getElementById('qrPreview');
+           const qrName = document.getElementById('qrAssetName');
+           const closeBtn = document.querySelector('#qrModal .btn-close');
+           let showingGrid = false;
+
+           // Toggle grid/table
+           btnToggle.addEventListener('click', () => {
+               showingGrid = !showingGrid;
+               btnToggle.classList.toggle('active');
+               if (showingGrid) {
+                   tableEl.style.display = 'none';
+                   gridEl.style.display = 'grid';
+                   btnToggle.innerHTML = '<i class="bi bi-table"></i>';
+                   btnToggle.title = 'Switch to Table View';
+               } else {
+                   gridEl.style.display = 'none';
+                   tableEl.style.display = 'table';
+                   btnToggle.innerHTML = '<i class="bi bi-grid"></i>';
+                   btnToggle.title = 'Switch to Grid View';
+               }
+           });
+
+           // QR code modal
+           window.showQR = function(src, name) {
+               qrPreview.src = src;
+               qrName.textContent = name;
+               qrModal.classList.add('active');
+           }
+           closeBtn.onclick = () => qrModal.classList.remove('active');
+           qrModal.onclick = (e) => { if (e.target === qrModal) qrModal.classList.remove('active'); }
+
+           // Print QR
+           window.printQR = function() {
+               const src = qrPreview.src;
+               const name = qrName.textContent;
+               const w = window.open('');
+               w.document.write(`<div style="text-align:center;font-family:sans-serif">
+                   <img src="${src}" style="width:200px;height:200px;margin:auto;border-radius:8px">
+                   <h3>${name}</h3></div>`);
+               w.print(); w.close();
+           }
+        // search (table only)
+        document.getElementById('search-bar').addEventListener('input', e=>{
+          const q = e.target.value.toLowerCase();
+          document.querySelectorAll('#assets-table tbody tr').forEach(row=>{
+            row.style.display = row.innerText.toLowerCase().includes(q) ? '' : 'none';
+          });
+        });
+
+        // image preview for create form
+        (document.querySelector('input[type="file"][name="CreateAsset.ImageFileAsset"]')||{}).addEventListener?.('change', e=>{
+          const f=e.target.files?.[0]; const img=document.getElementById('assetPreview');
+          if(!f){ img.src='~/images/default-asset.png'; return; }
+          const r=new FileReader(); r.onload=ev=>img.src=ev.target.result; r.readAsDataURL(f);
+        });
+
+        // delete confirm
+        document.querySelectorAll('.delete-asset-form').forEach(form=>{
+          form.addEventListener('submit', function(ev){
+            ev.preventDefault();
+            const name=this.querySelector('.delete-asset-btn').dataset.name;
+            Swal.fire({
+              title: 'Confirm Deletion',
+              html: `Delete asset <strong>${name}</strong>?`,
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#d33',
+              cancelButtonColor: '#6c757d',
+              confirmButtonText: 'Yes, delete'
+            }).then(r=>{ if(r.isConfirmed) this.submit(); });
+          });
+        });
+
+        // QR helpers
+        function showQR(src, name){
+          document.getElementById('qrPreview').src = src;
+          document.getElementById('qrAssetName').textContent = name;
+          new bootstrap.Modal('#qrModal').show();
+        }
+        window.showQR = showQR;
+
+        function printQR(){
+          const src=document.getElementById('qrPreview').src;
+          const name=document.getElementById('qrAssetName').textContent;
+          const w=window.open('');
+          w.document.write(`<div style="text-align:center;font-family:sans-serif">
+              <img src="${src}" style="width:200px;height:200px;margin:auto;display:block;border-radius:8px">
+              <h3>${name}</h3></div>`);
+          w.print(); w.close();
+        }
+        window.printQR = printQR;
+    </script>
+}

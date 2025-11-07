@@ -1,0 +1,242 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Room.CreateAndListRoomsViewModel
+@{
+    ViewBag.Title = "Manage Rooms";
+}
+
+<div class="main-title">
+    <h2><i class="ri-door-open-line"></i> MANAGE ROOMS</h2>
+    <div class="export-btns">
+        <a asp-action="ExportRoomsExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportRoomsPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<section class="manage-assets-wrapper">
+    <!-- ===== LEFT: ROOM LIST ===== -->
+    <section class="asset-list">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fw-semibold">All Rooms</h5>
+                <input id="search-bar" class="form-control form-control-sm" placeholder="Search rooms..." />
+            </div>
+
+            <div class="card-body">
+                <!-- ===== TABLE VIEW ===== -->
+                <table id="rooms-table" class="table align-middle mb-0 text-center">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Floor</th>
+                            <th>Assets</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Rooms != null && Model.Rooms.Any())
+                        {
+                            foreach (var r in Model.Rooms)
+                            {
+                                var img = !string.IsNullOrEmpty(r.RoomImage)
+                                ? r.RoomImage
+                                : Url.Content("~/images/default_broken.jpg");
+                                <tr>
+                                    <td><img src="@img" alt="Room" class="preview-image" /></td>
+                                    <td>@r.RoomName</td>
+                                    <td>@r.RoomDescription</td>
+                                    <td>@(string.IsNullOrEmpty(r.FloorName) ? "Unassigned" : r.FloorName)</td>
+                                    <td>@(r.Assets?.Count ?? 0)</td>
+                                    <td>@r.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <a asp-action="RoomsDetailsAndUpdate"
+                                               asp-controller="Admin"
+                                               asp-route-id="@r.RoomServerId"
+                                               class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <form asp-action="DeleteRoom" method="post" class="delete-room-form d-inline">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="roomId" value="@r.RoomServerId" />
+                                                <button type="submit"
+                                                        class="btn btn-outline-danger btn-sm delete-room-btn"
+                                                        data-name="@r.RoomName">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="7" class="text-muted-ux">No rooms found.</td></tr>
+                        }
+                    </tbody>
+                </table>
+
+                <!-- ===== GRID VIEW ===== -->
+                <div id="rooms-grid" class="mt-2">
+                    @if (Model.Rooms != null && Model.Rooms.Any())
+                    {
+                        foreach (var r in Model.Rooms)
+                        {
+                            var img = !string.IsNullOrEmpty(r.RoomImage)
+                            ? r.RoomImage
+                            : Url.Content("~/images/default_broken.jpg");
+                            <div class="asset-card">
+                                <img src="@img" alt="@r.RoomName" class="preview-image" />
+                                <h6 class="fw-semibold">@r.RoomName</h6>
+                                <div class="text-muted-ux">@r.FloorName</div>
+                                <div class="small">@((r.Assets?.Count ?? 0)) Assets</div>
+                                <div class="action-btns mt-2">
+                                    <a asp-action="RoomsDetailsAndUpdate"
+                                       asp-controller="Admin"
+                                       asp-route-id="@r.RoomServerId"
+                                       class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form asp-action="DeleteRoom" method="post" class="delete-room-form d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="roomId" value="@r.RoomServerId" />
+                                        <button type="submit"
+                                                class="btn btn-outline-danger btn-sm delete-room-btn"
+                                                data-name="@r.RoomName">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <!-- Floating Toggle -->
+                <button id="toggle-view" class="fab-toggle" title="Switch View"><i class="bi bi-grid"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RIGHT: CREATE ROOM FORM ===== -->
+    <aside class="asset-form-wrapper">
+        <form asp-action="ManageRooms" method="post" enctype="multipart/form-data" class="asset-form card h-100">
+            @Html.AntiForgeryToken()
+            <div class="card-header">
+                <h5 class="fw-bold mb-0 text-white">Register New Room</h5>
+            </div>
+
+            <div class="card-body">
+                <label asp-for="CreateRoom.RoomLocalId" class="form-label">RoomDB Primary Key</label>
+                <input asp-for="CreateRoom.RoomLocalId" class="form-control mb-3" placeholder="Enter Local ID" />
+
+                <label asp-for="CreateRoom.RoomName" class="form-label">Room Name</label>
+                <input asp-for="CreateRoom.RoomName" class="form-control mb-3" placeholder="Enter Room Name" />
+
+                <label asp-for="CreateRoom.FloorServerId" class="form-label">Select Floor</label>
+                <select asp-for="CreateRoom.FloorServerId" class="form-select mb-3">
+                    <option value="">-- Select Floor --</option>
+                    @foreach (var f in Model.Floors ?? new List<KovsieAssetsTracker.WebAppMVC.Models.Floor.FloorViewModel>())
+                    {
+                        <option value="@f.FloorServerId">@f.FloorName</option>
+                    }
+                </select>
+
+                <label asp-for="CreateRoom.RoomDescription" class="form-label">Description</label>
+                <textarea asp-for="CreateRoom.RoomDescription" rows="3" class="form-control mb-3"
+                          placeholder="Enter description"></textarea>
+
+                <label asp-for="CreateRoom.ImageFile" class="form-label">Room Image</label>
+                <div class="text-center mb-3">
+                    <img id="roomPreview" src="~/images/default_broken.jpg" class="rounded shadow-soft mb-2 preview-image"
+                         style="width:120px;height:120px;object-fit:cover;" />
+                    <input asp-for="CreateRoom.ImageFile" type="file" accept="image/*" class="form-control" />
+                </div>
+
+                <div class="form-check mb-2">
+                    <input asp-for="CreateRoom.IsAndroidBackedUp" class="form-check-input" />
+                    <label asp-for="CreateRoom.IsAndroidBackedUp" class="form-check-label">Android BackedUp?</label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input asp-for="CreateRoom.IsServerBackedUp" class="form-check-input" />
+                    <label asp-for="CreateRoom.IsServerBackedUp" class="form-check-label">Server BackedUp?</label>
+                </div>
+
+                <button type="submit" class="btn btn-gradient w-100 fw-bold">
+                    <i class="bi bi-plus-circle me-1"></i> Add Room
+                </button>
+            </div>
+        </form>
+    </aside>
+</section>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // ===== Grid/Table Toggle =====
+        document.addEventListener("DOMContentLoaded", () => {
+            const btnToggle = document.getElementById("toggle-view");
+            const tableEl = document.getElementById("rooms-table");
+            const gridEl = document.getElementById("rooms-grid");
+            if (!btnToggle || !tableEl || !gridEl) return;
+            gridEl.style.display = "none";
+            let showingGrid = false;
+
+            btnToggle.addEventListener("click", () => {
+                showingGrid = !showingGrid;
+                if (showingGrid) {
+                    tableEl.style.display = "none";
+                    gridEl.style.display = "grid";
+                    btnToggle.innerHTML = '<i class="bi bi-table"></i>';
+                } else {
+                    gridEl.style.display = "none";
+                    tableEl.style.display = "table";
+                    btnToggle.innerHTML = '<i class="bi bi-grid"></i>';
+                }
+            });
+        });
+
+        // ===== Live Search =====
+        document.getElementById("search-bar").addEventListener("input", e => {
+            const term = e.target.value.toLowerCase();
+            document.querySelectorAll("#rooms-table tbody tr").forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(term) ? "" : "none";
+            });
+        });
+
+        // ===== Delete Confirmation =====
+        document.addEventListener("click", e => {
+            const btn = e.target.closest(".delete-room-btn");
+            if (!btn) return;
+            e.preventDefault();
+            const form = btn.closest("form");
+            const name = btn.dataset.name;
+            Swal.fire({
+                title: "Confirm Deletion",
+                html: `Delete <strong>${name}</strong>?`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#6c757d",
+                confirmButtonText: "Yes, delete"
+            }).then(r => { if (r.isConfirmed) form.submit(); });
+        });
+
+        // image preview for create form
+        // ===== Image Preview =====
+        const imgInput = document.querySelector('input[name="CreateRoom.ImageFile"]');
+        if (imgInput) {
+            imgInput.addEventListener("change", e => {
+                const f = e.target.files?.[0];
+                const img = document.getElementById("roomPreview");
+                if (!f) return img.src = "~/images/default_broken.jpg";
+                const r = new FileReader();
+                r.onload = ev => img.src = ev.target.result;
+                r.readAsDataURL(f);
+            });
+        }
+    </script>
+}

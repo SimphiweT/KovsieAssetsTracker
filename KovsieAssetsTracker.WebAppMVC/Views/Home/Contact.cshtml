@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Contact Us";
+}
+
+<section class="contact-section container">
+    <div class="contact-left">
+        <h1>Contact <span>Us</span></h1>
+        <p>
+            Have questions or want to reach out? Send us a message and we’ll get back to you as soon as possible.
+        </p>
+
+        <div class="contact-cards">
+            <div class="contact-card glass-card">
+                <i class="ri-mail-line icon"></i>
+                <div>
+                    <h4>Email</h4>
+                    <p>nxumalosimphiweterrence@gmail.com</p>
+                    <p>2016401495@ufs4life.ac.za</p>
+                    <p>simphiweterrencenxumalo@gmail.com</p>
+                    <p>blackdoorsdev@gmail.com</p>
+                    <p>simphiweterrence@yahoo.com</p>
+                </div>
+            </div>
+
+            <div class="contact-card glass-card">
+                <i class="ri-phone-line icon"></i>
+                <div>
+                    <h4>Phone</h4>
+                    <p>084 970 2454</p>
+                    <p>076 570 1041</p>
+                </div>
+            </div>
+
+            <div class="contact-card glass-card">
+                <i class="ri-github-line icon"></i>
+                <div>
+                    <h4>GitHub</h4>
+                    <p><a href="https://github.com/SimphiweT" target="_blank">github.com/SimphiweT</a></p>
+                </div>
+            </div>
+
+            <div class="contact-card glass-card">
+                <i class="ri-linkedin-box-line icon"></i>
+                <div>
+                    <h4>LinkedIn</h4>
+                    <p><a href="https://www.linkedin.com/in/simphiwe-nxumalo-5a8334137/" target="_blank">linkedin.com/in/simphiwe-nxumalo</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-right glass-card">
+        <h2><i class="ri-send-plane-line"></i> Send a Message</h2>
+
+        <form asp-action="Contact" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="input_box">
+                <input type="text" name="name" class="input_field" required />
+                <label class="label">Your Name</label>
+                <i class="ri-user-line"></i>
+            </div>
+
+            <div class="input_box">
+                <input type="email" name="email" class="input_field" required />
+                <label class="label">Email Address</label>
+                <i class="ri-mail-line"></i>
+            </div>
+
+            <div class="input_box">
+                <textarea name="message" class="input_field" rows="5" required></textarea>
+                <label class="label">Your Message</label>
+                <i class="ri-chat-1-line"></i>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                <i class="ri-send-plane-line"></i> Send Message
+            </button>
+        </form>
+
+        <div id="lottie-contact" class="contact-animation"></div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            UIHelper.showAnimation("Contact", "lottie-contact", true);
+
+            ScrollReveal().reveal(".contact-left h1, .contact-left p", {
+                distance: "40px", origin: "left", duration: 1000, interval: 150
+            });
+            ScrollReveal().reveal(".contact-card", {
+                distance: "40px", origin: "left", duration: 1000, interval: 100
+            });
+            ScrollReveal().reveal(".contact-right", {
+                distance: "60px", origin: "right", duration: 1000
+            });
+        });
+    </script>
+}

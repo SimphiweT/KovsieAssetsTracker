@@ -1,0 +1,131 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Campus.DetailsAndUpdateCampusViewModel
+@{
+    ViewBag.Title = "Campus Details / Update";
+}
+
+<!-- ===== PAGE HEADER ===== -->
+<div class="main-title">
+    <h2><i class="ri-school-line"></i> CAMPUS DETAILS / UPDATE</h2>
+    <div class="export-btns">
+        <a asp-action="ManageCampuses" class="btn btn-outline-light">
+            <i class="ri-arrow-left-line me-1"></i> Back
+        </a>
+        <a asp-action="ExportCampusesExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportCampusesPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<!-- ===== MAIN WRAPPER ===== -->
+<section class="asset-details-wrapper">
+
+    <!-- ===== LEFT: CAMPUS PREVIEW ===== -->
+    <div class="card glass-card asset-preview text-white shadow-soft">
+        <div class="card-body text-center">
+            @{
+                var img = !string.IsNullOrEmpty(Model.CampusDetails?.CampusImage)
+                ? Model.CampusDetails.CampusImage
+                : Url.Content("~/images/default_broken.jpg");
+            }
+
+            <img src="@img" class="asset-img mb-3 rounded shadow" style="width:170px;height:170px;object-fit:cover;" />
+            <h4 class="fw-bold mb-1">@Model.CampusDetails?.CampusName</h4>
+            <p class="text-white-50 mb-2">@Model.CampusDetails?.CampusDescription</p>
+
+            <hr class="divider my-3" />
+
+            <div class="text-start small px-4">
+                <p><strong>Buildings:</strong> @(Model.CampusDetails?.Buildings?.Count ?? 0)</p>
+                <p><strong>Created:</strong> @Model.CampusDetails?.CreatedDate?.ToString("yyyy-MM-dd")</p>
+            </div>
+
+            <hr class="divider my-3" />
+
+            <div class="mt-3">
+                <span class="badge bg-success me-2">
+                    @(Model.CampusDetails.IsAndroidBackedUp ? "Android Backed Up" : "Not Android Backed Up")
+                </span>
+                <span class="badge bg-info">
+                    @(Model.CampusDetails.IsServerBackedUp ? "Server Backed Up" : "Not Server Backed Up")
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== RIGHT: UPDATE FORM ===== -->
+    <form asp-action="CampusDetailsAndUpdate" method="post" enctype="multipart/form-data"
+          class="card glass-card asset-form shadow-soft">
+        @Html.AntiForgeryToken()
+
+        <div class="card-header">
+            <h5 class="fw-bold mb-0 text-white">
+                <i class="bi bi-pencil-square me-2"></i> Update Campus Details
+            </h5>
+        </div>
+
+        <div class="card-body">
+            <input type="hidden" name="_method" value="PUT" />
+            <input type="hidden" asp-for="UpdateCampus.CampusServerId" name="CampusServerId" />
+
+            <!-- Campus Name -->
+            <div class="form-group mb-3">
+                <label asp-for="UpdateCampus.CampusName" class="form-label fw-semibold">Campus Name</label>
+                <input asp-for="UpdateCampus.CampusName" class="form-control form-control-lg" placeholder="Enter campus name" name="CampusName" />
+                <span asp-validation-for="UpdateCampus.CampusName" class="text-danger small"></span>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group mb-4">
+                <label asp-for="UpdateCampus.CampusDescription" class="form-label fw-semibold">Description</label>
+                <textarea asp-for="UpdateCampus.CampusDescription" rows="3" class="form-control form-control-lg" placeholder="Enter campus description" name="CampusDescription"></textarea>
+                <span asp-validation-for="UpdateCampus.CampusDescription" class="text-danger small"></span>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="form-group mb-4 text-center">
+                <label asp-for="UpdateCampus.ImageFile" class="form-label fw-semibold d-block">Change Image</label>
+                <img id="campusPreview" src="@img"
+                     class="rounded shadow mb-2 preview-img"
+                     style="width:120px;height:120px;object-fit:cover;border-radius:10px;" />
+                <input asp-for="UpdateCampus.ImageFile" type="file" accept="image/*" class="form-control form-control-lg" name="ImageFile" />
+            </div>
+
+            <!-- Checkboxes -->
+            <div class="d-flex flex-column gap-2 mb-4">
+                <div class="form-check">
+                    <input asp-for="UpdateCampus.IsAndroidBackedUp" class="form-check-input" type="checkbox" name="IsAndroidBackedUp" />
+                    <label asp-for="UpdateCampus.IsAndroidBackedUp" class="form-check-label">Android BackedUp?</label>
+                </div>
+                <div class="form-check">
+                    <input asp-for="UpdateCampus.IsServerBackedUp" class="form-check-input" type="checkbox" name="IsServerBackedUp" />
+                    <label asp-for="UpdateCampus.IsServerBackedUp" class="form-check-label">Server BackedUp?</label>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end gap-3 mt-3">
+                <a asp-action="ManageCampuses" class="btn btn-outline-light px-4">
+                    <i class="bi bi-x-lg me-1"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-gradient px-4">
+                    <i class="bi bi-save2 me-1"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // === Preview selected image ===
+        const fileInput = document.querySelector('input[type="file"][name="UpdateCampus.ImageFile"]');
+        const img = document.getElementById('campusPreview');
+        fileInput.addEventListener('change', e => {
+            const file = e.target.files?.[0];
+            if (!file) return img.src = '@(img)';
+            const reader = new FileReader();
+            reader.onload = ev => img.src = ev.target.result;
+            reader.readAsDataURL(file);
+        });
+    </script>
+}

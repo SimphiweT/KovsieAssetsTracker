@@ -1,0 +1,191 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Category.CreateAndListCategoryViewModel
+@{
+    ViewBag.Title = "Manage Categories";
+}
+
+<!-- ===== PAGE HEADER ===== -->
+<div class="main-title">
+    <h2><i class="ri-folder-2-line"></i> MANAGE CATEGORIES</h2>
+    <div class="export-btns">
+        <a asp-action="ExportCategoriesExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportCategoriesPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<!-- ===== MAIN WRAPPER ===== -->
+<section class="manage-assets-wrapper">
+    <!-- ===== LEFT: CATEGORY LIST ===== -->
+    <section class="asset-list">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fw-semibold">All Categories</h5>
+                <input id="search-bar" class="form-control form-control-sm" placeholder="Search categories..." />
+            </div>
+
+            <div class="card-body">
+                <table id="category-table" class="table align-middle mb-0 text-center">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Categories != null && Model.Categories.Any())
+                        {
+                            foreach (var c in Model.Categories)
+                            {
+                                var img = !string.IsNullOrEmpty(c.AssetCategoryImage)
+                                ? c.AssetCategoryImage
+                                : Url.Content("~/images/default-category.png");
+
+                                <tr>
+                                    <td>
+                                        <img src="@img" alt="@c.AssetCategoryName"
+                                             class="rounded shadow-sm"
+                                             style="width:55px;height:55px;object-fit:cover;" />
+                                    </td>
+                                    <td>@c.AssetCategoryName</td>
+                                    <td>@c.AssetCategoryDescription</td>
+                                    <td>@c.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <a asp-action="CategoriesDetailsAndUpdate" asp-route-id="@c.AssetCategoryServerId"
+                                               class="btn btn-outline-primary btn-sm me-1" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+
+                                            <form asp-action="DeleteCategory" method="post" class="delete-category-form d-inline">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="categoryId" value="@c.AssetCategoryServerId" />
+                                                <button type="submit" class="btn btn-outline-danger btn-sm delete-category-btn"
+                                                        data-name="@c.AssetCategoryName" title="Delete">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="5" class="text-muted">No categories found.</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RIGHT: CREATE CATEGORY FORM ===== -->
+    <aside class="asset-form-wrapper">
+        <form asp-action="ManageCategories" method="post" enctype="multipart/form-data" class="asset-form card h-100">
+            @Html.AntiForgeryToken()
+            <div class="card-header">
+                <h5 class="fw-bold mb-0 text-white"><i class="bi bi-plus-circle me-1"></i> Add New Category</h5>
+            </div>
+
+            <div class="card-body">
+                <label class="form-label">Category Image</label>
+                <div class="text-center mb-3">
+                    <img id="categoryPreview" src="~/images/default-category.png"
+                         class="rounded shadow-soft mb-2 preview-img"
+                         style="width:90px;height:90px;object-fit:cover;" />
+                    <input asp-for="CreateCategory.ImageFile" type="file" accept="image/*" class="form-control" />
+                </div>
+
+                <label asp-for="CreateCategory.AssetCategoryLocalId" class="form-label">RoomDB Key</label>
+                <input asp-for="CreateCategory.AssetCategoryLocalId" class="form-control mb-3" placeholder="Enter RoomDB Key" />
+                <span asp-validation-for="CreateCategory.AssetCategoryLocalId" class="text-danger small"></span>
+
+                <label asp-for="CreateCategory.AssetCategoryName" class="form-label">Category Name</label>
+                <input asp-for="CreateCategory.AssetCategoryName" class="form-control mb-3" placeholder="Category name" />
+                <span asp-validation-for="CreateCategory.AssetCategoryName" class="text-danger small"></span>
+
+                <label asp-for="CreateCategory.AssetCategoryDescription" class="form-label">Description</label>
+                <textarea asp-for="CreateCategory.AssetCategoryDescription" rows="3" class="form-control mb-3"
+                          placeholder="Short description"></textarea>
+
+                <div class="form-check mb-2">
+                    <input asp-for="CreateCategory.IsAndroidBackedUp" class="form-check-input" type="checkbox" />
+                    <label asp-for="CreateCategory.IsAndroidBackedUp" class="form-check-label">
+                        Android BackedUp?
+                    </label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input asp-for="CreateCategory.IsServerBackedUp" class="form-check-input" type="checkbox" />
+                    <label asp-for="CreateCategory.IsServerBackedUp" class="form-check-label">
+                        Server BackedUp?
+                    </label>
+                </div>
+
+                <button class="btn btn-gradient w-100 fw-bold">
+                    <i class="bi bi-save2 me-1"></i> Save Category
+                </button>
+            </div>
+        </form>
+    </aside>
+</section>
+
+@section Scripts {
+    <script>
+        // Live image preview
+        (document.querySelector('input[type="file"][name="CreateCategory.ImageFile"]') || {})
+            .addEventListener?.('change', e => {
+                const f = e.target.files?.[0];
+                const img = document.getElementById('categoryPreview');
+                if (!f) { img.src = '~/images/default-category.png'; return; }
+                const r = new FileReader();
+                r.onload = ev => img.src = ev.target.result;
+                r.readAsDataURL(f);
+            });
+
+        // Table search filter
+        document.getElementById('search-bar').addEventListener('input', e => {
+            const q = e.target.value.toLowerCase();
+            document.querySelectorAll('#category-table tbody tr').forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(q) ? '' : 'none';
+            });
+        });
+
+        // SweetAlert delete confirmation
+        document.querySelectorAll('.delete-category-form').forEach(form => {
+            form.addEventListener('submit', function (ev) {
+                ev.preventDefault();
+                const name = this.querySelector('.delete-category-btn').dataset.name || 'this category';
+                Swal.fire({
+                    title: 'Confirm Deletion',
+                    html: `Delete <strong>${name}</strong>?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, delete'
+                }).then(r => { if (r.isConfirmed) this.submit(); });
+            });
+        });
+
+        // TempData alert
+        const alertType = "@TempData["AlertType"]";
+        const alertMessage = "@TempData["AlertMessage"]";
+        const alertTitle = "@TempData["AlertTitle"]";
+        if (alertMessage) {
+            const iconMap = { success: "success", error: "error", warning: "warning", info: "info" };
+            Swal.fire({
+                icon: iconMap[alertType] || "info",
+                title: alertTitle || "Notification",
+                text: alertMessage,
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+        }
+    </script>
+}

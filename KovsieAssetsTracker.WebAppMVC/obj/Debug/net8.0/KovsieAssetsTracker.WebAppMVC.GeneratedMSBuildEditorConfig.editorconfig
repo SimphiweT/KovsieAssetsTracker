@@ -1,0 +1,261 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = KovsieAssetsTracker.WebAppMVC
+build_property.RootNamespace = KovsieAssetsTracker.WebAppMVC
+build_property.ProjectDir = C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.WebAppMVC\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.WebAppMVC
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Account/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Account/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/AdminDashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5EYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/AssetsDetailsAndUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXNzZXRzRGV0YWlsc0FuZFVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/BuildingDetailsAndUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQnVpbGRpbmdEZXRhaWxzQW5kVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/CampusDetailsAndUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2FtcHVzRGV0YWlsc0FuZFVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/CategoriesDetailsAndUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2F0ZWdvcmllc0RldGFpbHNBbmRVcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/FloorDetailsAndUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRmxvb3JEZXRhaWxzQW5kVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/ManageAccessRequests.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlQWNjZXNzUmVxdWVzdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/ManageAssets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlQXNzZXRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/ManageBuildings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlQnVpbGRpbmdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/ManageCampuses.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlQ2FtcHVzZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/ManageCategories.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlQ2F0ZWdvcmllcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/ManageFloors.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlRmxvb3JzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/ManagePasswords.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlUGFzc3dvcmRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/ManageProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlUHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/ManageRooms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlUm9vbXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/ManageUsers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlVXNlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/RoomsDetailsAndUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUm9vbXNEZXRhaWxzQW5kVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Admin/ViewAndUpdateUserDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVmlld0FuZFVwZGF0ZVVzZXJEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Agent/AgentDashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcQWdlbnREYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Agent/AssetsDetailsAndUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcQXNzZXRzRGV0YWlsc0FuZFVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Agent/CategoriesDetailsAndUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcQ2F0ZWdvcmllc0RldGFpbHNBbmRVcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Agent/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Agent/ManageAssets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcTWFuYWdlQXNzZXRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Agent/ManageCategories.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcTWFuYWdlQ2F0ZWdvcmllcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Agent/ManageProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcTWFuYWdlUHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Agent/ManageRooms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcTWFuYWdlUm9vbXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Agent/RoomsDetailsAndUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcUm9vbXNEZXRhaWxzQW5kVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Agent/SearchManager.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcU2VhcmNoTWFuYWdlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Home/About.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Home/Contact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb250YWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Home/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Home/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Home/RequestAccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXF1ZXN0QWNjZXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Home/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXNldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Other/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3RoZXJcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Other/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3RoZXJcUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Shared/_SweetAlertPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Td2VldEFsZXJ0UGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Staff/AssetsDetailsAndUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcQXNzZXRzRGV0YWlsc0FuZFVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Staff/CategoriesDetailsAndUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcQ2F0ZWdvcmllc0RldGFpbHNBbmRVcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Staff/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Staff/ManageAssets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcTWFuYWdlQXNzZXRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Staff/ManageCategories.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcTWFuYWdlQ2F0ZWdvcmllcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Staff/ManageProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcTWFuYWdlUHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Staff/ManageRooms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcTWFuYWdlUm9vbXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Staff/RoomsDetailsAndUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcUm9vbXNEZXRhaWxzQW5kVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Staff/SearchManager.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcU2VhcmNoTWFuYWdlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Staff/StaffDashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcU3RhZmZEYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-jcqmk1xl1g
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Shared/_LayoutAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-j0664berdy
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Shared/_LayoutAgent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRBZ2VudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-irmm9m023b
+
+[C:/KovsieAssetTrackerUFS/KovsieAssetsTracker/KovsieAssetsTracker.WebAppMVC/Views/Shared/_LayoutStaff.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRTdGFmZi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-dqloox3n3g

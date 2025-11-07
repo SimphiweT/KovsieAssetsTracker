@@ -1,0 +1,97 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Floor.DetailsAndUpdateFloorViewModel
+@{
+    ViewBag.Title = "Floor Details / Update";
+}
+
+<!-- ===== PAGE HEADER ===== -->
+<div class="main-title">
+    <h2><i class="ri-building-2-line"></i> FLOOR DETAILS / UPDATE</h2>
+    <div class="export-btns">
+        <a asp-action="ManageFloors" asp-controller="Admin" class="btn btn-outline-light">
+            <i class="ri-arrow-left-line me-1"></i> Back
+        </a>
+        <a asp-action="ExportFloorsExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportFloorsPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<!-- ===== MAIN WRAPPER ===== -->
+<section class="asset-details-wrapper">
+
+    <!-- ===== LEFT: FLOOR OVERVIEW ===== -->
+    <div class="card glass-card asset-preview text-white shadow-soft">
+        <div class="card-body text-center">
+            <div class="mb-3">
+                <i class="ri-building-4-line" style="font-size: 4rem; color: #ff7b00;"></i>
+            </div>
+            <h4 class="fw-bold mb-1">@Model.FloorDetails?.FloorName</h4>
+            <p class="text-white-50">@Model.FloorDetails?.FloorDescription</p>
+
+            <hr class="divider my-3" />
+
+            <div class="text-start small px-4">
+                <p><strong>Building:</strong> @Model.FloorDetails?.BuildingName</p>
+                <p><strong>Rooms:</strong> @(Model.FloorDetails?.Rooms?.Count ?? 0)</p>
+                <p><strong>Created:</strong> @Model.FloorDetails?.CreatedDate?.ToString("yyyy-MM-dd")</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== RIGHT: UPDATE FORM ===== -->
+    <form asp-action="FloorDetailsAndUpdate" method="post" class="card glass-card asset-form shadow-soft">
+        @Html.AntiForgeryToken()
+
+        <div class="card-header">
+            <h5 class="fw-bold mb-0 text-white">
+                <i class="bi bi-pencil-square me-2"></i> Update Floor Details
+            </h5>
+        </div>
+
+        <div class="card-body">
+            <input type="hidden" name="_method" value="PUT" />
+            <input type="hidden" asp-for="UpdateFloor.FloorServerId" name="FloorServerId" />
+
+            <!-- Floor Name -->
+            <div class="form-group mb-3">
+                <label asp-for="UpdateFloor.FloorName" class="form-label fw-semibold">Floor Name</label>
+                <input asp-for="UpdateFloor.FloorName" class="form-control form-control-lg" placeholder="Enter floor name" name="FloorName" />
+                <span asp-validation-for="UpdateFloor.FloorName" class="text-danger small"></span>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group mb-4">
+                <label asp-for="UpdateFloor.FloorDescription" class="form-label fw-semibold">Description</label>
+                <textarea asp-for="UpdateFloor.FloorDescription" rows="3" class="form-control form-control-lg" placeholder="Enter floor description" name="FloorDescription"></textarea>
+                <span asp-validation-for="UpdateFloor.FloorDescription" class="text-danger small"></span>
+            </div>
+
+            <!-- Building -->
+            <div class="form-group mb-4">
+                <label asp-for="UpdateFloor.BuildingServerId" class="form-label fw-semibold">Building</label>
+                <select asp-for="UpdateFloor.BuildingServerId" class="form-select form-select-lg" name="BuildingServerId">
+                    <option value="">Select Building</option>
+                    @foreach (var b in Model.Buildings ?? new List<KovsieAssetsTracker.WebAppMVC.Models.Building.BuildingViewModel>())
+                    {
+                        <option value="@b.BuildingServerId" selected="@(b.BuildingServerId == Model.UpdateFloor.BuildingServerId)">
+                            @b.BuildingName
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end gap-3 mt-3">
+                <a asp-action="ManageFloors" asp-controller="Admin" class="btn btn-outline-light px-4">
+                    <i class="bi bi-x-lg me-1"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-gradient px-4">
+                    <i class="bi bi-save2 me-1"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

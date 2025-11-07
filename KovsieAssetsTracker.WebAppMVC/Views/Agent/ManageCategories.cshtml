@@ -1,0 +1,186 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Category.UpdateAndListCategoryViewModel
+@{
+    ViewBag.Title = "Manage Categories";
+}
+
+<div class="main-title">
+    <h2><i class="ri-folder-2-line"></i> MANAGE CATEGORIES</h2>
+    <div class="export-btns">
+        <a asp-action="ExportCategoriesExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportCategoriesPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<section class="manage-assets-wrapper">
+    <!-- ===== LEFT: CATEGORY LIST ===== -->
+    <section class="asset-list">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="fw-semibold mb-0">All Categories</h5>
+                <input id="search-bar" class="form-control form-control-sm" placeholder="Search categories..." />
+            </div>
+
+            <div class="card-body">
+                <table id="category-table" class="table align-middle mb-0 text-center">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Categories?.Any() == true)
+                        {
+                            foreach (var c in Model.Categories)
+                            {
+                                var img = !string.IsNullOrEmpty(c.AssetCategoryImage)
+                                ? c.AssetCategoryImage
+                                : Url.Content("~/images/default-category.png");
+
+                                <tr class="category-row"
+                                    data-id="@c.AssetCategoryServerId"
+                                    data-name="@c.AssetCategoryName"
+                                    data-desc="@c.AssetCategoryDescription"
+                                    data-andr="@c.IsAndroidBackedUp"
+                                    data-srv="@c.IsServerBackedUp">
+                                    <td>
+                                        <img src="@img" alt="@c.AssetCategoryName"
+                                             class="rounded shadow-sm"
+                                             style="width:55px;height:55px;object-fit:cover;" />
+                                    </td>
+                                    <td>@c.AssetCategoryName</td>
+                                    <td>@c.AssetCategoryDescription</td>
+                                    <td>@c.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <a asp-action="CategoriesDetailsAndUpdate" asp-route-id="@c.AssetCategoryServerId" asp-controller="Agent"
+                                               class="btn btn-outline-primary btn-sm me-1" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+
+                                            <form asp-action="DeleteCategory" method="post" class="delete-category-form d-inline" asp-controller="Agent">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="categoryId" value="@c.AssetCategoryServerId" />
+                                                <button type="submit" class="btn btn-outline-danger btn-sm delete-category-btn"
+                                                        data-name="@c.AssetCategoryName" title="Delete">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="4" class="text-muted">No categories found.</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RIGHT: UPDATE FORM ===== -->
+    <aside class="asset-form-wrapper">
+        <form asp-action="ManageCategories" method="post" enctype="multipart/form-data" class="asset-form card h-100">
+            @Html.AntiForgeryToken()
+            <div class="card-header">
+                <h5 class="fw-bold mb-0 text-white">Update Category</h5>
+            </div>
+
+            <div class="card-body">
+                <input asp-for="UpdateCategory.AssetCategoryServerId" type="hidden" />
+
+                <label class="form-label">Category Image</label>
+                <div class="text-center mb-3">
+                    <img id="categoryPreview" src="~/images/default-category.png"
+                         class="rounded shadow-soft mb-2 preview-img"
+                         style="width:90px;height:90px;object-fit:cover;" />
+                    <input asp-for="UpdateCategory.ImageFile" type="file" accept="image/*" class="form-control" />
+                </div>
+
+                <label asp-for="UpdateCategory.AssetCategoryName" class="form-label">Category Name</label>
+                <input asp-for="UpdateCategory.AssetCategoryName" class="form-control mb-3" placeholder="Category Name" />
+
+                <label asp-for="UpdateCategory.AssetCategoryDescription" class="form-label">Description</label>
+                <textarea asp-for="UpdateCategory.AssetCategoryDescription" rows="3"
+                          class="form-control mb-3" placeholder="Description"></textarea>
+
+                <div class="form-check mb-2">
+                    <input asp-for="UpdateCategory.IsAndroidBackedUp" class="form-check-input" type="checkbox" />
+                    <label asp-for="UpdateCategory.IsAndroidBackedUp" class="form-check-label">
+                        Android BackedUp?
+                    </label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input asp-for="UpdateCategory.IsServerBackedUp" class="form-check-input" type="checkbox" />
+                    <label asp-for="UpdateCategory.IsServerBackedUp" class="form-check-label">
+                        Server BackedUp?
+                    </label>
+                </div>
+
+                <button class="btn btn-gradient w-100 fw-bold mt-2">
+                    <i class="bi bi-pencil-square me-1"></i> Update Category
+                </button>
+            </div>
+        </form>
+    </aside>
+</section>
+
+@section Scripts {
+    <script>
+        // ===== Search filter =====
+        document.getElementById('search-bar').addEventListener('input', e => {
+            const q = e.target.value.toLowerCase();
+            document.querySelectorAll('#category-table tbody tr').forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(q) ? '' : 'none';
+            });
+        });
+
+        // ===== Row click populates update form =====
+        document.querySelectorAll('.category-row').forEach(row => {
+            row.addEventListener('click', () => {
+                const f = document.querySelector('.asset-form');
+                f.querySelector('[name="UpdateCategory.AssetCategoryServerId"]').value = row.dataset.id;
+                f.querySelector('[name="UpdateCategory.AssetCategoryName"]').value = row.dataset.name;
+                f.querySelector('[name="UpdateCategory.AssetCategoryDescription"]').value = row.dataset.desc;
+                f.querySelector('[name="UpdateCategory.IsAndroidBackedUp"]').checked = row.dataset.andr === "True";
+                f.querySelector('[name="UpdateCategory.IsServerBackedUp"]').checked = row.dataset.srv === "True";
+                f.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+
+        // ===== Live image preview =====
+        (document.querySelector('input[type="file"][name="UpdateCategory.ImageFile"]') || {})
+            .addEventListener?.('change', e => {
+                const f = e.target.files?.[0];
+                const img = document.getElementById('categoryPreview');
+                if (!f) { img.src = '~/images/default-category.png'; return; }
+                const r = new FileReader();
+                r.onload = ev => img.src = ev.target.result;
+                r.readAsDataURL(f);
+            });
+
+        // ===== TempData SweetAlert =====
+        const alertType = "@TempData["AlertType"]";
+        const alertMessage = "@TempData["AlertMessage"]";
+        const alertTitle = "@TempData["AlertTitle"]";
+        if (alertMessage) {
+            Swal.fire({
+                icon: alertType || "info",
+                title: alertTitle || "Notification",
+                text: alertMessage,
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+        }
+    </script>
+}

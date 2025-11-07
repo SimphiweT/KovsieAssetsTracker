@@ -1,0 +1,43 @@
+﻿@using System.Text.Json
+@inject KovsieAssetsTracker.WebAppMVC.Helpers.SessionManager sessionManager
+
+@if (TempData.Peek("SweetAlertMessage") != null || TempData.Peek("LottieAnimation") != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // --- SweetAlert ---
+            const type = @Html.Raw(JsonSerializer.Serialize(TempData["SweetAlertType"] ?? ""));
+            const message = @Html.Raw(JsonSerializer.Serialize(TempData["SweetAlertMessage"] ?? ""));
+            const title = @Html.Raw(JsonSerializer.Serialize(TempData["SweetAlertTitle"] ?? "Notification"));
+
+            if (type && message) {
+                UIHelper.showAlert(type, message, title);
+            }
+
+            // --- Lottie Animation ---
+            const lottieKey = @Html.Raw(JsonSerializer.Serialize(TempData["LottieAnimation"] ?? ""));
+            const role = @Html.Raw(JsonSerializer.Serialize(sessionManager.GetRole() ?? "Guest"));
+
+            if (lottieKey) {
+                UIHelper.showAnimation(lottieKey);
+            } else if (role) {
+                UIHelper.showAnimation(role);
+            } else {
+                UIHelper.showAnimation("Guest");
+            }
+        });
+    </script>
+
+    TempData.Remove("SweetAlertType");
+    TempData.Remove("SweetAlertMessage");
+    TempData.Remove("SweetAlertTitle");
+    TempData.Remove("LottieAnimation");
+}
+
+
+
+
+
+
+

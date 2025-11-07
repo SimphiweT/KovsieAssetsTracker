@@ -1,0 +1,225 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Category.CreateAndListCategoryViewModel
+@{
+    ViewBag.Title = "Manage Categories";
+}
+
+<div class="main-title">
+    <h2><i class="ri-folder-2-line"></i> MANAGE CATEGORIES</h2>
+    <div class="export-btns">
+        <a asp-action="ExportCategoriesExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportCategoriesPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<section class="manage-assets-wrapper">
+    <!-- ===== LEFT: CATEGORY LIST ===== -->
+    <section class="asset-list">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fw-semibold">All Categories</h5>
+                <input id="search-bar" class="form-control form-control-sm" placeholder="Search categories..." />
+            </div>
+
+            <div class="card-body">
+                <!-- ===== TABLE VIEW ===== -->
+                <table id="categories-table" class="table align-middle mb-0 text-center">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Categories != null && Model.Categories.Any())
+                        {
+                            foreach (var c in Model.Categories)
+                            {
+                                var img = !string.IsNullOrEmpty(c.AssetCategoryImage)
+                                ? c.AssetCategoryImage
+                                : Url.Content("~/images/default-category.png");
+
+                                <tr>
+                                    <td><img src="@img" alt="@c.AssetCategoryName" class="preview-image" /></td>
+                                    <td>@c.AssetCategoryName</td>
+                                    <td>@c.AssetCategoryDescription</td>
+                                    <td>@c.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <a asp-action="CategoriesDetailsAndUpdate"
+                                               asp-route-id="@c.AssetCategoryServerId"
+                                               class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+
+                                            <form asp-action="DeleteCategory" method="post" class="delete-category-form">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="categoryId" value="@c.AssetCategoryServerId" />
+                                                <button class="btn btn-outline-danger btn-sm delete-category-btn"
+                                                        data-name="@c.AssetCategoryName">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="5" class="text-muted-ux">No categories found.</td></tr>
+                        }
+                    </tbody>
+                </table>
+
+                <!-- ===== GRID VIEW ===== -->
+                <div id="categories-grid" class="mt-2">
+                    @if (Model.Categories != null && Model.Categories.Any())
+                    {
+                        foreach (var c in Model.Categories)
+                        {
+                            var img = !string.IsNullOrEmpty(c.AssetCategoryImage)
+                            ? c.AssetCategoryImage
+                            : Url.Content("~/images/default-category.png");
+
+                            <div class="asset-card">
+                                <img src="@img" alt="@c.AssetCategoryName" class="preview-image" />
+                                <h6 class="fw-semibold">@c.AssetCategoryName</h6>
+                                <div class="text-muted-ux small">@c.AssetCategoryDescription</div>
+                                <div class="mt-2 text-xs text-light">@c.CreatedDate?.ToString("yyyy-MM-dd")</div>
+
+                                <div class="action-btns mt-2">
+                                    <a asp-action="CategoriesDetailsAndUpdate"
+                                       asp-route-id="@c.AssetCategoryServerId"
+                                       class="btn btn-outline-primary btn-sm"
+                                       title="Edit Category">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form asp-action="DeleteCategory" method="post" class="delete-category-form">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="categoryId" value="@c.AssetCategoryServerId" />
+                                        <button class="btn btn-outline-danger btn-sm delete-category-btn"
+                                                data-name="@c.AssetCategoryName">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <!-- Floating Toggle -->
+                <button id="toggle-view" class="fab-toggle" title="Switch View"><i class="bi bi-grid"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RIGHT: CREATE CATEGORY FORM ===== -->
+    <aside class="asset-form-wrapper">
+        <form asp-action="ManageCategories" method="post" enctype="multipart/form-data" class="asset-form card h-100">
+            @Html.AntiForgeryToken()
+            <div class="card-header">
+                <h5 class="fw-bold mb-0 text-white">Register New Category</h5>
+            </div>
+            <div class="card-body">
+                <label class="form-label">Category Image</label>
+                <div class="text-center mb-3">
+                    <img id="UploadPreview" src="~/images/default_broken.jpg" class="rounded shadow-soft mb-2 preview-image" />
+                    <input asp-for="CreateCategory.ImageFile" type="file" accept="image/*" class="form-control" />
+                </div>
+
+                <label asp-for="CreateCategory.AssetCategoryLocalId" class="form-label">RoomDB Primary Key</label>
+                <input asp-for="CreateCategory.AssetCategoryLocalId" class="form-control mb-3" placeholder="Enter RoomDB Key" />
+
+                <label asp-for="CreateCategory.AssetCategoryName" class="form-label">Category Name</label>
+                <input asp-for="CreateCategory.AssetCategoryName" class="form-control mb-3" placeholder="Enter category name" />
+
+                <label asp-for="CreateCategory.AssetCategoryDescription" class="form-label">Description</label>
+                <textarea asp-for="CreateCategory.AssetCategoryDescription" rows="3" class="form-control mb-3"
+                          placeholder="Enter category description"></textarea>
+
+                <div class="form-check mb-3">
+                    <input asp-for="CreateCategory.IsAndroidBackedUp" class="form-check-input" type="checkbox" />
+                    <label asp-for="CreateCategory.IsAndroidBackedUp" class="form-check-label">Android BackedUp?</label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input asp-for="CreateCategory.IsServerBackedUp" class="form-check-input" type="checkbox" />
+                    <label asp-for="CreateCategory.IsServerBackedUp" class="form-check-label">Server BackedUp?</label>
+                </div>
+
+                <button class="btn btn-gradient w-100 fw-bold">
+                    <i class="bi bi-plus-circle me-1"></i> Add Category
+                </button>
+            </div>
+        </form>
+    </aside>
+</section>
+
+@section Scripts {
+    <script>
+        const btnToggle = document.getElementById('toggle-view');
+        const tableEl = document.getElementById('categories-table');
+        const gridEl = document.getElementById('categories-grid');
+        let showingGrid = false;
+
+        // Toggle grid/table
+        btnToggle.addEventListener('click', () => {
+            showingGrid = !showingGrid;
+            btnToggle.classList.toggle('active');
+            if (showingGrid) {
+                tableEl.style.display = 'none';
+                gridEl.style.display = 'grid';
+                btnToggle.innerHTML = '<i class="bi bi-table"></i>';
+                btnToggle.title = 'Switch to Table View';
+            } else {
+                gridEl.style.display = 'none';
+                tableEl.style.display = 'table';
+                btnToggle.innerHTML = '<i class="bi bi-grid"></i>';
+                btnToggle.title = 'Switch to Grid View';
+            }
+        });
+
+        // Live search
+        document.getElementById('search-bar').addEventListener('input', e => {
+            const q = e.target.value.toLowerCase();
+            document.querySelectorAll('#categories-table tbody tr').forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(q) ? '' : 'none';
+            });
+        });
+
+        // image preview for create form
+        // ===== Image Preview =====
+        const imgInput = document.querySelector('input[name="CreateCategory.ImageFile"]');
+        if (imgInput) {
+            imgInput.addEventListener("change", e => {
+                const f = e.target.files?.[0];
+                const img = document.getElementById("UploadPreview");
+                if (!f) return img.src = "~/images/default_broken.jpg";
+                const r = new FileReader();
+                r.onload = ev => img.src = ev.target.result;
+                r.readAsDataURL(f);
+            });
+        }
+
+        // Delete confirm
+        document.querySelectorAll('.delete-category-form').forEach(form => {
+            form.addEventListener('submit', function (ev) {
+                ev.preventDefault();
+                const name = this.querySelector('.delete-category-btn').dataset.name;
+                Swal.fire({
+                    title: 'Confirm Deletion',
+                    html: `Delete category <strong>${name}</strong>?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, delete'
+                }).then(r => { if (r.isConfirmed) this.submit(); });
+            });
+        });
+    </script>
+}

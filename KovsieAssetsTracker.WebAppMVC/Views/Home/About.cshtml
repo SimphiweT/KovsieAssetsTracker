@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<main class="about-container">
+    <!-- ===== LEFT SECTION: Lottie Animation / Image ===== -->
+    <div class="about-left">
+        <div class="about-visual">
+            <img src="~/images/default-avatar.png" alt="Simphiwe Terrence Nxumalo" class="about-img" />
+            <div id="lottie-about" class="about-lottie"></div>
+        </div>
+    </div>
+
+    <!-- ===== RIGHT SECTION: Text Content ===== -->
+    <div class="about-right glass-card">
+        <h1><i class="ri-user-star-line"></i> About <span>Me</span></h1>
+        <p class="intro">
+            Hello! I'm <strong>Simphiwe Terrence Nxumalo</strong>, a passionate software developer specializing in
+            <strong>Android</strong>, <strong>Web</strong>, and <strong>Game Development</strong>.
+            I create modern, responsive, and dynamic applications — combining technology and creativity
+            to deliver seamless user experiences.
+        </p>
+
+        <p class="intro">
+            Currently, I'm developing <strong>KovsieAssetsTracker</strong>, an asset management system integrating
+            QR scanning, automation, and multi-role dashboards.
+            I’m also exploring real-time 3D environments, cybersecurity, and mobile innovation.
+        </p>
+
+        <div class="about-cards">
+            <div class="about-card">
+                <i class="ri-code-s-slash-line"></i>
+                <div>
+                    <h4>Development</h4>
+                    <p>Proficient in ASP.NET Core, Android (Java/Kotlin), Unity, and Flutter.</p>
+                </div>
+            </div>
+
+            <div class="about-card">
+                <i class="ri-lightbulb-flash-line"></i>
+                <div>
+                    <h4>Innovation</h4>
+                    <p>Driven by creativity, problem-solving, and continuous learning.</p>
+                </div>
+            </div>
+
+            <div class="about-card">
+                <i class="ri-layout-4-line"></i>
+                <div>
+                    <h4>UI / UX Design</h4>
+                    <p>Designing intuitive and visually engaging interfaces.</p>
+                </div>
+            </div>
+
+            <div class="about-card">
+                <i class="ri-team-line"></i>
+                <div>
+                    <h4>Professionalism</h4>
+                    <p>Experienced with project planning, version control, and collaboration.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-footer">
+            <a href="@Url.Action("Contact", "Home")" class="btn-primary">
+                <i class="ri-mail-send-line"></i> Get In Touch
+            </a>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>© 2025 Kovsie Assets Tracker | Crafted by Simphiwe Terrence Nxumalo</p>
+</footer>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // UIHelper.showAnimation("About", "lottie-about", true);
+            ScrollReveal().reveal(".about-right, .about-left", {
+                distance: "50px",
+                origin: "bottom",
+                duration: 1000,
+                interval: 200,
+            });
+        });
+    </script>
+}

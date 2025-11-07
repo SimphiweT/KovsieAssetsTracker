@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KovsieAssetsTracker.Api", "KovsieAssetsTracker.Api\KovsieAssetsTracker.Api.csproj", "{F416789C-A562-4A94-896D-D4DA4BC66041}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KovsieAssetsTracker.Application", "KovsieAssetsTracker.Application\KovsieAssetsTracker.Application.csproj", "{495F2B13-F9F9-405D-9483-C026C8BAF0ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KovsieAssetsTracker.Domain", "KovsieAssetsTracker.Domain\KovsieAssetsTracker.Domain.csproj", "{CBFDF7B2-EF2B-420C-862A-74F699FFC741}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KovsieAssetsTracker.Infrastructure", "KovsieAssetsTracker.Infrastructure\KovsieAssetsTracker.Infrastructure.csproj", "{CDCDBAF4-ABD6-4F23-964B-689F25E2325F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KovsieAssetsTracker.WebAppMVC", "KovsieAssetsTracker.WebAppMVC\KovsieAssetsTracker.WebAppMVC.csproj", "{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F416789C-A562-4A94-896D-D4DA4BC66041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F416789C-A562-4A94-896D-D4DA4BC66041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F416789C-A562-4A94-896D-D4DA4BC66041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F416789C-A562-4A94-896D-D4DA4BC66041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{495F2B13-F9F9-405D-9483-C026C8BAF0ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{495F2B13-F9F9-405D-9483-C026C8BAF0ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{495F2B13-F9F9-405D-9483-C026C8BAF0ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{495F2B13-F9F9-405D-9483-C026C8BAF0ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBFDF7B2-EF2B-420C-862A-74F699FFC741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBFDF7B2-EF2B-420C-862A-74F699FFC741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBFDF7B2-EF2B-420C-862A-74F699FFC741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBFDF7B2-EF2B-420C-862A-74F699FFC741}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDCDBAF4-ABD6-4F23-964B-689F25E2325F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDCDBAF4-ABD6-4F23-964B-689F25E2325F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDCDBAF4-ABD6-4F23-964B-689F25E2325F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDCDBAF4-ABD6-4F23-964B-689F25E2325F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1912007-AA22-41B0-BEB6-29AC1F5A30CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C06411C1-1024-4A5C-B2B1-5CA75335127A}
+	EndGlobalSection
+EndGlobal

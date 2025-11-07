@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "KovsieAssetsTracker.Api\\KovsieAssetsTracker.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "KovsieAssetsTracker.WebAppMVC\\KovsieAssetsTracker.WebAppMVC.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

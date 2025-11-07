@@ -1,0 +1,191 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Room.UpdateAndListRoomsViewModel
+@{
+    ViewBag.Title = "Manage Rooms";
+}
+
+<div class="main-title">
+    <h2><i class="ri-door-open-line"></i> MANAGE ROOMS</h2>
+    <div class="export-btns">
+        <a asp-action="ExportRoomsExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportRoomsPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<section class="manage-assets-wrapper">
+    <!-- ===== LEFT: ROOM LIST ===== -->
+    <section class="asset-list">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="fw-semibold mb-0">All Rooms</h5>
+                <input id="searchRooms" class="form-control form-control-sm w-50" placeholder="Search rooms..." />
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table id="roomsTable" class="table align-middle text-center mb-0 table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Image</th>
+                                <th>Room Name</th>
+                                <th>Description</th>
+                                <th>Floor</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Rooms?.Any() == true)
+                            {
+                                foreach (var room in Model.Rooms)
+                                {
+                                    var img = !string.IsNullOrEmpty(room.RoomImage)
+                                    ? room.RoomImage
+                                    : Url.Content("~/images/default_broken.jpg");
+
+                                    <tr class="room-row"
+                                        data-id="@room.RoomServerId"
+                                        data-name="@room.RoomName"
+                                        data-desc="@room.RoomDescription"
+                                        data-floor="@room.FloorServerId"
+                                        data-andr="@room.IsAndroidBackedUp"
+                                        data-srv="@room.IsServerBackedUp">
+                                        <td><img src="@img" class="rounded shadow-sm" style="width:55px;height:55px;object-fit:cover;" /></td>
+                                        <td>@room.RoomName</td>
+                                        <td class="text-muted text-truncate" style="max-width:200px;">@room.RoomDescription</td>
+                                        <td>@(string.IsNullOrEmpty(room.FloorName) ? "Unassigned" : room.FloorName)</td>
+                                        <td>@room.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                                        <td>
+                                            <div class="d-flex justify-content-center gap-2">
+                                                <a asp-action="RoomsDetailsAndUpdate"
+                                                   asp-route-id="@room.RoomServerId"
+                                                   asp-controller="Agent"
+                                                   class="btn btn-outline-primary btn-sm" title="Edit">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <form asp-action="DeleteRoom" method="post" class="delete-room-form" asp-controller="Agent">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="roomId" value="@room.RoomServerId" />
+                                                    <button type="submit" class="btn btn-outline-danger btn-sm" title="Delete"
+                                                            data-name="@room.RoomName">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr><td colspan="5" class="text-muted py-3">No rooms found.</td></tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RIGHT: UPDATE FORM ===== -->
+    <aside class="asset-form-wrapper">
+        <form asp-action="ManageRooms" method="post" enctype="multipart/form-data" class="asset-form card h-100">
+            @Html.AntiForgeryToken()
+            <div class="card-header">
+                <h5 class="fw-bold mb-0 text-white">Update Room</h5>
+            </div>
+
+            <div class="card-body">
+                <input asp-for="UpdateRoom.RoomServerId" type="hidden" />
+
+                <label class="form-label">Room Image</label>
+                <div class="text-center mb-3">
+                    <img id="roomPreview" src="~/images/default_broken.jpg"
+                         class="rounded shadow-sm mb-2" style="width:90px;height:90px;object-fit:cover;" />
+                    <input asp-for="UpdateRoom.ImageFile" type="file" accept="image/*" class="form-control" />
+                </div>
+
+                <label asp-for="UpdateRoom.RoomName" class="form-label">Room Name</label>
+                <input asp-for="UpdateRoom.RoomName" class="form-control mb-3" placeholder="Room Name" />
+
+                <label asp-for="UpdateRoom.FloorServerId" class="form-label">Floor</label>
+                <select asp-for="UpdateRoom.FloorServerId" class="form-select mb-3">
+                    <option value="">-- Select Floor --</option>
+                    @foreach (var f in Model.Floors)
+                    {
+                        <option value="@f.FloorServerId">@f.FloorName</option>
+                    }
+                </select>
+
+                <label asp-for="UpdateRoom.RoomDescription" class="form-label">Description</label>
+                <textarea asp-for="UpdateRoom.RoomDescription" rows="3" class="form-control mb-3"
+                          placeholder="Description"></textarea>
+
+                <div class="form-check mb-2">
+                    <input asp-for="UpdateRoom.IsAndroidBackedUp" class="form-check-input" type="checkbox" />
+                    <label asp-for="UpdateRoom.IsAndroidBackedUp" class="form-check-label">Android Backup</label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input asp-for="UpdateRoom.IsServerBackedUp" class="form-check-input" type="checkbox" />
+                    <label asp-for="UpdateRoom.IsServerBackedUp" class="form-check-label">Server Backup</label>
+                </div>
+
+                <button class="btn btn-gradient w-100 fw-bold">
+                    <i class="bi bi-pencil me-1"></i> Update Room
+                </button>
+            </div>
+        </form>
+    </aside>
+</section>
+
+@section Scripts {
+    <script>
+        // ===== Filter search =====
+        document.getElementById('searchRooms').addEventListener('input', e => {
+            const q = e.target.value.toLowerCase();
+            document.querySelectorAll('#roomsTable tbody tr').forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(q) ? '' : 'none';
+            });
+        });
+
+        // ===== Row click to populate form =====
+        document.querySelectorAll('.room-row').forEach(row => {
+            row.addEventListener('click', () => {
+                const f = document.querySelector('.asset-form');
+                f.querySelector('[name="UpdateRoom.RoomServerId"]').value = row.dataset.id;
+                f.querySelector('[name="UpdateRoom.RoomName"]').value = row.dataset.name;
+                f.querySelector('[name="UpdateRoom.RoomDescription"]').value = row.dataset.desc;
+                f.querySelector('[name="UpdateRoom.FloorServerId"]').value = row.dataset.floor;
+                f.querySelector('[name="UpdateRoom.IsAndroidBackedUp"]').checked = row.dataset.andr === "True";
+                f.querySelector('[name="UpdateRoom.IsServerBackedUp"]').checked = row.dataset.srv === "True";
+                f.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+
+        // ===== Image preview =====
+        document.querySelector('input[name="UpdateRoom.ImageFile"]')?.addEventListener('change', e => {
+            const f = e.target.files?.[0];
+            const img = document.getElementById('roomPreview');
+            if (!f) { img.src = '~/images/default_broken.jpg'; return; }
+            const r = new FileReader();
+            r.onload = ev => img.src = ev.target.result;
+            r.readAsDataURL(f);
+        });
+
+        // ===== SweetAlert from TempData =====
+        const alertType = "@TempData["AlertType"]";
+        const alertMessage = "@TempData["AlertMessage"]";
+        const alertTitle = "@TempData["AlertTitle"]";
+        if (alertMessage) {
+            Swal.fire({
+                icon: alertType || "info",
+                title: alertTitle || "Notification",
+                text: alertMessage,
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+        }
+    </script>
+}

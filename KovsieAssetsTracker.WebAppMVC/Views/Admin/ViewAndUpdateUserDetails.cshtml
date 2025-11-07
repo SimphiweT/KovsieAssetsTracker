@@ -1,0 +1,177 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.User.DetailsAndUpdateUserViewModel
+@using System.Globalization
+@{
+    ViewBag.Title = "View / Update User";
+}
+
+<!-- ===== PAGE HEADER ===== -->
+<div class="main-title">
+    <h2><i class="ri-user-settings-line"></i> USER DETAILS / UPDATE</h2>
+    <div class="export-btns">
+        <a asp-action="ManageUsers" class="btn btn-outline-light">
+            <i class="ri-arrow-left-line me-1"></i> Back
+        </a>
+        <a asp-action="ExportUsers" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportUsersPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<!-- ===== MAIN WRAPPER ===== -->
+<section class="asset-details-wrapper">
+
+    <!-- ===== LEFT: PROFILE PREVIEW ===== -->
+    <div class="card glass-card asset-preview text-white shadow-soft">
+        <div class="card-body text-center">
+            @{
+                var profileImg = !string.IsNullOrEmpty(Model.UserDetails?.ProfileImageFileName)
+                ? Model.UserDetails.ProfileImageFileName
+                : Url.Content("~/images/default-avatar.png");
+            }
+
+            <img src="@profileImg"
+                 class="rounded-circle shadow mb-3"
+                 style="width:140px;height:140px;object-fit:cover;border:3px solid rgba(255,255,255,0.2);" />
+
+            <h4 class="fw-bold mb-1">@Model.UserDetails?.UsernameDisplay</h4>
+            <p class="text-white-50 mb-1">@Model.UserDetails?.UserEmail</p>
+            <span class="badge bg-gradient px-3 py-2">@Model.UserDetails?.UserRole</span>
+
+            <hr class="divider my-3" />
+            <div class="text-start small px-4">
+                <p><strong>📞 Contact:</strong> @Model.UserDetails?.ContactNumber</p>
+                <p><strong>🎓 Staff/Student #:</strong> @Model.UserDetails?.StudentStaffNumber</p>
+                <p><strong>📝 Description:</strong> @Model.UserDetails?.Description</p>
+                <p><strong>📅 Created:</strong> @Model.UserDetails?.CreatedDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)</p>
+                <p><strong>🔄 Updated:</strong> @Model.UserDetails?.UpdatedDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== RIGHT: UPDATE FORM ===== -->
+    <form asp-action="ViewAndUpdateUserDetails" method="post" enctype="multipart/form-data"
+          class="card glass-card asset-form shadow-soft">
+        @Html.AntiForgeryToken()
+
+        <div class="card-header">
+            <h5 class="fw-bold mb-0 text-white">
+                <i class="bi bi-pencil-square me-2"></i> Update User Details
+            </h5>
+        </div>
+
+        <div class="card-body">
+            <input type="hidden" name="_method" value="PUT" />
+            <input type="hidden" asp-for="UpdateUser.UserId" name="UserId" />
+
+            <!-- Username / Email -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="UpdateUser.UsernameDisplay" class="form-label fw-semibold">Username</label>
+                    <input asp-for="UpdateUser.UsernameDisplay" class="form-control form-control-lg" name="UsernameDisplay" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="UpdateUser.UserEmail" class="form-label fw-semibold">Email</label>
+                    <input asp-for="UpdateUser.UserEmail" class="form-control form-control-lg" name="UserEmail" />
+                </div>
+            </div>
+
+            <!-- Contact / Role -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="UpdateUser.ContactNumber" class="form-label fw-semibold">Contact</label>
+                    <input asp-for="UpdateUser.ContactNumber" class="form-control form-control-lg" name="ContactNumber" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="UpdateUser.UserRole" class="form-label fw-semibold">Role</label>
+                    <select asp-for="UpdateUser.UserRole" class="form-select form-select-lg" name="UserRole">
+                        <option value="Administrator">Administrator</option>
+                        <option value="StaffMember">Staff Member</option>
+                        <option value="VerificationAgent">Verification Agent</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Staff/Student Number -->
+            <div class="mb-3">
+                <label asp-for="UpdateUser.StudentStaffNumber" class="form-label fw-semibold">Student/Staff Number</label>
+                <input asp-for="UpdateUser.StudentStaffNumber" class="form-control form-control-lg" name="StudentStaffNumber" />
+            </div>
+
+            <!-- Description -->
+            <div class="mb-4">
+                <label asp-for="UpdateUser.Description" class="form-label fw-semibold">Description</label>
+                <textarea asp-for="UpdateUser.Description" class="form-control form-control-lg" rows="3" name="Description"></textarea>
+            </div>
+
+            <!-- Profile Image -->
+            <div class="form-group mb-4 text-center">
+                <label asp-for="UpdateUser.ImageFile" class="form-label fw-semibold d-block">Change Profile Image</label>
+                <img id="userPreview" src="@profileImg"
+                     class="rounded-circle shadow mb-2"
+                     style="width:120px;height:120px;object-fit:cover;border:2px solid rgba(255,255,255,0.3);" />
+                <input asp-for="UpdateUser.ImageFile" type="file" accept="image/*" class="form-control form-control-lg mt-2" id="imageUpload" name="ImageFile" />
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end gap-3 mt-3">
+                <a asp-action="ManageUsers" class="btn btn-outline-light px-4">
+                    <i class="bi bi-x-lg me-1"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-gradient px-4">
+                    <i class="bi bi-save me-1"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // === TempData SweetAlert Notifications ===
+            const type = "@TempData["AlertType"]";
+            const msg = "@TempData["AlertMessage"]";
+            const title = "@TempData["AlertTitle"]";
+            if (msg) {
+                Swal.fire({
+                    icon: type || "info",
+                    title: title || "Notification",
+                    text: msg,
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+            }
+
+            // === Image Preview ===
+            const fileInput = document.getElementById("imageUpload");
+            const img = document.getElementById("userPreview");
+            fileInput.addEventListener("change", e => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = ev => img.src = ev.target.result;
+                reader.readAsDataURL(file);
+                Swal.fire({
+                    icon: "info",
+                    title: "Profile Image Selected",
+                    text: "Click 'Save Changes' to apply the update.",
+                    confirmButtonColor: "#ff7b00"
+                });
+            });
+
+            // === Submit Loading Spinner ===
+            document.querySelector("form").addEventListener("submit", () => {
+                Swal.fire({
+                    title: "Updating...",
+                    text: "Please wait while we save your changes.",
+                    allowOutsideClick: false,
+                    didOpen: () => Swal.showLoading()
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,136 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Admin.DashboardStatsViewModel
+@using Newtonsoft.Json
+@{
+    ViewBag.Title = "ADMIN DASHBOARD";
+}
+
+<div class="main-title">
+    <h2><i class="ri-folder-2-line"></i>ADMIN DASHBOARD</h2>
+    <div class="export-btns">
+        <a asp-action="ExportDashboardExcel" class="btn btn-excel">  <i class="bi bi-file-earmark-excel"></i>Excel</a>
+        <a asp-action="ExportDashboardPdf" class="btn btn-pdf"> <i class="bi bi-file-earmark-pdf"></i> PDF</a>
+    </div>
+</div>
+
+<!-- ======= STATS CARDS ======= -->
+<div class="main-cards">
+    <div class="card">
+        <div class="card-inner">
+            <h3>ASSETS</h3>
+            <i class="ri-folder-2-line"></i>
+        </div>
+        <h1>@Model.TotalAssets</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-inner">
+            <h3>CATEGORIES</h3>
+            <i class="ri-list-check"></i>
+        </div>
+        <h1>@Model.TotalCategories</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-inner">
+            <h3>USERS</h3>
+            <i class="ri-user-3-line"></i>
+        </div>
+        <h1>@Model.TotalUsers</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-inner">
+            <h3>ROOMS</h3>
+            <i class="ri-database-line"></i>
+        </div>
+        <h1>@Model.TotalRooms</h1>
+    </div>
+</div>
+
+<!-- ======= CHARTS ======= -->
+<div class="charts grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+
+    <div class="charts-card">
+        <h2 class="chart-title">Top 5 Assets</h2>
+        <div id="bar-chart"></div>
+    </div>
+
+    <div class="charts-card">
+        <h2 class="chart-title">Assets by Room</h2>
+        <div id="area-chart"></div>
+    </div>
+
+    <div class="charts-card">
+        <h2 class="chart-title">Assets by Category</h2>
+        <div id="pie-chart"></div>
+    </div>
+
+    <div class="charts-card">
+        <h2 class="chart-title">Assets by Status</h2>
+        <div id="donut-chart"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // === Safe serialization ===
+            const topAssetNames = @Html.Raw(JsonConvert.SerializeObject(Model.TopAssetNames ?? new List<string>()));
+            const topAssetCounts = @Html.Raw(JsonConvert.SerializeObject(Model.TopAssetCounts ?? new List<int>()));
+            const roomLabels = @Html.Raw(JsonConvert.SerializeObject(Model.RoomLabels ?? new List<string>()));
+            const roomCounts = @Html.Raw(JsonConvert.SerializeObject(Model.RoomAssetCounts ?? new List<int>()));
+            const categoryLabels = @Html.Raw(JsonConvert.SerializeObject(Model.CategoryLabels ?? new List<string>()));
+            const categoryCounts = @Html.Raw(JsonConvert.SerializeObject(Model.CategoryCounts ?? new List<int>()));
+            const statusLabels = @Html.Raw(JsonConvert.SerializeObject(Model.StatusLabels ?? new List<string>()));
+            const statusCounts = @Html.Raw(JsonConvert.SerializeObject(Model.StatusCounts ?? new List<int>()));
+
+            try {
+                // === BAR CHART (Top 5 Assets) ===
+                new ApexCharts(document.querySelector("#bar-chart"), {
+                    series: [{ data: topAssetCounts, name: 'Assets' }],
+                    chart: { type: 'bar', background: 'transparent', height: 350, toolbar: { show: false } },
+                    colors: ["#2962ff", "#d50000", "#2e7d32", "#ff6d00", "#583cb3"],
+                    plotOptions: { bar: { distributed: true, borderRadius: 4, columnWidth: '40%' } },
+                    dataLabels: { enabled: false },
+                    xaxis: { categories: topAssetNames, labels: { style: { colors: '#f5f7ff' } } },
+                    yaxis: { title: { text: "Count" }, labels: { style: { colors: '#f5f7ff' } } }
+                }).render();
+
+                // === AREA CHART (Assets by Room) ===
+                new ApexCharts(document.querySelector("#area-chart"), {
+                    series: [{ name: 'Assets', data: roomCounts }],
+                    chart: { type: 'area', height: 350, toolbar: { show: false } },
+                    colors: ["#ff6d00"],
+                    xaxis: { categories: roomLabels, labels: { style: { colors: '#f5f7ff' } } },
+                    yaxis: { title: { text: 'Asset Count' }, labels: { style: { colors: '#f5f7ff' } } },
+                    fill: { opacity: 0.4 },
+                    stroke: { curve: 'smooth' }
+                }).render();
+
+                // === PIE CHART (Assets by Category) ===
+                new ApexCharts(document.querySelector("#pie-chart"), {
+                    series: categoryCounts,
+                    chart: { type: 'pie', height: 350 },
+                    labels: categoryLabels,
+                    colors: ["#2962ff", "#ff6d00", "#2e7d32", "#d50000", "#9c27b0", "#00bcd4", "#ffc107"],
+                    legend: { position: 'bottom', labels: { colors: '#f5f7ff' } }
+                }).render();
+
+                // === DONUT CHART (Assets by Status) ===
+                new ApexCharts(document.querySelector("#donut-chart"), {
+                    series: statusCounts,
+                    chart: { type: 'donut', height: 350 },
+                    labels: statusLabels,
+                    colors: ["#00c853", "#ffab00", "#d50000", "#2962ff"],
+                    legend: { position: 'bottom', labels: { colors: '#f5f7ff' } }
+                }).render();
+
+            } catch (err) {
+                console.error("ApexCharts rendering error:", err);
+            }
+
+        });
+    </script>
+}
+

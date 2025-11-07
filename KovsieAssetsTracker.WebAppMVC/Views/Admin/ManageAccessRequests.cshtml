@@ -1,0 +1,202 @@
+﻿@model IEnumerable<KovsieAssetsTracker.WebAppMVC.Models.Account.AccessResponseViewModel>
+@{
+    ViewBag.Title = "Manage Access Requests";
+
+    int total = Model?.Count() ?? 0;
+    int pending = Model?.Count(r => r.Status.Equals("Pending", StringComparison.OrdinalIgnoreCase)) ?? 0;
+    int approved = Model?.Count(r => r.Status.Equals("Approved", StringComparison.OrdinalIgnoreCase)) ?? 0;
+    int declined = Model?.Count(r => r.Status.Equals("Declined", StringComparison.OrdinalIgnoreCase)) ?? 0;
+}
+
+<div class="main-title">
+    <h2><i class="ri-user-check-line"></i> MANAGE ACCESS REQUESTS</h2>
+    <div class="export-btns">
+        <a asp-action="ExportAccessRequestsExcel" class="btn btn-excel">
+            <i class="bi bi-file-earmark-excel"></i> Excel
+        </a>
+        <a asp-action="ExportAccessRequestsPdf" class="btn btn-pdf">
+            <i class="bi bi-file-earmark-pdf"></i> PDF
+        </a>
+    </div>
+</div>
+
+<section class="manage-assets-wrapper">
+    <!-- ===== LEFT SUMMARY DASHBOARD ===== -->
+    <aside class="summary-card">
+        <div class="summary-title"><i class="ri-dashboard-line"></i> Summary</div>
+        <div class="summary-grid">
+            <div class="summary-box total">
+                <i class="ri-group-line"></i>
+                <div>
+                    <h4>@total</h4>
+                    <p>Total Requests</p>
+                </div>
+            </div>
+            <div class="summary-box approved">
+                <i class="ri-checkbox-circle-line"></i>
+                <div>
+                    <h4>@approved</h4>
+                    <p>Approved</p>
+                </div>
+            </div>
+            <div class="summary-box pending">
+                <i class="ri-time-line"></i>
+                <div>
+                    <h4>@pending</h4>
+                    <p>Pending</p>
+                </div>
+            </div>
+            <div class="summary-box declined">
+                <i class="ri-close-circle-line"></i>
+                <div>
+                    <h4>@declined</h4>
+                    <p>Declined</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ===== RIGHT ACCESS REQUESTS TABLE ===== -->
+    <section class="asset-list">
+        <div class="card glass-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fw-semibold"><i class="ri-list-check"></i> Access Requests</h5>
+                <input id="searchRequests" class="form-control form-control-sm w-50" placeholder="Search requests..." />
+            </div>
+
+            <div class="card-body p-0">
+                @if (Model != null && Model.Any())
+                {
+                    <div class="table-responsive">
+                        <table id="requestsTable" class="table align-middle text-center table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Requested Role</th>
+                                    <th>Status</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var req in Model)
+                                {
+                                    var badgeClass = req.Status.ToLower() switch
+                                    {
+                                        "approved" => "success",
+                                        "declined" => "danger",
+                                        _ => "warning"
+                                    };
+
+                                    <tr>
+                                        <td>@req.Id</td>
+                                        <td class="fw-semibold">@req.FullName</td>
+                                        <td>@req.Email</td>
+                                        <td>@req.RequestedRole</td>
+                                        <td><span class="badge bg-@badgeClass">@req.Status</span></td>
+                                        <td>@req.CreatedAt.ToString("yyyy-MM-dd")</td>
+                                        <td>
+                                            <div class="d-flex justify-content-center gap-2">
+                                                <form asp-action="ApproveAccessRequest" method="post" class="approve-form">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="id" value="@req.Id" />
+                                                    <button type="submit" class="btn btn-sm btn-outline-success" title="Approve">
+                                                        <i class="bi bi-check2"></i>
+                                                    </button>
+                                                </form>
+
+                                                <form asp-action="DeclineAccessRequest" method="post" class="decline-form">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="id" value="@req.Id" />
+                                                    <input type="hidden" name="reason" value="Declined by admin" />
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Decline">
+                                                        <i class="bi bi-x-lg"></i>
+                                                    </button>
+                                                </form>
+
+                                                @if (!string.IsNullOrEmpty(req.DocumentPath))
+                                                {
+                                                    <a href="@req.DocumentPath" target="_blank" class="btn btn-sm btn-outline-info" title="View Document">
+                                                        <i class="bi bi-file-earmark-pdf"></i>
+                                                    </a>
+                                                }
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center py-5">
+                        <div id="lottie-empty" style="width:200px;height:200px;margin:auto;"></div>
+                        <h6 class="text-muted mt-3">No access requests found.</h6>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</section>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // Search filter
+            const search = document.getElementById("searchRequests");
+            search.addEventListener("input", e => {
+                const q = e.target.value.toLowerCase();
+                document.querySelectorAll("#requestsTable tbody tr").forEach(row => {
+                    row.style.display = row.innerText.toLowerCase().includes(q) ? "" : "none";
+                });
+            });
+
+            // ✅ Approve confirmation
+            document.querySelectorAll(".approve-form").forEach(form => {
+                form.addEventListener("submit", e => {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: "Approve Request?",
+                        text: "Are you sure you want to approve this access request?",
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes, Approve",
+                        confirmButtonColor: "#198754"
+                    }).then(r => { if (r.isConfirmed) form.submit(); });
+                });
+            });
+
+            // Decline confirmation
+            document.querySelectorAll(".decline-form").forEach(form => {
+                form.addEventListener("submit", e => {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: "Decline Request?",
+                        input: "text",
+                        inputLabel: "Enter a reason (optional)",
+                        inputPlaceholder: "Reason for declining...",
+                        showCancelButton: true,
+                        confirmButtonText: "Decline",
+                        confirmButtonColor: "#dc3545",
+                        preConfirm: (reason) => {
+                            form.querySelector("input[name='reason']").value = reason || "Declined by admin";
+                            form.submit();
+                        }
+                    });
+                });
+            });
+
+            // Lottie animation for empty view
+            if (document.getElementById("lottie-empty")) {
+                UIHelper.showAnimation("Empty", "lottie-empty", true);
+            }
+        });
+    </script>
+}

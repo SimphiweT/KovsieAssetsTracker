@@ -1,0 +1,209 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Floor.CreateAndListFloorsViewModel
+@{
+    ViewBag.Title = "Manage Floors";
+}
+
+<div class="main-title">
+    <h2><i class="ri-building-2-line"></i> MANAGE FLOORS</h2>
+    <div class="export-btns">
+        <a asp-action="ExportFloorsExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportFloorsPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<section class="manage-assets-wrapper">
+    <!-- ===== LEFT: FLOORS LIST ===== -->
+    <section class="asset-list">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fw-semibold">All Floors</h5>
+                <input id="search-bar" class="form-control form-control-sm" placeholder="Search floors..." />
+            </div>
+
+            <div class="card-body">
+                <!-- ===== TABLE VIEW ===== -->
+                <table id="floors-table" class="table align-middle mb-0 text-center">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Building</th>
+                            <th>Rooms</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Floors != null && Model.Floors.Any())
+                        {
+                            foreach (var f in Model.Floors)
+                            {
+                                <tr>
+                                    <td>@f.FloorName</td>
+                                    <td>@f.FloorDescription</td>
+                                    <td>@f.BuildingName</td>
+                                    <td>@(f.Rooms?.Count ?? 0)</td>
+                                    <td>@f.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <a asp-action="FloorDetailsAndUpdate"
+                                               asp-controller="Admin"
+                                               asp-route-id="@f.FloorServerId"
+                                               class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <form asp-action="DeleteFloor" method="post" class="delete-floor-form d-inline">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="floorId" value="@f.FloorServerId" />
+                                                <button type="submit"
+                                                        class="btn btn-outline-danger btn-sm delete-floor-btn"
+                                                        data-name="@f.FloorName">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="6" class="text-muted-ux">No floors found.</td></tr>
+                        }
+                    </tbody>
+                </table>
+
+                <!-- ===== GRID VIEW ===== -->
+                <div id="floors-grid" class="mt-2">
+                    @if (Model.Floors != null && Model.Floors.Any())
+                    {
+                        foreach (var f in Model.Floors)
+                        {
+                            <div class="asset-card">
+                                <h6 class="fw-semibold">@f.FloorName</h6>
+                                <div class="text-muted-ux">@f.BuildingName</div>
+                                <div class="small">@((f.Rooms?.Count ?? 0)) Rooms</div>
+                                <div class="action-btns mt-2">
+                                    <a asp-action="FloorDetailsAndUpdate"
+                                       asp-controller="Admin"
+                                       asp-route-id="@f.FloorServerId"
+                                       class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form asp-action="DeleteFloor" method="post" class="delete-floor-form d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="floorId" value="@f.FloorServerId" />
+                                        <button type="submit"
+                                                class="btn btn-outline-danger btn-sm delete-floor-btn"
+                                                data-name="@f.FloorName">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <!-- Floating Toggle -->
+                <button id="toggle-view" class="fab-toggle" title="Switch View"><i class="bi bi-grid"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RIGHT: CREATE FLOOR FORM ===== -->
+    <aside class="asset-form-wrapper">
+        <form asp-action="ManageFloors" method="post" class="asset-form card h-100">
+            @Html.AntiForgeryToken()
+            <div class="card-header">
+                <h5 class="fw-bold mb-0 text-white">Add New Floor</h5>
+            </div>
+
+            <div class="card-body">
+                <label asp-for="CreateFloor.FloorLocalId" class="form-label">RoomDB KEY</label>
+                <input asp-for="CreateFloor.FloorLocalId" class="form-control mb-3" placeholder="Enter RoomDB Key" />
+
+                <label asp-for="CreateFloor.FloorName" class="form-label">Floor Name</label>
+                <input asp-for="CreateFloor.FloorName" class="form-control mb-3" placeholder="Enter floor name" />
+
+                <label asp-for="CreateFloor.FloorDescription" class="form-label">Description</label>
+                <textarea asp-for="CreateFloor.FloorDescription" class="form-control mb-3"
+                          placeholder="Enter floor description" rows="3"></textarea>
+
+                <label asp-for="CreateFloor.BuildingServerId" class="form-label">Building</label>
+                <select asp-for="CreateFloor.BuildingServerId" class="form-select mb-3">
+                    <option value="">Select Building</option>
+                    @foreach (var b in Model.Buildings ?? new List<KovsieAssetsTracker.WebAppMVC.Models.Building.BuildingViewModel>())
+                    {
+                        <option value="@b.BuildingServerId">@b.BuildingName</option>
+                    }
+                </select>
+
+                <input asp-for="CreateFloor.IsAndroidBackedUp" class="form-check-input" type="checkbox" />
+                <label asp-for="CreateFloor.IsAndroidBackedUp" class="form-check-label">Android BackedUp?</label>
+
+                <input asp-for="CreateFloor.IsServerBackedUp" class="form-check-input" type="checkbox" />
+                <label asp-for="CreateFloor.IsServerBackedUp" class="form-check-label">Server BackedUp?</label>
+
+
+                <button type="submit" class="btn btn-gradient w-100 fw-bold">
+                    <i class="bi bi-plus-circle me-1"></i> Add Floor
+                </button>
+            </div>
+        </form>
+    </aside>
+</section>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // ===== Grid/Table Toggle =====
+        document.addEventListener("DOMContentLoaded", () => {
+            const btnToggle = document.getElementById("toggle-view");
+            const tableEl = document.getElementById("floors-table");
+            const gridEl = document.getElementById("floors-grid");
+            if (!btnToggle || !tableEl || !gridEl) return;
+            gridEl.style.display = "none";
+            let showingGrid = false;
+
+            btnToggle.addEventListener("click", () => {
+                showingGrid = !showingGrid;
+                if (showingGrid) {
+                    tableEl.style.display = "none";
+                    gridEl.style.display = "grid";
+                    btnToggle.innerHTML = '<i class="bi bi-table"></i>';
+                } else {
+                    gridEl.style.display = "none";
+                    tableEl.style.display = "table";
+                    btnToggle.innerHTML = '<i class="bi bi-grid"></i>';
+                }
+            });
+        });
+
+        // ===== Live Search =====
+        document.getElementById("search-bar").addEventListener("input", e => {
+            const term = e.target.value.toLowerCase();
+            document.querySelectorAll("#floors-table tbody tr").forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(term) ? "" : "none";
+            });
+        });
+
+        // ===== Delete Confirmation =====
+        document.addEventListener("click", e => {
+            const btn = e.target.closest(".delete-floor-btn");
+            if (!btn) return;
+            e.preventDefault();
+            const form = btn.closest("form");
+            const name = btn.dataset.name;
+            Swal.fire({
+                title: "Confirm Deletion",
+                html: `Delete <strong>${name}</strong>?`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#6c757d",
+                confirmButtonText: "Yes, delete"
+            }).then(r => { if (r.isConfirmed) form.submit(); });
+        });
+    </script>
+}

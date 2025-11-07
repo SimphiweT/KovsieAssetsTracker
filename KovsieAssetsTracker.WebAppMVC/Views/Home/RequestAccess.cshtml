@@ -1,0 +1,104 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Account.SignUpViewModel
+@{
+    ViewBag.Title = "Request Access";
+}
+
+<main class="access-request-wrapper">
+    <!-- ===== LEFT SIDE (ANIMATION + TEXT) ===== -->
+    <section class="access-left">
+        <div id="lottie-access" class="access-animation"></div>
+        <h2>Join Kovsie Assets Tracker</h2>
+        <p>
+            Request secure access to manage, verify, and track institutional assets efficiently.
+        </p>
+    </section>
+
+    <!-- ===== RIGHT SIDE (FORM CARD) ===== -->
+    <section class="access-right glass-card">
+        <div class="access-header">
+            <h2><i class="ri-lock-user-line"></i> Request Access</h2>
+            <p>Complete the form below to request system access and upload a valid PDF document for verification.</p>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" asp-action="RequestAccess" class="access-form">
+            @Html.AntiForgeryToken()
+
+            <div class="input-box">
+                <label asp-for="DisplayName"></label>
+                <div class="input-field">
+                    <i class="ri-user-line"></i>
+                    <input asp-for="DisplayName" placeholder="Enter your full name" />
+                </div>
+                <span asp-validation-for="DisplayName" class="text-danger"></span>
+            </div>
+
+            <div class="input-box">
+                <label asp-for="Email"></label>
+                <div class="input-field">
+                    <i class="ri-mail-line"></i>
+                    <input asp-for="Email" placeholder="Enter your email" />
+                </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="input-box">
+                <label asp-for="Role"></label>
+                <div class="input-field">
+                    <i class="ri-briefcase-line"></i>
+                    <select asp-for="Role" style="color:#333333">
+                        <option value="">Select a role</option>
+                        <option value="Administrator">Administrator</option>
+                        <option value="VerificationAgent">Verification Agent</option>
+                        <option value="StaffMember">Staff Member</option>
+                    </select>
+                </div>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+
+            <div class="input-box">
+                <label asp-for="Message">Message (optional)</label>
+                <div class="input-field textarea-field">
+                    <i class="ri-message-line"></i>
+                    <textarea asp-for="Message" rows="3" placeholder="Reason for requesting access..."></textarea>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <label asp-for="Document">Upload Supporting Document (PDF)</label>
+                <div class="input-field file-field">
+                    <i class="ri-file-pdf-2-line"></i>
+                    <input asp-for="Document" type="file" accept=".pdf" />
+                </div>
+                <span asp-validation-for="Document" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                <i class="ri-send-plane-line"></i> Submit Request
+            </button>
+
+            <p class="form-footer">
+                Already have an account? <a asp-action="Login">Sign In</a>
+            </p>
+        </form>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>© 2025 Kovsie Assets Tracker | Powered by UFS IT Final Year Project</p>
+</footer>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            UIHelper.showAnimation("Signup", "lottie-access", true);
+
+            ScrollReveal().reveal(".access-left, .access-right", {
+                distance: "60px",
+                origin: "bottom",
+                duration: 1000,
+                interval: 200
+            });
+        });
+    </script>
+}

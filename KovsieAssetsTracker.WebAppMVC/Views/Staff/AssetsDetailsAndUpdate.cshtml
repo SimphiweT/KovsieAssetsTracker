@@ -1,0 +1,167 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Asset.DetailsAndUpdateAssetViewModel
+@{
+    ViewBag.Title = "View / Update Asset";
+}
+
+<!-- ===== PAGE HEADER ===== -->
+<div class="main-title">
+    <h2><i class="ri-folder-2-line"></i> View & Update Asset</h2>
+    <div class="export-btns">
+        <a asp-action="ManageAssets" class="btn btn-outline-light"><i class="ri-arrow-left-line me-1"></i>Back</a>
+        <a asp-action="ExportAssetsExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportAssetsPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<!-- ===== MAIN WRAPPER ===== -->
+<section class="asset-details-wrapper">
+    <!-- ===== LEFT: ASSET PREVIEW ===== -->
+    <div class="asset-preview card text-white">
+        <div class="card-body text-center">
+            @{
+                var img = !string.IsNullOrEmpty(Model.AssetDetails?.AssetImage)
+                ? Model.AssetDetails.AssetImage
+                : Url.Content("~/images/default-asset.png");
+                var qr = !string.IsNullOrEmpty(Model.AssetDetails?.AssetQRCodeImage)
+                ? Model.AssetDetails.AssetQRCodeImage
+                : Url.Content("~/images/default_qr.png");
+            }
+
+            <img src="@img" class="asset-img mb-3 shadow-sm" />
+            <h4 class="fw-bold text-white">@Model.AssetDetails?.AssetName</h4>
+            <div class="text-white-50">@Model.AssetDetails?.AssetCategoryName</div>
+            <div class="mt-2"><span class="badge bg-primary">@Model.AssetDetails?.Status</span></div>
+
+            <hr class="divider" />
+            <div class="fw-semibold mb-2">QR Code</div>
+            <img src="@qr" class="asset-qr mb-2" />
+            <button class="btn btn-success btn-sm" onclick="printQR('@qr','@Model.AssetDetails?.AssetName')">
+                <i class="bi bi-printer me-1"></i> Print Label
+            </button>
+
+            <hr class="divider" />
+            <div class="text-start small">
+                <div><strong>Room:</strong> @Model.AssetDetails?.RoomName</div>
+                <div><strong>Description:</strong> @Model.AssetDetails?.AssetDescription</div>
+                <div><strong>Created:</strong> @Model.AssetDetails?.CreatedDate?.ToString("yyyy-MM-dd")</div>
+                <div><strong>Updated:</strong> @Model.AssetDetails?.UpdatedDate?.ToString("yyyy-MM-dd")</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== RIGHT: UPDATE FORM ===== -->
+    <form asp-action="AssetsDetailsAndUpdate" method="post" enctype="multipart/form-data" class="asset-update-form card">
+        @Html.AntiForgeryToken()
+        <div class="card-header">
+            <h5 class="mb-0"><i class="bi bi-pencil-square me-2"></i> Update Asset Details</h5>
+        </div>
+        <div class="card-body">
+            <input type="hidden" name="_method" value="PUT" />
+            <input type="hidden" asp-for="UpdateAsset.AssetServerId" name="AssetServerId" />
+            <div class="mb-3">
+                <label asp-for="UpdateAsset.AssetLocalId" class="form-label">RoomDB KEY</label>
+                <input asp-for="UpdateAsset.AssetLocalId" class="form-control" placeholder="Asset RoomDB KEY" name="AssetLocalId" />
+                <span asp-validation-for="UpdateAsset.AssetLocalId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="UpdateAsset.AssetName" class="form-label">Asset Name</label>
+                <input asp-for="UpdateAsset.AssetName" class="form-control" placeholder="Asset name" name="AssetName" />
+                <span asp-validation-for="UpdateAsset.AssetName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UpdateAsset.AssetDescription" class="form-label">Description</label>
+                <textarea asp-for="UpdateAsset.AssetDescription" rows="3" class="form-control"
+                          placeholder="Asset description" name="AssetDescription"></textarea>
+                <span asp-validation-for="UpdateAsset.AssetDescription" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="UpdateAsset.AssetCategoryServerId" class="form-label">Category</label>
+                    <select asp-for="UpdateAsset.AssetCategoryServerId" class="form-select" name="AssetCategoryServerId">
+                        <option value="">Select Category</option>
+                        @foreach (var c in Model.Categories)
+                        {
+                            <option value="@c.AssetCategoryServerId"
+                                    selected="@(c.AssetCategoryServerId == Model.AssetDetails?.AssetCategoryServerId)">
+                                @c.AssetCategoryName
+                            </option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="UpdateAsset.RoomServerId" class="form-label">Room</label>
+                    <select asp-for="UpdateAsset.RoomServerId" class="form-select" name="RoomServerId">
+                        <option value="">Select Room</option>
+                        @foreach (var r in Model.Rooms)
+                        {
+                            <option value="@r.RoomServerId"
+                                    selected="@(r.RoomServerId == Model.AssetDetails?.RoomServerId)">
+                                @r.RoomName
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UpdateAsset.Status" class="form-label">Status</label>
+                <select asp-for="UpdateAsset.Status" class="form-select" name="Status">
+                    <option>Available</option>
+                    <option>Deployed</option>
+                    <option>In_Repair</option>
+                    <option>Out_Of_Service</option>
+                    <option>Device</option>
+                    <option>Lost_Stolen</option>
+                    <option>In_Transit</option>
+                    <option>On_Order</option>
+                    <option>Received</option>
+                    <option>Under_Evaluation</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UpdateAsset.ImageFileAsset" class="form-label">Change Asset Image</label>
+                <input asp-for="UpdateAsset.ImageFileAsset" type="file" class="form-control" accept="image/*" name="ImageFileAsset" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UpdateAsset.ImageFileQrCode" class="form-label">Change QR Code (optional)</label>
+                <input asp-for="UpdateAsset.ImageFileQrCode" type="file" class="form-control" accept="image/*" name="ImageFileQrCode" />
+            </div>
+
+            <div class="form-check mb-3">
+                <input asp-for="UpdateAsset.IsAndroidBackedUp" class="form-check-input" name="IsAndroidBackedUp" />
+                <label asp-for="UpdateAsset.IsAndroidBackedUp" class="form-check-label">Android BackedUp?</label>
+            </div>
+
+            <div class="form-check mb-3">
+                <input asp-for="UpdateAsset.IsServerBackedUp" class="form-check-input" name="IsServerBackedUp" />
+                <label asp-for="UpdateAsset.IsServerBackedUp" class="form-check-label">Server BackedUp?</label>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+                <a asp-action="ManageAssets" class="btn btn-secondary px-4">
+                    <i class="bi bi-arrow-left-circle me-1"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-success px-4">
+                    <i class="bi bi-save me-1"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <script>
+        function printQR(src, name) {
+            const w = window.open('');
+            w.document.write(`<div style="text-align:center;font-family:sans-serif">
+                <img src="${src}" style="width:200px;height:200px;border-radius:10px;display:block;margin:auto">
+                <h3>${name ?? ''}</h3></div>`);
+            w.print(); w.close();
+        }
+    </script>
+}

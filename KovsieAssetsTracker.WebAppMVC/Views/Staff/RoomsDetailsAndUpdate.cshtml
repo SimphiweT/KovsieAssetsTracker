@@ -1,0 +1,124 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Room.DetailsAndUpdateRoomViewModel
+@{
+    ViewBag.Title = "Room Details / Update";
+}
+
+<div class="main-title">
+    <h2><i class="ri-door-open-line"></i>Room Details / Update</h2>
+    <div class="export-btns">
+        <a asp-action="ManageRooms" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Back to Manage Rooms</a>
+        <a asp-action="ExportRoomsExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportRoomsPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<section class="asset-details-wrapper">
+    <!-- LEFT: ROOM PREVIEW -->
+    <div class="asset-preview card glass-card text-center">
+        <div class="card-body">
+            @{
+                var img = !string.IsNullOrEmpty(Model.RoomDetails.RoomImage) ? Model.RoomDetails.RoomImage : Url.Content("~/images/default_broken.jpg");
+            }
+            <img src="@img" alt="Room" />
+            <h4>@Model.RoomDetails.RoomName</h4>
+            <p class="text-muted">@Model.RoomDetails.RoomDescription</p>
+            <hr class="divider" />
+            <p><strong>Floor:</strong> @Model.RoomDetails.FloorName ?? "N/A"</p>
+            <p><strong>Created:</strong> @Model.RoomDetails.CreatedDate?.ToString("yyyy-MM-dd")</p>
+            <p><strong>Updated:</strong> @Model.RoomDetails.UpdatedDate?.ToString("yyyy-MM-dd")</p>
+        </div>
+    </div>
+
+    <!-- RIGHT: UPDATE FORM -->
+    <form asp-action="RoomsDetailsAndUpdate" method="post" enctype="multipart/form-data" class="asset-update-form card glass-card">
+        @Html.AntiForgeryToken()
+        <div class="card-header">
+            <h5><i class="bi bi-pencil-square me-2"></i> Update Room</h5>
+        </div>
+        <div class="card-body">
+            <input type="hidden" name="_method" value="PUT" />
+            <input type="hidden" asp-for="UpdateRoom.RoomServerId" name="RoomServerId" />
+
+            <div class="mb-3">
+                <label asp-for="UpdateRoom.RoomLocalId" class="form-label">RoomDB Primary Key</label>
+                <input asp-for="UpdateRoom.RoomLocalId" class="form-control" name="RoomLocalId" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UpdateRoom.RoomName" class="form-label">Room Name</label>
+                <input asp-for="UpdateRoom.RoomName" class="form-control" name="RoomName" />
+            </div>
+            <div class="mb-3">
+    <label asp-for="UpdateRoom.FloorServerId" class="form-label">Select Floor</label>
+                <select asp-for="UpdateRoom.FloorServerId" class="form-select" name="FloorServerId">
+        <option value="">-- Select Floor --</option>
+                    @foreach (var floor in Model.Floors)
+                    {
+                        var isSelected = floor.FloorServerId == Model.UpdateRoom.FloorServerId ? "selected" : "";
+                        <option value="@floor.FloorServerId" selected="@isSelected">@floor.FloorName</option>
+                    }
+
+    </select>
+</div>
+
+            <div class="mb-3">
+                <label asp-for="UpdateRoom.RoomDescription" class="form-label">Description</label>
+                <textarea asp-for="UpdateRoom.RoomDescription" class="form-control" rows="3" name="RoomDescription"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UpdateRoom.ImageFile" class="form-label">Change Image</label>
+                <input asp-for="UpdateRoom.ImageFile" type="file" accept="image/*" class="form-control" name="ImageFile" />
+            </div>
+
+            <div class="form-check mb-2">
+                <input asp-for="UpdateRoom.IsAndroidBackedUp" class="form-check-input" name="IsAndroidBackedUp" />
+                <label asp-for="UpdateRoom.IsAndroidBackedUp" class="form-check-label">Android Backup</label>
+            </div>
+
+            <div class="form-check mb-3">
+                <input asp-for="UpdateRoom.IsServerBackedUp" class="form-check-input" name="IsServerBackedUp" />
+                <label asp-for="UpdateRoom.IsServerBackedUp" class="form-check-label">Server Backup</label>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+                <a asp-action="ManageRooms" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-success px-4">Save Changes</button>
+            </div>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // SweetAlert TempData alerts
+            const type = "@TempData["AlertType"]";
+            const message = "@TempData["AlertMessage"]";
+            const title = "@TempData["AlertTitle"]";
+            if (message) {
+                Swal.fire({
+                    icon: type || "info",
+                    title: title || "Notification",
+                    text: message,
+                    toast: true,
+                    position: "top-end",
+                    timer: 3000,
+                    showConfirmButton: false,
+                    timerProgressBar: true
+                });
+            }
+
+            // Show spinner on submit
+            document.querySelector("form").addEventListener("submit", () => {
+                Swal.fire({
+                    title: "Updating...",
+                    text: "Please wait while we save your changes.",
+                    allowOutsideClick: false,
+                    didOpen: () => Swal.showLoading()
+                });
+            });
+        });
+    </script>
+}

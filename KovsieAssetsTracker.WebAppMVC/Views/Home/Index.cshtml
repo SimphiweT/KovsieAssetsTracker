@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<main>
+    <!-- ===== HERO SECTION ===== -->
+    <div class="container">
+        <div class="container_left">
+            <div class="content">
+                <div class="slides">
+                    <!-- Slide 1 -->
+                    <div class="slide active">
+                        <h1>SMART <span>ASSET</span> TRACKING</h1>
+                        <p>
+                            Track, manage, and optimize assets in real time — from anywhere, on any device.
+                            Boost visibility and reduce manual work with intelligent automation.
+                        </p>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="slide">
+                        <h1>EFFICIENCY & <span>SECURITY</span></h1>
+                        <p>
+                            Empower your organization with secure, role-based access and real-time status updates.
+                            Protect assets, streamline verification, and strengthen accountability.
+                        </p>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="slide">
+                        <h1>DATA INSIGHTS & <span>ANALYTICS</span></h1>
+                        <p>
+                            Gain deeper insights through smart dashboards and automated reports.
+                            Make informed decisions using trend analysis, usage stats, and verification logs.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="chevrons">
+                    <span class="chev_left"><i class="ri-arrow-left-s-line"></i></span>
+                    <span class="chev_right"><i class="ri-arrow-right-s-line"></i></span>
+                </div>
+
+                <div class="bottom_tracker">
+                    <span class="tracker active"></span>
+                    <span class="tracker"></span>
+                    <span class="tracker"></span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container_right">
+            <div id="lottie-welcome" class="lottie_welcome_animation"></div>
+        </div>
+    </div>
+
+    <!-- ===== DOWNLOAD CARD ===== -->
+    <section id="download" class="download-card" data-sr="fade-up">
+        <div class="download-info">
+            <h2>Download <span>Kovsie Assets</span> App</h2>
+            <p>
+                Stay connected with your assets wherever you are. Our Android app lets you
+                scan QR codes, verify, and manage assets seamlessly.
+            </p>
+
+            <a href="@ViewBag.DownloadUrl" class="btn-download">
+                <i class="ri-android-line"></i> Download APK
+            </a>
+
+            <small class="version-text">
+                Latest version: @ViewBag.ApkVersion | Size: @ViewBag.ApkSize
+            </small>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>© 2025 Kovsie Assets Tracker | Powered by UFS IT Final Year Project | Student Number: 2016401495</p>
+    <div class="footer-links">
+        <a href="https://opensource.org/license/MIT" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+        <a href="http://localhost:5250/swagger/index.html" target="_blank" rel="noopener noreferrer">API Docs</a>
+    </div>
+</footer>
+
+@section Scripts {
+    <script>
+        // document.addEventListener("DOMContentLoaded", () => {
+        //     UIHelper.showAnimation("Welcome", "lottie-welcome", true);
+
+            ScrollReveal().reveal(".content h1, .content p, .chevrons, .bottom_tracker, .download-card", {
+                distance: "50px",
+                origin: "bottom",
+                duration: 1000,
+                interval: 150,
+            });
+        // });
+    </script>
+}

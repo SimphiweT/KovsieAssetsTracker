@@ -1,0 +1,262 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.User.CreateAndListUserViewModel
+@{
+    ViewBag.Title = "Manage Users";
+}
+
+<div class="main-title">
+    <h2><i class="ri-folder-2-line"></i> MANAGE USERS</h2>
+    <div class="export-btns">
+        <a asp-action="ExportUsers" class="btn btn-excel"><i class="bi bi-file-earmark-excel"></i> Excel</a>
+        <a asp-action="ExportUsersPdf" class="btn btn-pdf"><i class="bi bi-file-earmark-pdf"></i> PDF</a>
+    </div>
+</div>
+
+<section class="manage-assets-wrapper">
+    <!-- ===== LEFT: USER LIST ===== -->
+    <section class="asset-list">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fw-semibold">All Users</h5>
+                <div class="d-flex flex-wrap gap-2 align-items-center">
+                    <input id="search-bar" class="form-control form-control-sm" placeholder="Search users..." />
+                    <select id="role-filter" class="form-select form-select-sm">
+                        <option value="">All Roles</option>
+                        <option value="Administrator">Administrator</option>
+                        <option value="StaffMember">Staff Member</option>
+                        <option value="VerificationAgent">Verification Agent</option>
+                    </select>
+                    <button id="clear-filters" class="btn btn-outline-secondary btn-sm">Clear</button>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <!-- ===== TABLE VIEW ===== -->
+                <table id="users-table" class="table align-middle mb-0 text-center">
+                    <thead>
+                        <tr>
+                            <th>Profile</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Contact</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Users != null && Model.Users.Any())
+                        {
+                            foreach (var user in Model.Users)
+                            {
+                                var img = !string.IsNullOrEmpty(user.ProfileImageFileName)
+                                ? user.ProfileImageFileName
+                                : Url.Content("~/images/default-avatar.png");
+
+                                <tr>
+                                    <td><img src="@img" alt="@user.UsernameDisplay" class="preview-image rounded-circle" /></td>
+                                    <td>@user.UsernameDisplay</td>
+                                    <td>@user.UserEmail</td>
+                                    <td><span class="badge bg-primary">@user.UserRole</span></td>
+                                    <td>@user.ContactNumber</td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <a asp-action="ViewAndUpdateUserDetails"
+                                               asp-route-userId="@user.UserId"
+                                               class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+
+                                            <form asp-action="DeleteUser" method="post" class="delete-user-form d-inline">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="userId" value="@user.UserId" />
+                                                <button type="submit"
+                                                        class="btn btn-outline-danger btn-sm delete-user-btn"
+                                                        data-username="@user.UsernameDisplay">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="6" class="text-muted-ux">No users found.</td></tr>
+                        }
+                    </tbody>
+                </table>
+
+                <!-- ===== GRID VIEW ===== -->
+                <div id="users-grid" class="mt-2">
+                    @if (Model.Users != null && Model.Users.Any())
+                    {
+                        foreach (var user in Model.Users)
+                        {
+                            var img = !string.IsNullOrEmpty(user.ProfileImageFileName)
+                            ? user.ProfileImageFileName
+                            : Url.Content("~/images/default-avatar.png");
+
+                            <div class="asset-card">
+                                <img src="@img" alt="@user.UsernameDisplay" class="preview-image rounded-circle" />
+                                <h6 class="fw-semibold mt-2">@user.UsernameDisplay</h6>
+                                <div class="text-muted-ux">@user.UserRole</div>
+                                <div class="mt-1 small">@user.UserEmail</div>
+                                <div class="action-btns mt-2">
+                                    <a asp-action="ViewAndUpdateUserDetails"
+                                       asp-route-userId="@user.UserId"
+                                       class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form asp-action="DeleteUser" method="post" class="delete-user-form d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="userId" value="@user.UserId" />
+                                        <button class="btn btn-outline-danger btn-sm delete-user-btn"
+                                                data-username="@user.UsernameDisplay">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <!-- Floating Toggle -->
+                <button id="toggle-view" class="fab-toggle" title="Switch View"><i class="bi bi-grid"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RIGHT: CREATE USER FORM ===== -->
+    <aside class="asset-form-wrapper">
+        <form asp-action="ManageUsers" method="post" enctype="multipart/form-data" class="asset-form card h-100">
+            @Html.AntiForgeryToken()
+            <div class="card-header">
+                <h5 class="fw-bold mb-0 text-white">Register New User</h5>
+            </div>
+
+            <div class="card-body">
+                <label class="form-label">Profile Picture</label>
+                <div class="text-center mb-3">
+                    <img id="UploadPreview" src="~/images/default-avatar.png" class="rounded-circle shadow-soft mb-2 preview-image" style="width:120px; height:120px;" />
+                    <input asp-for="CreateUser.ImageFile" type="file" accept="image/*" class="form-control" />
+                </div>
+
+                <label asp-for="CreateUser.UsernameDisplay" class="form-label">Full Name</label>
+                <input asp-for="CreateUser.UsernameDisplay" class="form-control mb-3" placeholder="Full Name" />
+
+                <label asp-for="CreateUser.UserEmail" class="form-label">Email</label>
+                <input asp-for="CreateUser.UserEmail" class="form-control mb-3" placeholder="Email" />
+
+                <label asp-for="CreateUser.StudentStaffNumber" class="form-label">Staff / Student Number</label>
+                <input asp-for="CreateUser.StudentStaffNumber" class="form-control mb-3" placeholder="Staff or Student Number" />
+
+                <label asp-for="CreateUser.Description" class="form-label">Description</label>
+                <textarea asp-for="CreateUser.Description" class="form-control mb-3" rows="3" maxlength="500"></textarea>
+
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <label asp-for="CreateUser.Password" class="form-label">Password</label>
+                        <input asp-for="CreateUser.Password" type="password" class="form-control" placeholder="Password" />
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label asp-for="CreateUser.UserRole" class="form-label">Role</label>
+                        <select asp-for="CreateUser.UserRole" class="form-select">
+                            <option>Administrator</option>
+                            <option>StaffMember</option>
+                            <option>VerificationAgent</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label asp-for="CreateUser.ContactNumber" class="form-label">Contact Number</label>
+                <input asp-for="CreateUser.ContactNumber" class="form-control mb-3" placeholder="Phone Number" />
+
+                <button class="btn btn-gradient w-100 fw-bold">
+                    <i class="bi bi-person-plus me-1"></i> Add User
+                </button>
+            </div>
+        </form>
+    </aside>
+</section>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const btnToggle = document.getElementById('toggle-view');
+        const tableEl = document.getElementById('users-table');
+        const gridEl = document.getElementById('users-grid');
+        let showingGrid = false;
+
+                      // Toggle grid/table
+           btnToggle.addEventListener('click', () => {
+               showingGrid = !showingGrid;
+               btnToggle.classList.toggle('active');
+               if (showingGrid) {
+                   tableEl.style.display = 'none';
+                   gridEl.style.display = 'grid';
+                   btnToggle.innerHTML = '<i class="bi bi-table"></i>';
+                   btnToggle.title = 'Switch to Table View';
+               } else {
+                   gridEl.style.display = 'none';
+                   tableEl.style.display = 'table';
+                   btnToggle.innerHTML = '<i class="bi bi-grid"></i>';
+                   btnToggle.title = 'Switch to Grid View';
+               }
+           });
+
+
+        // Search and filter
+        function applyFilters() {
+            const q = document.getElementById('search-bar').value.toLowerCase();
+            const role = document.getElementById('role-filter').value.toLowerCase();
+            document.querySelectorAll('#users-table tbody tr').forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = (!role || text.includes(role)) && text.includes(q) ? '' : 'none';
+            });
+        }
+        document.getElementById('search-bar').addEventListener('input', applyFilters);
+        document.getElementById('role-filter').addEventListener('change', applyFilters);
+        document.getElementById('clear-filters').addEventListener('click', () => {
+            document.getElementById('search-bar').value = '';
+            document.getElementById('role-filter').value = '';
+            applyFilters();
+        });
+
+        // Profile image preview
+        document.querySelector('input[type="file"]').addEventListener('change', e => {
+            const file = e.target.files[0];
+            const preview = document.getElementById('UploadPreview');
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = ev => preview.src = ev.target.result;
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '~/images/default-avatar.png';
+            }
+        });
+
+        // SweetAlert Delete Confirmation
+        document.addEventListener('click', e => {
+            const btn = e.target.closest('.delete-user-btn');
+            if (!btn) return;
+            e.preventDefault();
+            const form = btn.closest('form');
+            const name = btn.dataset.username || 'this user';
+            Swal.fire({
+                title: 'Confirm Deletion',
+                html: `Are you sure you want to delete <strong>${name}</strong>?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, delete'
+            }).then(r => {
+                if (r.isConfirmed) {
+                    Swal.fire({ title: 'Deleting...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+                    setTimeout(() => form.submit(), 500);
+                }
+            });
+        });
+    </script>
+}

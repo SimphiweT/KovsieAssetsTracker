@@ -1,0 +1,122 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Category.DetailsAndUpdateCategoryViewModel
+@{
+    ViewBag.Title = "View / Update Category";
+}
+
+<div class="main-title">
+    <h2><i class="ri-folder-2-line"></i> View & Update Category </h2>
+    <div class="export-btns">
+        <a asp-action="ManageCategories" class="btn btn-outline-light"><i class="ri-arrow-left-line me-1"></i>Back</a>
+        <a asp-action="ExportCategoriesExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportCategoriesPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<section class="asset-details-wrapper">
+    <!-- LEFT: CATEGORY PREVIEW -->
+    <div class="asset-preview card glass-card text-center">
+        @{
+            var img = !string.IsNullOrEmpty(Model.CategoryDetails?.AssetCategoryImage)
+            ? Model.CategoryDetails.AssetCategoryImage
+            : Url.Content("~/images/default-category.png");
+        }
+        <img src="@img" class="asset-img mb-3" />
+        <h4 class="fw-bold text-white">@Model.CategoryDetails?.AssetCategoryName</h4>
+        <p class="text-white-50">@Model.CategoryDetails?.AssetCategoryDescription</p>
+        <hr class="divider" />
+        <div class="text-start small text-white-50 px-4">
+            <div><strong>Created:</strong> @Model.CategoryDetails?.CreatedDate?.ToString("yyyy-MM-dd")</div>
+            <div><strong>Updated:</strong> @Model.CategoryDetails?.UpdatedDate?.ToString("yyyy-MM-dd")</div>
+        </div>
+    </div>
+
+    <!-- RIGHT: UPDATE FORM -->
+    <form asp-action="CategoriesDetailsAndUpdate"
+          method="post" enctype="multipart/form-data"
+          class="asset-update-form card glass-card">
+        @Html.AntiForgeryToken()
+        <div class="card-header">
+            <h5><i class="bi bi-pencil-square me-2"></i> Update Details</h5>
+        </div>
+
+        <div class="card-body">
+            <input type="hidden" asp-for="UpdateCategory.AssetCategoryServerId" />
+
+            <div class="mb-3">
+                <label asp-for="UpdateCategory.AssetCategoryLocalId" class="form-label"></label>
+                <input asp-for="UpdateCategory.AssetCategoryLocalId" name="AssetCategoryLocalId" class="form-control" />
+                <span asp-validation-for="UpdateCategory.AssetCategoryLocalId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UpdateCategory.AssetCategoryName" class="form-label"></label>
+                <input asp-for="UpdateCategory.AssetCategoryName" name="AssetCategoryName" class="form-control" />
+                <span asp-validation-for="UpdateCategory.AssetCategoryName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UpdateCategory.AssetCategoryDescription" class="form-label"></label>
+                <textarea asp-for="UpdateCategory.AssetCategoryDescription" name="AssetCategoryDescription" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="UpdateCategory.AssetCategoryDescription" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UpdateCategory.ImageFile" class="form-label">Update Image</label>
+                <input asp-for="UpdateCategory.ImageFile" type="file" name="ImageFile" class="form-control" accept="image/*" />
+            </div>
+
+            <div class="form-check mb-2">
+                <input asp-for="UpdateCategory.IsAndroidBackedUp" name="IsAndroidBackedUp" class="form-check-input" />
+                <label asp-for="UpdateCategory.IsAndroidBackedUp" class="form-check-label"></label>
+            </div>
+
+            <div class="form-check mb-3">
+                <input asp-for="UpdateCategory.IsServerBackedUp" name="IsServerBackedUp" class="form-check-input" />
+                <label asp-for="UpdateCategory.IsServerBackedUp" class="form-check-label"></label>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+                <a asp-action="ManageCategories" class="btn btn-secondary">Cancel</a>
+                <button class="btn btn-success px-4">
+                    <i class="bi bi-save me-1"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </form>
+
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const alertType = "@TempData["AlertType"]";
+            const alertMessage = "@TempData["AlertMessage"]";
+            const alertTitle = "@TempData["AlertTitle"]";
+
+            if (alertMessage) {
+                const iconMap = { success: "success", error: "error", warning: "warning", info: "info" };
+                Swal.fire({
+                    icon: iconMap[alertType] || "info",
+                    title: alertTitle || "Notification",
+                    text: alertMessage,
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+            }
+        });
+
+       document.querySelector("form.asset-update-form").addEventListener("submit", (e) => {
+            Swal.fire({
+                title: "Saving...",
+                text: "Please wait while we update your changes.",
+                allowOutsideClick: false,
+                didOpen: () => Swal.showLoading()
+            });
+        });
+
+    </script>
+}

@@ -1,0 +1,161 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Staff.SearchManagerViewModel
+@{
+    ViewBag.Title = "Search Manager";
+}
+
+<div class="main-title">
+    <h2><i class="ri-search-eye-line"></i> Search Manager</h2>
+    <div class="export-btns">
+        <a asp-action="ExportSearchResultExcel" asp-route-query="@Model.Query" asp-route-typeFilter="@Model.TypeFilter" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportSearchResultPdf" asp-route-query="@Model.Query" asp-route-typeFilter="@Model.TypeFilter" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<section class="search-section mt-4">
+    <div class="card glass-card p-3">
+        <!-- Unified Search Toolbar -->
+        <form method="get" asp-action="SearchManager" class="d-flex flex-wrap align-items-center gap-3">
+            <div class="flex-grow-1 position-relative">
+                <i class="ri-search-line position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                <input type="text"
+                       name="query"
+                       value="@Model.Query"
+                       class="form-control ps-5"
+                       placeholder="Search by name, description..." />
+            </div>
+            <div style="width:180px;">
+                <select name="typeFilter" class="form-select">
+                    <option value="All" selected="@("All".Equals(Model.TypeFilter, StringComparison.OrdinalIgnoreCase))">All</option>
+                    <option value="Asset" selected="@("Asset".Equals(Model.TypeFilter, StringComparison.OrdinalIgnoreCase))">Assets</option>
+                    <option value="Room" selected="@("Room".Equals(Model.TypeFilter, StringComparison.OrdinalIgnoreCase))">Rooms</option>
+                    <option value="Category" selected="@("Category".Equals(Model.TypeFilter, StringComparison.OrdinalIgnoreCase))">Categories</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-gradient rounded-pill px-4 fw-semibold">
+                <i class="ri-search-line me-1"></i> Search
+            </button>
+        </form>
+    </div>
+
+    <!-- Results Table -->
+    @if (Model.Results != null && Model.Results.Any())
+    {
+        <div class="card glass-card mt-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="ri-list-check-2"></i> Results (@Model.Results.Count)</h5>
+                <select id="sortSelect" class="form-select form-select-sm" style="width:180px;">
+                    <option value="">Sort by...</option>
+                    <option value="asc">Title A–Z</option>
+                    <option value="desc">Title Z–A</option>
+                    <option value="recent">Most Recent</option>
+                </select>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-middle table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Type</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Extra</th>
+                            <th>Created</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="searchResultsBody">
+                        @foreach (var item in Model.Results)
+                        {
+                            var viewUrl = item.Type.ToLower() switch
+                            {
+                                "asset" => Url.Action("AssetsDetailsAndUpdate", "Staff", new { id = item.Id }),
+                                "room" => Url.Action("RoomsDetailsAndUpdate", "Staff", new { id = item.Id }),
+                                "category" => Url.Action("CategoriesDetailsAndUpdate", "Staff", new { id = item.Id }),
+                                _ => "#"
+                            };
+                            <tr>
+                                <td>
+                                    @switch (item.Type.ToLower())
+                                    {
+                                        case "asset":
+                                            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill">
+                                                <i class="ri-box-3-line me-1"></i> Asset
+                                            </span>
+                                            break;
+                                        case "room":
+                                            <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">
+                                                <i class="ri-home-4-line me-1"></i> Room
+                                            </span>
+                                            break;
+                                        case "category":
+                                            <span class="badge bg-warning-subtle text-dark px-3 py-2 rounded-pill">
+                                                <i class="ri-folder-2-line me-1"></i> Category
+                                            </span>
+                                            break;
+                                        default:
+                                            <span class="badge bg-secondary-subtle text-dark px-3 py-2 rounded-pill">Other</span>
+                                            break;
+                                    }
+                                </td>
+                                <td class="fw-semibold">@item.Title</td>
+                                <td>@item.Description</td>
+                                <td>@item.Extra</td>
+                                <td>@item.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                                <td class="text-center">
+                                    <a href="@viewUrl" class="btn btn-sm btn-outline-primary rounded-pill d-inline-flex align-items-center gap-1">
+                                        <i class="ri-eye-line"></i> View
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(Model.Query))
+    {
+        <div class="alert alert-warning mt-4">
+            <i class="ri-error-warning-line me-1"></i>
+            No results found for "<strong>@Model.Query</strong>" in <strong>@Model.TypeFilter</strong>.
+        </div>
+    }
+</section>
+
+@section Scripts {
+    <script>
+        // --- Sort client-side ---
+           document.getElementById("sortSelect")?.addEventListener("change", e => {
+               const rows = Array.from(document.querySelectorAll("#searchResultsBody tr"));
+               const sort = e.target.value;
+               rows.sort((a, b) => {
+                   const aText = a.cells[1].innerText.toLowerCase();
+                   const bText = b.cells[1].innerText.toLowerCase();
+                   const aDate = new Date(a.cells[4].innerText);
+                   const bDate = new Date(b.cells[4].innerText);
+                   switch (sort) {
+                       case "asc": return aText.localeCompare(bText);
+                       case "desc": return bText.localeCompare(aText);
+                       case "recent": return bDate - aDate;
+                       default: return 0;
+                   }
+               });
+               const tbody = document.getElementById("searchResultsBody");
+               tbody.innerHTML = "";
+               rows.forEach(r => tbody.appendChild(r));
+           });
+
+                document.addEventListener("DOMContentLoaded", () => {
+            const searchInput = document.querySelector(".search input");
+            const searchIcon = document.querySelector(".search i");
+
+            const doSearch = () => {
+                const q = searchInput.value.trim();
+                if (q) window.location.href = `/Staff/SearchManager?query=${encodeURIComponent(q)}`;
+            };
+
+            searchIcon.addEventListener("click", doSearch);
+            searchInput.addEventListener("keypress", e => { if (e.key === "Enter") doSearch(); });
+        });
+
+    </script>
+}

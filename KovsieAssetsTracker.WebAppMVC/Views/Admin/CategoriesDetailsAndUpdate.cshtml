@@ -1,0 +1,158 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Category.DetailsAndUpdateCategoryViewModel
+@{
+    ViewBag.Title = "View / Update Category";
+}
+
+<!-- ===== PAGE HEADER ===== -->
+<div class="main-title">
+    <h2><i class="ri-folder-2-line"></i> VIEW & UPDATE CATEGORY</h2>
+    <div class="export-btns">
+        <a asp-action="ManageCategories" class="btn btn-outline-light">
+            <i class="ri-arrow-left-line me-1"></i> Back
+        </a>
+        <a asp-action="ExportCategoriesExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportCategoriesPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+<!-- ===== MAIN WRAPPER ===== -->
+<section class="asset-details-wrapper">
+
+    <!-- ===== LEFT: CATEGORY PREVIEW ===== -->
+    <div class="card glass-card asset-preview text-white shadow-soft">
+        <div class="card-body text-center">
+            @{
+                var img = !string.IsNullOrEmpty(Model.CategoryDetails?.AssetCategoryImage)
+                ? Model.CategoryDetails.AssetCategoryImage
+                : Url.Content("~/images/default-category.png");
+            }
+
+            <img src="@img" class="rounded shadow mb-3" style="width:160px;height:160px;object-fit:cover;" />
+            <h4 class="fw-bold mb-1">@Model.CategoryDetails?.AssetCategoryName</h4>
+            <p class="text-white-50 px-3 mb-3">@Model.CategoryDetails?.AssetCategoryDescription</p>
+
+            <hr class="divider my-3" />
+            <div class="text-start small px-4">
+                <p><strong>Created:</strong> @Model.CategoryDetails?.CreatedDate?.ToString("yyyy-MM-dd")</p>
+                <p><strong>Updated:</strong> @Model.CategoryDetails?.UpdatedDate?.ToString("yyyy-MM-dd")</p>
+                <p><strong>Android Backup:</strong> @(Model.CategoryDetails?.IsAndroidBackedUp == true ? "Yes" : "No")</p>
+                <p><strong>Server Backup:</strong> @(Model.CategoryDetails?.IsServerBackedUp == true ? "Yes" : "No")</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== RIGHT: UPDATE FORM ===== -->
+    <form asp-action="CategoriesDetailsAndUpdate" method="post" enctype="multipart/form-data"
+          class="card glass-card asset-form shadow-soft">
+        @Html.AntiForgeryToken()
+
+        <div class="card-header">
+            <h5 class="fw-bold mb-0 text-white">
+                <i class="bi bi-pencil-square me-2"></i> Update Category Details
+            </h5>
+        </div>
+
+        <div class="card-body">
+            <input type="hidden" name="_method" value="PUT" />
+            <input type="hidden" asp-for="UpdateCategory.AssetCategoryServerId" name="AssetCategoryServerId" />
+
+            <!-- RoomDB Key -->
+            <div class="form-group mb-3">
+                <label asp-for="UpdateCategory.AssetCategoryLocalId" class="form-label fw-semibold">RoomDB Key</label>
+                <input asp-for="UpdateCategory.AssetCategoryLocalId" class="form-control form-control-lg" placeholder="RoomDB Primary Key" name="AssetCategoryLocalId" />
+            </div>
+
+            <!-- Category Name -->
+            <div class="form-group mb-3">
+                <label asp-for="UpdateCategory.AssetCategoryName" class="form-label fw-semibold">Category Name</label>
+                <input asp-for="UpdateCategory.AssetCategoryName" class="form-control form-control-lg" placeholder="Enter category name" name="AssetCategoryName" />
+            </div>
+
+            <!-- Description -->
+            <div class="form-group mb-4">
+                <label asp-for="UpdateCategory.AssetCategoryDescription" class="form-label fw-semibold">Description</label>
+                <textarea asp-for="UpdateCategory.AssetCategoryDescription" rows="3" class="form-control form-control-lg" placeholder="Enter category description" name="AssetCategoryDescription"></textarea>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="form-group mb-4 text-center">
+                <label asp-for="UpdateCategory.ImageFile" class="form-label fw-semibold d-block">Change Image</label>
+                <img id="categoryPreview" src="@img"
+                     class="rounded shadow mb-2 preview-img"
+                     style="width:120px;height:120px;object-fit:cover;border-radius:10px;" />
+                <input asp-for="UpdateCategory.ImageFile" type="file" accept="image/*" class="form-control form-control-lg" name="ImageFile" />
+            </div>
+
+            <!-- Checkboxes -->
+            <div class="d-flex flex-column gap-2 mb-4">
+                <div class="form-check">
+                    <input asp-for="UpdateCategory.IsAndroidBackedUp" class="form-check-input" type="checkbox" name="IsAndroidBackedUp" />
+                    <label asp-for="UpdateCategory.IsAndroidBackedUp" class="form-check-label">Android BackedUp?</label>
+                </div>
+                <div class="form-check">
+                    <input asp-for="UpdateCategory.IsServerBackedUp" class="form-check-input" type="checkbox" name="IsServerBackedUp" />
+                    <label asp-for="UpdateCategory.IsServerBackedUp" class="form-check-label">Server BackedUp?</label>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end gap-3 mt-3">
+                <a asp-action="ManageCategories" class="btn btn-outline-light px-4">
+                    <i class="bi bi-x-lg me-1"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-gradient px-4">
+                    <i class="bi bi-save me-1"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script>
+        // === SweetAlert Notifications ===
+        document.addEventListener("DOMContentLoaded", () => {
+            const type = "@TempData["AlertType"]";
+            const msg = "@TempData["AlertMessage"]";
+            const title = "@TempData["AlertTitle"]";
+
+            if (msg) {
+                const iconMap = { success: "success", error: "error", warning: "warning", info: "info" };
+                Swal.fire({
+                    icon: iconMap[type] || "info",
+                    title: title || "Notification",
+                    text: msg,
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+            }
+
+            // Loading indicator on save
+            const form = document.querySelector(".asset-form");
+            form.addEventListener("submit", (e) => {
+                Swal.fire({
+                    title: "Saving...",
+                    text: "Please wait while we update your changes.",
+                    allowOutsideClick: false,
+                    didOpen: () => Swal.showLoading()
+                });
+            });
+
+            // === Preview selected image ===
+            const fileInput = document.querySelector('input[type="file"][name="UpdateCategory.ImageFile"]');
+            const img = document.getElementById('categoryPreview');
+            fileInput.addEventListener('change', e => {
+                const file = e.target.files?.[0];
+                if (!file) return img.src = '@(img)';
+                const reader = new FileReader();
+                reader.onload = ev => img.src = ev.target.result;
+                reader.readAsDataURL(file);
+            });
+        });
+    </script>
+}

@@ -1,0 +1,12 @@
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Domain\bin\Debug\net8.0\KovsieAssetsTracker.Domain.deps.json
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Domain\bin\Debug\net8.0\KovsieAssetsTracker.Domain.dll
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Domain\bin\Debug\net8.0\KovsieAssetsTracker.Domain.pdb
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Domain\obj\Debug\net8.0\KovsieAssetsTracker.Domain.csproj.AssemblyReference.cache
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Domain\obj\Debug\net8.0\KovsieAssetsTracker.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Domain\obj\Debug\net8.0\KovsieAssetsTracker.Domain.AssemblyInfoInputs.cache
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Domain\obj\Debug\net8.0\KovsieAssetsTracker.Domain.AssemblyInfo.cs
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Domain\obj\Debug\net8.0\KovsieAssetsTracker.Domain.csproj.CoreCompileInputs.cache
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Domain\obj\Debug\net8.0\KovsieAssetsTracker.Domain.dll
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Domain\obj\Debug\net8.0\refint\KovsieAssetsTracker.Domain.dll
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Domain\obj\Debug\net8.0\KovsieAssetsTracker.Domain.pdb
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Domain\obj\Debug\net8.0\ref\KovsieAssetsTracker.Domain.dll

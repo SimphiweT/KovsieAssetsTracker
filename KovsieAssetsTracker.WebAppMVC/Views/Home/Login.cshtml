@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+<main class="login-container">
+    <!-- ===== LEFT: LOTTIE ANIMATION ===== -->
+    <div class="login-left">
+        <div id="lottie-login" class="lottie-login-animation"></div>
+        <h2>Welcome Back!</h2>
+        <p>Access your Kovsie Assets account to manage, verify and track with ease.</p>
+    </div>
+
+    <!-- ===== RIGHT: LOGIN FORM ===== -->
+    <div class="login-right glass-card">
+        <div class="login-header">
+            <h2><i class="ri-shield-user-line"></i> Sign In</h2>
+            <p>Sign in using your Kovsie Assets credentials.</p>
+        </div>
+
+        <form method="post" asp-controller="Home" asp-action="Login" class="login-form">
+            <div class="input-box">
+                <label>Email</label>
+                <div class="input-field">
+                    <i class="ri-mail-line"></i>
+                    <input type="email" name="Email" required placeholder="Enter your email" />
+                </div>
+            </div>
+
+            <div class="input-box">
+                <label>Password</label>
+                <div class="input-field">
+                    <i class="ri-lock-line"></i>
+                    <input type="password" id="password" name="Password" required placeholder="Enter password" />
+                    <i id="togglePassword" class="ri-eye-line toggle-password"></i>
+                </div>
+            </div>
+
+            <div class="remember-forgot">
+                <label>
+                    <input type="checkbox" name="RememberMe" /> Remember me
+                </label>
+                <a href="@Url.Action("ForgotPassword", "Home")">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                <i class="ri-login-box-line"></i> Login
+            </button>
+
+            <p class="register-link">
+                Don’t have an account? <a href="@Url.Action("RequestAccess", "Home")">Request Access</a>
+            </p>
+        </form>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>© 2025 Kovsie Assets Tracker | Powered by UFS IT Final Year Project</p>
+</footer>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Password toggle
+            const togglePassword = document.getElementById("togglePassword");
+            const password = document.getElementById("password");
+            if (togglePassword && password) {
+                togglePassword.addEventListener("click", function () {
+                    const type = password.getAttribute("type") === "password" ? "text" : "password";
+                    password.setAttribute("type", type);
+                    this.classList.toggle("ri-eye-off-line");
+                });
+            }
+
+            // Lottie animation
+            UIHelper.showAnimation("Login", "lottie-login", true);
+
+            // Reveal
+            ScrollReveal().reveal(".login-left, .login-right", {
+                distance: "50px",
+                origin: "bottom",
+                duration: 1000,
+                interval: 150
+            });
+        });
+    </script>
+}

@@ -1,0 +1,15 @@
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\bin\Debug\net8.0\KovsieAssetsTracker.Application.deps.json
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\bin\Debug\net8.0\KovsieAssetsTracker.Application.dll
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\bin\Debug\net8.0\KovsieAssetsTracker.Application.pdb
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\bin\Debug\net8.0\KovsieAssetsTracker.Domain.dll
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\bin\Debug\net8.0\KovsieAssetsTracker.Domain.pdb
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\obj\Debug\net8.0\KovsieAssetsTracker.Application.csproj.AssemblyReference.cache
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\obj\Debug\net8.0\KovsieAssetsTracker.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\obj\Debug\net8.0\KovsieAssetsTracker.Application.AssemblyInfoInputs.cache
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\obj\Debug\net8.0\KovsieAssetsTracker.Application.AssemblyInfo.cs
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\obj\Debug\net8.0\KovsieAssetsTracker.Application.csproj.CoreCompileInputs.cache
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\obj\Debug\net8.0\KovsieAs.B9818EAD.Up2Date
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\obj\Debug\net8.0\KovsieAssetsTracker.Application.dll
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\obj\Debug\net8.0\refint\KovsieAssetsTracker.Application.dll
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\obj\Debug\net8.0\KovsieAssetsTracker.Application.pdb
+C:\KovsieAssetTrackerUFS\KovsieAssetsTracker\KovsieAssetsTracker.Application\obj\Debug\net8.0\ref\KovsieAssetsTracker.Application.dll

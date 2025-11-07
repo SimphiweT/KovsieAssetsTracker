@@ -1,0 +1,2272 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Kovsie Assets Tracker - API",
+    "description": "Full-stack Asset Manager System for Kovsie supporting QR tracking, user roles, and reporting.",
+    "termsOfService": "https://github.com/SimphiweT/KovsieAssetTrackerUFS",
+    "contact": {
+      "name": "Simphiwe Terrence",
+      "url": "https://github.com/SimphiweT",
+      "email": "2016401495@ufs4life.ac.za"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/api/AssetCategories": {
+      "get": {
+        "tags": [
+          "AssetCategories"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AssetCategories"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "AssetCategoryLocalId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssetCategoryName": {
+                    "type": "string"
+                  },
+                  "AssetCategoryDescription": {
+                    "type": "string"
+                  },
+                  "IsAndroidBackedUp": {
+                    "type": "boolean"
+                  },
+                  "IsServerBackedUp": {
+                    "type": "boolean"
+                  },
+                  "ImageFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "AssetCategoryLocalId": {
+                  "style": "form"
+                },
+                "AssetCategoryName": {
+                  "style": "form"
+                },
+                "AssetCategoryDescription": {
+                  "style": "form"
+                },
+                "IsAndroidBackedUp": {
+                  "style": "form"
+                },
+                "IsServerBackedUp": {
+                  "style": "form"
+                },
+                "ImageFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AssetCategories"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "AssetCategoryServerId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssetCategoryLocalId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssetCategoryName": {
+                    "type": "string"
+                  },
+                  "AssetCategoryDescription": {
+                    "type": "string"
+                  },
+                  "IsAndroidBackedUp": {
+                    "type": "boolean"
+                  },
+                  "IsServerBackedUp": {
+                    "type": "boolean"
+                  },
+                  "ImageFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "AssetCategoryServerId": {
+                  "style": "form"
+                },
+                "AssetCategoryLocalId": {
+                  "style": "form"
+                },
+                "AssetCategoryName": {
+                  "style": "form"
+                },
+                "AssetCategoryDescription": {
+                  "style": "form"
+                },
+                "IsAndroidBackedUp": {
+                  "style": "form"
+                },
+                "IsServerBackedUp": {
+                  "style": "form"
+                },
+                "ImageFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetCategories/get_all_categories_with_assets": {
+      "get": {
+        "tags": [
+          "AssetCategories"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetCategories/{id}": {
+      "get": {
+        "tags": [
+          "AssetCategories"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AssetCategories"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetCategories/get_category_with_assets/{id}": {
+      "get": {
+        "tags": [
+          "AssetCategories"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Assets": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Assets"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "AssetLocalId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssetName": {
+                    "type": "string"
+                  },
+                  "AssetDescription": {
+                    "type": "string"
+                  },
+                  "QRCodeSecretText": {
+                    "type": "string"
+                  },
+                  "Status": {
+                    "type": "string"
+                  },
+                  "IsAndroidBackedUp": {
+                    "type": "boolean"
+                  },
+                  "IsServerBackedUp": {
+                    "type": "boolean"
+                  },
+                  "RoomServerId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssetCategoryServerId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ImageFileAsset": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "ImageFileQrCode": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "AssetLocalId": {
+                  "style": "form"
+                },
+                "AssetName": {
+                  "style": "form"
+                },
+                "AssetDescription": {
+                  "style": "form"
+                },
+                "QRCodeSecretText": {
+                  "style": "form"
+                },
+                "Status": {
+                  "style": "form"
+                },
+                "IsAndroidBackedUp": {
+                  "style": "form"
+                },
+                "IsServerBackedUp": {
+                  "style": "form"
+                },
+                "RoomServerId": {
+                  "style": "form"
+                },
+                "AssetCategoryServerId": {
+                  "style": "form"
+                },
+                "ImageFileAsset": {
+                  "style": "form"
+                },
+                "ImageFileQrCode": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Assets/{id}": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Assets"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "AssetServerId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssetLocalId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssetName": {
+                    "type": "string"
+                  },
+                  "AssetDescription": {
+                    "type": "string"
+                  },
+                  "QRCodeSecretText": {
+                    "type": "string"
+                  },
+                  "Status": {
+                    "type": "string"
+                  },
+                  "IsAndroidBackedUp": {
+                    "type": "boolean"
+                  },
+                  "IsServerBackedUp": {
+                    "type": "boolean"
+                  },
+                  "RoomServerId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssetCategoryServerId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ImageFileAsset": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "ImageFileQrCode": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "AssetServerId": {
+                  "style": "form"
+                },
+                "AssetLocalId": {
+                  "style": "form"
+                },
+                "AssetName": {
+                  "style": "form"
+                },
+                "AssetDescription": {
+                  "style": "form"
+                },
+                "QRCodeSecretText": {
+                  "style": "form"
+                },
+                "Status": {
+                  "style": "form"
+                },
+                "IsAndroidBackedUp": {
+                  "style": "form"
+                },
+                "IsServerBackedUp": {
+                  "style": "form"
+                },
+                "RoomServerId": {
+                  "style": "form"
+                },
+                "AssetCategoryServerId": {
+                  "style": "form"
+                },
+                "ImageFileAsset": {
+                  "style": "form"
+                },
+                "ImageFileQrCode": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Assets"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Assets/qrcode/{qrCodeSecretText}": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "parameters": [
+          {
+            "name": "qrCodeSecretText",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "UsernameDisplay": {
+                    "type": "string"
+                  },
+                  "UserEmail": {
+                    "type": "string"
+                  },
+                  "StudentStaffNumber": {
+                    "type": "string"
+                  },
+                  "ContactNumber": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "UserRole": {
+                    "type": "string"
+                  },
+                  "Password": {
+                    "type": "string"
+                  },
+                  "ImageFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "UsernameDisplay": {
+                  "style": "form"
+                },
+                "UserEmail": {
+                  "style": "form"
+                },
+                "StudentStaffNumber": {
+                  "style": "form"
+                },
+                "ContactNumber": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "UserRole": {
+                  "style": "form"
+                },
+                "Password": {
+                  "style": "form"
+                },
+                "ImageFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.LoginRequestDTO"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.LoginRequestDTO"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.LoginRequestDTO"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/access-requests": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/request-access": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "DisplayName",
+                  "Email",
+                  "RoleApplied"
+                ],
+                "type": "object",
+                "properties": {
+                  "DisplayName": {
+                    "maxLength": 100,
+                    "type": "string"
+                  },
+                  "Email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "RoleApplied": {
+                    "maxLength": 50,
+                    "type": "string"
+                  },
+                  "Message": {
+                    "maxLength": 500,
+                    "type": "string"
+                  },
+                  "PdfDocument": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "DisplayName": {
+                  "style": "form"
+                },
+                "Email": {
+                  "style": "form"
+                },
+                "RoleApplied": {
+                  "style": "form"
+                },
+                "Message": {
+                  "style": "form"
+                },
+                "PdfDocument": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/access-requests/pending": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/access-requests/reviewed": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/approve-access/{id}": {
+      "put": {
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/decline/{id}": {
+      "put": {
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/change-password": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.UserDTO.ChangePasswordRequestDTO"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.UserDTO.ChangePasswordRequestDTO"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.UserDTO.ChangePasswordRequestDTO"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/forgot-password": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.AuthDTOs.ForgotPasswordRequestDTO"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.AuthDTOs.ForgotPasswordRequestDTO"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.AuthDTOs.ForgotPasswordRequestDTO"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/reset-password": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.AuthDTOs.ResetPasswordRequestDTO"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.AuthDTOs.ResetPasswordRequestDTO"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.AuthDTOs.ResetPasswordRequestDTO"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Buildings": {
+      "get": {
+        "tags": [
+          "Buildings"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Buildings"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "BuildingLocalId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "BuildingName": {
+                    "type": "string"
+                  },
+                  "BuildingDescription": {
+                    "type": "string"
+                  },
+                  "IsAndroidBackedUp": {
+                    "type": "boolean"
+                  },
+                  "IsServerBackedUp": {
+                    "type": "boolean"
+                  },
+                  "CampusServerId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ImageFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "BuildingLocalId": {
+                  "style": "form"
+                },
+                "BuildingName": {
+                  "style": "form"
+                },
+                "BuildingDescription": {
+                  "style": "form"
+                },
+                "IsAndroidBackedUp": {
+                  "style": "form"
+                },
+                "IsServerBackedUp": {
+                  "style": "form"
+                },
+                "CampusServerId": {
+                  "style": "form"
+                },
+                "ImageFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Buildings"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "BuildingServerId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "BuildingLocalId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "BuildingName": {
+                    "type": "string"
+                  },
+                  "BuildingDescription": {
+                    "type": "string"
+                  },
+                  "IsAndroidBackedUp": {
+                    "type": "boolean"
+                  },
+                  "IsServerBackedUp": {
+                    "type": "boolean"
+                  },
+                  "CampusServerId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ImageFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "BuildingServerId": {
+                  "style": "form"
+                },
+                "BuildingLocalId": {
+                  "style": "form"
+                },
+                "BuildingName": {
+                  "style": "form"
+                },
+                "BuildingDescription": {
+                  "style": "form"
+                },
+                "IsAndroidBackedUp": {
+                  "style": "form"
+                },
+                "IsServerBackedUp": {
+                  "style": "form"
+                },
+                "CampusServerId": {
+                  "style": "form"
+                },
+                "ImageFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Buildings/get_all_buildings_with_floors": {
+      "get": {
+        "tags": [
+          "Buildings"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Buildings/{id}": {
+      "get": {
+        "tags": [
+          "Buildings"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Buildings"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Buildings/get_building_with_floors/{id}": {
+      "get": {
+        "tags": [
+          "Buildings"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Campuses": {
+      "get": {
+        "tags": [
+          "Campuses"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Campuses"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "CampusLocalId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "CampusName": {
+                    "type": "string"
+                  },
+                  "CampusDescription": {
+                    "type": "string"
+                  },
+                  "IsAndroidBackedUp": {
+                    "type": "boolean"
+                  },
+                  "IsServerBackedUp": {
+                    "type": "boolean"
+                  },
+                  "ImageFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "CampusLocalId": {
+                  "style": "form"
+                },
+                "CampusName": {
+                  "style": "form"
+                },
+                "CampusDescription": {
+                  "style": "form"
+                },
+                "IsAndroidBackedUp": {
+                  "style": "form"
+                },
+                "IsServerBackedUp": {
+                  "style": "form"
+                },
+                "ImageFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Campuses"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "CampusServerId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "CampusLocalId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "CampusName": {
+                    "type": "string"
+                  },
+                  "CampusDescription": {
+                    "type": "string"
+                  },
+                  "IsAndroidBackedUp": {
+                    "type": "boolean"
+                  },
+                  "IsServerBackedUp": {
+                    "type": "boolean"
+                  },
+                  "ImageFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "CampusServerId": {
+                  "style": "form"
+                },
+                "CampusLocalId": {
+                  "style": "form"
+                },
+                "CampusName": {
+                  "style": "form"
+                },
+                "CampusDescription": {
+                  "style": "form"
+                },
+                "IsAndroidBackedUp": {
+                  "style": "form"
+                },
+                "IsServerBackedUp": {
+                  "style": "form"
+                },
+                "ImageFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Campuses/get_all_campuses_with_buildings": {
+      "get": {
+        "tags": [
+          "Campuses"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Campuses/{id}": {
+      "get": {
+        "tags": [
+          "Campuses"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Campuses"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Campuses/get_campus_with_buildings/{id}": {
+      "get": {
+        "tags": [
+          "Campuses"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Contact/Send": {
+      "post": {
+        "tags": [
+          "Contact"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.ContactDTOs.ContactRequestDTO"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.ContactDTOs.ContactRequestDTO"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.ContactDTOs.ContactRequestDTO"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Download/download-apk": {
+      "get": {
+        "tags": [
+          "Download"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Download/apk-info": {
+      "get": {
+        "tags": [
+          "Download"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Floors": {
+      "get": {
+        "tags": [
+          "Floors"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Floors"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.FloorDTOs.CreateFloorRequestDTO"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.FloorDTOs.CreateFloorRequestDTO"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.FloorDTOs.CreateFloorRequestDTO"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Floors"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.FloorDTOs.UpdateFloorRequestDTO"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.FloorDTOs.UpdateFloorRequestDTO"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.FloorDTOs.UpdateFloorRequestDTO"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Floors/get_all_floors_with_rooms": {
+      "get": {
+        "tags": [
+          "Floors"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Floors/{id}": {
+      "get": {
+        "tags": [
+          "Floors"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Floors"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Floors/get_floor_with_rooms/{id}": {
+      "get": {
+        "tags": [
+          "Floors"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Health/ping": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Rooms": {
+      "get": {
+        "tags": [
+          "Rooms"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Rooms"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "RoomLocalId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "RoomName": {
+                    "type": "string"
+                  },
+                  "RoomDescription": {
+                    "type": "string"
+                  },
+                  "RoomImage": {
+                    "type": "string"
+                  },
+                  "IsAndroidBackedUp": {
+                    "type": "boolean"
+                  },
+                  "IsServerBackedUp": {
+                    "type": "boolean"
+                  },
+                  "FloorServerId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ImageFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "RoomLocalId": {
+                  "style": "form"
+                },
+                "RoomName": {
+                  "style": "form"
+                },
+                "RoomDescription": {
+                  "style": "form"
+                },
+                "RoomImage": {
+                  "style": "form"
+                },
+                "IsAndroidBackedUp": {
+                  "style": "form"
+                },
+                "IsServerBackedUp": {
+                  "style": "form"
+                },
+                "FloorServerId": {
+                  "style": "form"
+                },
+                "ImageFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Rooms"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "RoomServerId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "RoomLocalId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "RoomName": {
+                    "type": "string"
+                  },
+                  "RoomDescription": {
+                    "type": "string"
+                  },
+                  "RoomImage": {
+                    "type": "string"
+                  },
+                  "IsAndroidBackedUp": {
+                    "type": "boolean"
+                  },
+                  "IsServerBackedUp": {
+                    "type": "boolean"
+                  },
+                  "FloorServerId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ImageFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "RoomServerId": {
+                  "style": "form"
+                },
+                "RoomLocalId": {
+                  "style": "form"
+                },
+                "RoomName": {
+                  "style": "form"
+                },
+                "RoomDescription": {
+                  "style": "form"
+                },
+                "RoomImage": {
+                  "style": "form"
+                },
+                "IsAndroidBackedUp": {
+                  "style": "form"
+                },
+                "IsServerBackedUp": {
+                  "style": "form"
+                },
+                "FloorServerId": {
+                  "style": "form"
+                },
+                "ImageFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Rooms/{id}": {
+      "get": {
+        "tags": [
+          "Rooms"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Rooms"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Users/get_user/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Users/{id}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "UserId": {
+                    "type": "string"
+                  },
+                  "UsernameDisplay": {
+                    "type": "string"
+                  },
+                  "UserEmail": {
+                    "type": "string"
+                  },
+                  "StudentStaffNumber": {
+                    "type": "string"
+                  },
+                  "ContactNumber": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "UserRole": {
+                    "type": "string"
+                  },
+                  "ImageFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "UserId": {
+                  "style": "form"
+                },
+                "UsernameDisplay": {
+                  "style": "form"
+                },
+                "UserEmail": {
+                  "style": "form"
+                },
+                "StudentStaffNumber": {
+                  "style": "form"
+                },
+                "ContactNumber": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "UserRole": {
+                  "style": "form"
+                },
+                "ImageFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Users/{id}/profile-image": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Users/change-password": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.UserDTO.ChangePasswordRequestDTO"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.UserDTO.ChangePasswordRequestDTO"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/KovsieAssetsTracker.Application.DTOs.UserDTO.ChangePasswordRequestDTO"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Users/admin-reset-password": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "temporaryPassword": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "email": {
+                  "style": "form"
+                },
+                "temporaryPassword": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "KovsieAssetsTracker.Application.DTOs.AuthDTOs.ForgotPasswordRequestDTO": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KovsieAssetsTracker.Application.DTOs.AuthDTOs.ResetPasswordRequestDTO": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "newPassword": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KovsieAssetsTracker.Application.DTOs.ContactDTOs.ContactRequestDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KovsieAssetsTracker.Application.DTOs.FloorDTOs.CreateFloorRequestDTO": {
+        "type": "object",
+        "properties": {
+          "floorLocalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "floorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "floorDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAndroidBackedUp": {
+            "type": "boolean"
+          },
+          "isServerBackedUp": {
+            "type": "boolean"
+          },
+          "buildingServerId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KovsieAssetsTracker.Application.DTOs.FloorDTOs.UpdateFloorRequestDTO": {
+        "type": "object",
+        "properties": {
+          "floorServerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "floorLocalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "floorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "floorDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAndroidBackedUp": {
+            "type": "boolean"
+          },
+          "isServerBackedUp": {
+            "type": "boolean"
+          },
+          "buildingServerId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KovsieAssetsTracker.Application.DTOs.LoginRequestDTO": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KovsieAssetsTracker.Application.DTOs.UserDTO.ChangePasswordRequestDTO": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentPassword": {
+            "type": "string",
+            "nullable": true
+          },
+          "newPassword": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Enter 'Bearer' [space] and then your valid JWT token.",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

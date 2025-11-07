@@ -1,0 +1,50 @@
+{
+  "version": "3.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "bootstrap@5.3.8",
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "alertify.js@0.3.11",
+      "destination": "wwwroot/lib/alertify.js/"
+    },
+    {
+      "library": "material-design-icons@4.0.0",
+      "destination": "wwwroot/lib/material-design-icons/"
+    },
+    {
+      "library": "jquery@3.7.1",
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "sweetalert@2.1.2",
+      "destination": "wwwroot/lib/sweetalert/"
+    },
+    {
+      "library": "sweetalert2@11.23.0",
+      "destination": "wwwroot/lib/sweetalert2/"
+    },
+    {
+      "library": "font-awesome@7.0.1",
+      "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "library": "lottie-web@5.13.0",
+      "destination": "wwwroot/lib/lottie-web/"
+    },
+    {
+      "library": "popper.js@2.11.8",
+      "destination": "wwwroot/lib/popper.js/"
+    },
+    {
+      "library": "remixicon@4.6.0",
+      "destination": "wwwroot/lib/remixicon/"
+    },
+    {
+      "library": "apexcharts@5.3.5",
+      "destination": "wwwroot/lib/apexcharts/"
+    }
+  ]
+}

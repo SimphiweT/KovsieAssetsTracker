@@ -1,0 +1,156 @@
+﻿@model KovsieAssetsTracker.WebAppMVC.Models.Agent.AgentDashboardViewModel
+@using Newtonsoft.Json
+@{
+    ViewBag.Title = "AGENT DASHBOARD";
+}
+
+<!-- Header -->
+<div class="main-title">
+    <h2><i class="ri-dashboard-line"></i> AGENT DASHBOARD</h2>
+    <div class="export-btns">
+        <a asp-action="ExportDashboardExcel" class="btn btn-excel">Excel</a>
+        <a asp-action="ExportDashboardPdf" class="btn btn-pdf">PDF</a>
+    </div>
+</div>
+
+    <!-- Stats -->
+    <div class="cardBox">
+        <div class="card">
+            <div>
+                <div class="numbers">@Model.TotalAssets</div>
+                <div class="cardName">Total Assets</div>
+            </div>
+            <div class="iconBx"><i class="ri-folder-2-line"></i></div>
+        </div>
+        <div class="card">
+            <div>
+                <div class="numbers">@Model.TotalCategories</div>
+                <div class="cardName">Total Categories</div>
+            </div>
+            <div class="iconBx"><i class="ri-list-check"></i></div>
+        </div>
+        <div class="card">
+            <div>
+                <div class="numbers">@Model.TotalRooms</div>
+                <div class="cardName">Total Rooms</div>
+            </div>
+            <div class="iconBx"><i class="ri-database-line"></i></div>
+        </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="details mt-3">
+        <div class="charts-card">
+            <h5 class="mb-3">Assets by Category</h5>
+            <div id="categoryChart" style="height:350px"></div>
+        </div>
+        <div class="charts-card">
+            <h5 class="mb-3">Assets by Room</h5>
+            <div id="roomChart" style="height:350px"></div>
+        </div>
+    </div>
+
+    <!-- Recent -->
+    <div class="details mt-3">
+        <div class="recentAssets p-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="mb-0">Recent Assets</h5>
+                <a href="@Url.Action("ManageAssets", "Agent")" class="btn btn-gradient btn-sm">View All</a>
+            </div>
+            <table class="table mb-0">
+                <thead class="text-center">
+                    <tr><th>Image</th><th>Name</th><th>Category</th><th>Status</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                    @foreach (var a in Model.RecentAssets)
+                    {
+                        var image = !string.IsNullOrEmpty(a.AssetImage) ? a.AssetImage : Url.Content("~/images/default_broken.jpg");
+                        <tr>
+                            <td>
+                                <img src="@image" alt="@a.AssetName" class="preview-image" data-name="@a.AssetName" data-src="@image" style="cursor:pointer" />
+                            </td>
+                            <td>@a.AssetName</td>
+                            <td>@a.AssetCategoryName</td>
+                            <td><span class="badge bg-primary">@a.Status</span></td>
+                        <td><a class="btn btn-outline-primary btn-sm" href="@Url.Action("AssetsDetailsAndUpdate", "Agent", new { id = a.AssetServerId })">Details</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="recentRooms p-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="mb-0">Recent Rooms</h5>
+            <a href="@Url.Action("ManageRooms", "Agent")" class="btn btn-gradient btn-sm">View All</a>
+            </div>
+            <table class="table mb-0">
+                <tbody>
+                    @foreach (var r in Model.RecentRooms)
+                    {
+                        var img = !string.IsNullOrEmpty(r.RoomImage) ? r.RoomImage : Url.Content("~/images/default-avatar.png");
+                        <tr>
+                            <td style="width:56px"><img src="@img" class="preview-image" data-name="@r.RoomName" data-src="@img" style="width:48px;height:48px;border-radius:50%;object-fit:cover;cursor:pointer" /></td>
+                            <td class="text-start">
+                                <div class="fw-semibold">@r.RoomName</div>
+                                <div class="text-muted-ux small">@r.RoomDescription</div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<!-- Image Preview Modal -->
+<div id="imagePreviewModal" class="preview-modal">
+    <span class="close-btn">&times;</span>
+    <img class="modal-content" id="previewModalImage" />
+    <div id="previewCaption"></div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+          const categoryLabels = @Html.Raw(JsonConvert.SerializeObject(Model.CategoryLabels ?? new List<string>()));
+          const categoryCounts = @Html.Raw(JsonConvert.SerializeObject(Model.CategoryCounts ?? new List<int>()));
+          const roomLabels      = @Html.Raw(JsonConvert.SerializeObject(Model.RoomLabels ?? new List<string>()));
+          const roomCounts      = @Html.Raw(JsonConvert.SerializeObject(Model.RoomCounts ?? new List<int>()));
+
+          if (categoryLabels.length){
+            new ApexCharts(document.querySelector("#categoryChart"),{
+              series: categoryCounts, chart:{type:'pie',height:350},
+              labels: categoryLabels,
+              colors:['#287bff','#ffb67b','#6dd5ed','#a78bfa','#34d399','#f59e0b'],
+              legend:{position:'bottom'}
+            }).render();
+          }
+          if (roomLabels.length){
+            new ApexCharts(document.querySelector("#roomChart"),{
+              series:[{name:'Assets',data:roomCounts}],
+              chart:{type:'bar',height:350},
+              colors:['#287bff'],
+              plotOptions:{bar:{borderRadius:8,columnWidth:'48%'}},
+              xaxis:{categories:roomLabels}, yaxis:{title:{text:'Asset Count'}}
+            }).render();
+          }
+
+          // image preview
+          const modal=document.getElementById('imagePreviewModal');
+          const modalImg=document.getElementById('previewModalImage');
+          const caption=document.getElementById('previewCaption');
+          const closeBtn=document.querySelector('.close-btn');
+
+          document.querySelectorAll('.preview-image').forEach(el=>{
+            el.addEventListener('click', ()=>{
+              modal.style.display='block';
+              modalImg.src=el.dataset.src;
+              caption.textContent=el.dataset.name||'';
+            })
+          });
+          closeBtn.onclick=()=>modal.style.display='none';
+          modal.onclick=(e)=>{ if(e.target===modal) modal.style.display='none'; }
+        });
+    </script>
+}
